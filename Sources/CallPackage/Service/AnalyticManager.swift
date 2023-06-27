@@ -24,7 +24,7 @@ public class AnalyticManager {
     private var amplToken: String? {
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
            let dict = NSDictionary(contentsOfFile: path),
-           let bundle = dict["Bundle identifier"] as? String {
+           let bundle = dict["AmplitudeKey"] as? String {
         return bundle
         } else {
            return nil
@@ -34,7 +34,7 @@ public class AnalyticManager {
     private var yandexToken: String? {
         if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
            let dict = NSDictionary(contentsOfFile: path),
-           let bundle = dict["Bundle identifier"] as? String {
+           let bundle = dict["YandexKey"] as? String {
         return bundle
         } else {
            return nil

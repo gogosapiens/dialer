@@ -9,7 +9,7 @@ public class Settings {
         fileprivate static var bundle: String {
             if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
                let dict = NSDictionary(contentsOfFile: path),
-               let bundle = dict["Bundle identifier"] as? String {
+               let bundle = dict["CFBundleIdentifier"] as? String {
                 return bundle
             } else {
                 fatalError("add callBaseURL -> Info.plist")
