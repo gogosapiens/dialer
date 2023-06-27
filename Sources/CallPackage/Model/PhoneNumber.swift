@@ -1,9 +1,3 @@
-//
-//  File 2.swift
-//  
-//
-//  Created by Maxim Okolokulak on 20.06.23.
-//
 
 import RealmSwift
 import UIKit

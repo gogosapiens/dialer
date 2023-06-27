@@ -1,9 +1,3 @@
-//
-//  File 2.swift
-//  
-//
-//  Created by Maxim Okolokulak on 26.06.23.
-//
 
 import ContactsUI
 import Foundation

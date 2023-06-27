@@ -1,9 +1,4 @@
-//
-//  File.swift
-//  
-//
-//  Created by Maxim Okolokulak on 20.06.23.
-//
+
 
 import Foundation
 import PromiseKit

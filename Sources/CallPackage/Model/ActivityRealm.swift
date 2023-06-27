@@ -1,9 +1,4 @@
-//
-//  File 2.swift
-//  
-//
-//  Created by Maxim Okolokulak on 21.06.23.
-//
+
 
 import Foundation
 import RealmSwift
