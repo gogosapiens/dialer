@@ -40,7 +40,6 @@ public class CallFlow: NSObject, OnNotification {
     override init() {
         super.init()
         
-//        provider = CallProvider()
         handler.registerNotificationName(UIApplication.willEnterForegroundNotification) { [unowned self] _ in
             if self.callModel != nil {
                 self.showCall()
@@ -172,34 +171,11 @@ extension CallFlow: NotificationDelegate {
     }
     
     public func callInviteReceived(callInvite: CallInvite) {
-        
-        //if self.callModel?.call.state == .pending {
-            if let uid = CallMagic.UID {
-                let call = SPCall(source:"Notification", uuid: uid , handle: callInvite.from ?? "")
-                call.twilioCallInvite = callInvite
-                _ = start(call, service: Service.shared)
-            }
-        //}
-        
-        //migrate
-        /*
-        
-        if callInvite.state == .pending {
-            print("TWILIO INVITE RECIEVED \(callInvite.uuid)")
-            if let uid = CallMagic.UID {
-                
-                let call = SPCall(source:"Notification", uuid: uid , handle: callInvite.from)
-                call.twilioCallInvite = callInvite
-                _ = start(call)
-                
-                print("TWILIO INVITE RECIEVED \(callInvite.uuid) read UID uid")
-            } else {
-                print("TWILIO INVITE NO UID")
-            }
-        } else if callInvite.state == .canceled {
-            print("TWILIO INVITE CANCELLED")
-            callModel?.handleNotifiactionCancel(callInvite)
-        }*/
+        if let uid = CallMagic.UID {
+            let call = SPCall(source:"Notification", uuid: uid , handle: callInvite.from ?? "")
+            call.twilioCallInvite = callInvite
+            _ = start(call, service: Service.shared)
+        }
     }
     
     func notificationError(_ error: Error) {

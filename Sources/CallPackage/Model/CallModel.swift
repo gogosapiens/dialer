@@ -24,25 +24,23 @@ public class CallModel {
     private unowned let callProvider: CallProvider
     
     let call: SPCall
-//    weak var callVC: CallVC? {
-//        didSet {
-//            callVC?.updateUI()
-//            callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
-//        }
-//    }
+    var callVC: CallVCDatasource? {
+        didSet {
+            callVC?.updateUI()
+            callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)!
+        }
+    }
     private let callKitCallController = CXCallController()
     private var callKitCompletionCallback: ((Bool)-> ())? = nil
     
     private func observeCall() {
-        
-        
         call.callConnectBlock = { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.callKitCompletionCallback?(true)
             strongSelf.callKitCompletionCallback = nil
-//            strongSelf.callVC?.updateUI()
+            strongSelf.callVC?.updateUI()
         }
         call.callDisconnectBlock = { [weak self] error in
             guard let strongSelf = self else {
@@ -50,7 +48,7 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
-//        callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
+        callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)!
     }
     
     func handleCall(completion: (()->())? = nil) {
@@ -76,20 +74,20 @@ public class CallModel {
 extension CallModel {
     private func reqeustStart(_ call: SPCall) {
         call.state = .start
-//        callVC?.updateUI()
+        callVC?.updateUI()
         
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
         
         let startCallAction = CXStartCallAction(call: call.uuid, handle: callHandle)
-//        let contact = ContactsManager.shared.contactBy(phone: call.handle)
-//        startCallAction.contactIdentifier = contact?.fullName
+        let contact = ContactsManager.shared.contactBy(phone: call.handle)
+        startCallAction.contactIdentifier = contact?.fullName
         let transaction = CXTransaction(action: startCallAction)
         
         callKitCallController.request(transaction)  { error in
             
             if let error = error {
                 self.call.state = .failed(error)
-//                self.callVC?.updateUI()
+                self.callVC?.updateUI()
                 print("StartCallAction transaction request failed: \(error.localizedDescription)")
                 print("call UUID \(call.uuid)")
                 return
@@ -98,7 +96,7 @@ extension CallModel {
             print("StartCallAction transaction request successful")
             print("call UUID \(call.uuid)")
             
-//            let contact = ContactsManager.shared.contactBy(phone: call.handle)
+            let contact = ContactsManager.shared.contactBy(phone: call.handle)
             let callUpdate = CXCallUpdate()
             callUpdate.remoteHandle = callHandle
             callUpdate.supportsDTMF = true
@@ -106,7 +104,7 @@ extension CallModel {
             callUpdate.supportsGrouping = false
             callUpdate.supportsUngrouping = false
             callUpdate.hasVideo = false
-//            callUpdate.localizedCallerName = contact?.fullName
+            callUpdate.localizedCallerName = contact?.fullName
             
             self.callProvider.updateCall(with: call.uuid, callUpdate)
         }
@@ -114,8 +112,8 @@ extension CallModel {
     
     private func reportIncoming(_ call: SPCall) {
         call.state = .pending
-//        let contact = ContactsManager.shared.contactBy(phone: call.handle)
-//        callVC?.updateUI()
+        let contact = ContactsManager.shared.contactBy(phone: call.handle)
+        callVC?.updateUI()
         
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
         
@@ -125,7 +123,7 @@ extension CallModel {
         CallMagic.update?.supportsGrouping = false
         CallMagic.update?.supportsUngrouping = false
         CallMagic.update?.hasVideo = false
-//        CallMagic.update?.localizedCallerName = contact?.fullName
+        CallMagic.update?.localizedCallerName = contact?.fullName
         
         if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
             CallMagic.update = nil
@@ -133,23 +131,20 @@ extension CallModel {
               
                 if let error = error {
                     self.call.state = .failed(error)
-//                    self.callVC?.updateUI()
+                    self.callVC?.updateUI()
                     print("Failed to report incoming call successfully: \(error.localizedDescription).")
                     print("call UUID \(call.uuid)")
                 }
                 
                 print("Incoming call successfully reported.")
                 print("call UUID \(call.uuid)")
-                
-                //TwilioVoice.configureAudioSession()
-                //migrate
             }
         }
     }
     
     func requestEnd(_ call: SPCall) {
         call.state = .ending
-//        callVC?.updateUI()
+        callVC?.updateUI()
         let endCallAction = CXEndCallAction(call: call.uuid)
         let transaction = CXTransaction(action: endCallAction)
         
@@ -182,11 +177,7 @@ extension CallModel: CallProviderDelegate {
             completion(false)
             return
         }
-        
-        //TwilioVoice.configureAudioSession()
         audioDevice.isEnabled = false
-        //migrate
-        
         createTwilioCall(for: call, with: completion)
     }
     
@@ -195,12 +186,8 @@ extension CallModel: CallProviderDelegate {
             completion(false)
             return
         }
-        
         audioDevice.isEnabled = false
-        //migrate
-        
         answer(call, with: completion)
-        
         NotificationCenter.default.post(name: Notification.Name(rawValue: "ShowCall"), object: nil)
     }
     
@@ -215,11 +202,11 @@ extension CallModel: CallProviderDelegate {
         }
         callKitCompletionCallback?(false)
         callKitCompletionCallback = nil
-//        callVC?.updateUI()
-//        callVC?.durationTimer?.invalidate()
-//        Double(1).delay {
-//            self.callFlow.endCall()
-//        }
+        callVC?.updateUI()
+        callVC?.durationTimer?.invalidate()
+        Double(1).delay {
+            self.callFlow.endCall()
+        }
     }
     
     func providerReportHoldCall(with uuid: UUID, _ onHold: Bool) -> Bool {
@@ -232,7 +219,7 @@ extension CallModel: CallProviderDelegate {
             return false
         }
         call.isMuted = onMute
-//        callVC?.updateUI()
+        callVC?.updateUI()
         return true
     }
     
@@ -241,7 +228,7 @@ extension CallModel: CallProviderDelegate {
             return false
         }
         call.sendDigits(digits)
-//        callVC?.updateUI()
+        callVC?.updateUI()
         return true
     }
 }
@@ -253,7 +240,7 @@ extension CallModel {
             .done { [weak self] token in
                 guard let self = self else { return }
                 call.connect(with: token)
-//                self.callVC?.updateUI()
+                self.callVC?.updateUI()
                 self.callKitCompletionCallback = completion
             }
             .catch { error in
@@ -267,6 +254,6 @@ extension CallModel {
         } else {
             completion(false)
         }
-//        callVC?.updateUI()
+        callVC?.updateUI()
     }
 }

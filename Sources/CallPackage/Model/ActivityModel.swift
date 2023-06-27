@@ -5,9 +5,6 @@ import PromiseKit
 import RealmSwift
 
 public class ActivityModel: Observable1 {
-    static let fakeActivityParticipantProd = "SecondPhone Team"
-    static let fakeActivityParticipantDev = "SecondPhone Team"
-    
     public enum Event {
         case initial, update([Int], [Int], [Int])
     }
