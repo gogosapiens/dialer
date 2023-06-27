@@ -93,9 +93,6 @@ public class ActivityModel: Observable1 {
                         chat.update(with: $0)
                     }
                 }
-                
-                //
-                
                 var messageCount = 0
                 var callsCount = 0
                 
@@ -107,10 +104,6 @@ public class ActivityModel: Observable1 {
                         callsCount +=  1
                     }
                 }
-                  
-//                NotificationCenter.default.post(name: AppDelegate.reloadBadges, object: nil, userInfo: ["message":"\(messageCount)","call":"\(callsCount)"])
-                //
-                
         }
     }
     

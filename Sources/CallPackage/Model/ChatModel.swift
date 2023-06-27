@@ -25,7 +25,7 @@ public class ChatModel: Observable1 {
     
     public var delayed:[DelayedDessages]?
     
-    func isDelayedPresent()->Bool {
+    func isDelayedPresent() -> Bool {
         return delayed?.count ?? 0 > 0
     }
     
@@ -146,12 +146,11 @@ public class ChatModel: Observable1 {
     private var tempMessageId = -1
     
     public func send(message: String, delay:Int?) -> Promise<Void> {
-        return checkAvailability()
+        return checkAvailability(phoneNumber: self.participant, action: .sms)
             .then { () -> Promise<SendMessageResponse> in
                 let promise: Promise<SendMessageResponse> = self.service.execute(.sendMessage(self.numberId, self.participant, message, nil,delay))
                 return promise
             }.then(on: DispatchQueue.global()) { response -> Promise<Void> in
-//                trackEvent("CallOrMessage")
                 if let activity = response.activity {
                     let realm = try! Realm()
                     try! realm.write {
@@ -172,7 +171,7 @@ public class ChatModel: Observable1 {
     
     
     public func deleteSheduled(id:Int) -> Promise<Void> {
-        return checkAvailability()
+        return checkAvailability(phoneNumber: self.participant, action: .sms)
             .then { () -> Promise<EmptyResponse> in
                 let promise: Promise<EmptyResponse> = self.service.execute(.deteleSheduled(self.numberId, id))
                 return promise
@@ -189,7 +188,7 @@ public class ChatModel: Observable1 {
     }
     
     public func send(images: [UIImage],delay:Int?) -> Promise<Void> {
-        return checkAvailability()
+        return checkAvailability(phoneNumber: self.participant, action: .mms)
             .then { () -> Promise<SendMessageResponse> in
                 let imagesData = Array(images.compactMap { $0.jpegData(compressionQuality: 0.5) }.prefix(11))
                 let promise: Promise<SendMessageResponse> = self.service.executeMultipart(.sendMessage(self.numberId, self.participant, "", [], delay)) { multipartData in
@@ -201,7 +200,6 @@ public class ChatModel: Observable1 {
                 }
                 return promise
             }.then(on: DispatchQueue.global()) { response -> Promise<Void> in
-//                trackEvent("CallOrMessage")
                 if let activity = response.activity {
                     let realm = try! Realm()
                     try! realm.write {
@@ -216,20 +214,16 @@ public class ChatModel: Observable1 {
                 return Promise.value(())
         }
     }
-    
-    private func checkAvailability() -> Promise<Void> {
+
+    private func checkAvailability(phoneNumber: String, action: VerificationUserManager.Action) -> Promise<Void> {
         return Promise { seal in
-//            guard AppDelegate.shared.accountManager.account?.paused == false else {
-//                seal.reject(ServiceError.accountPaused)
-//                return
-//            }
-            guard activityModel.phoneNumber.isActive else {
-//                if Settings.isRestoringPeriod {
-//                    seal.reject(ServiceError.phoneRestoring(activityModel.phoneNumber.number))
-//                } else {
-//                    seal.resolve(nil)
-//                }
-                return
+            VerificationUserManager.shared.canAction(phoneNumber: phoneNumber, action: action) { result in
+                switch result {
+                case .success:
+                    seal.resolve(nil)
+                case .failure(let error):
+                    seal.reject(error)
+                }
             }
             seal.fulfill(())
         }
