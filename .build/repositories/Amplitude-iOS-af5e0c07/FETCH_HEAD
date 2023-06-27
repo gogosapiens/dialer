@@ -1,0 +1,453 @@
+921a91b4a6dd6e762388772eab62a70754db699b	not-for-merge	branch 'bgiori/pods-test' of https://github.com/Amplitude/Amplitude-iOS
+439193450b1252fb3388115baa4738ef60f8465e	not-for-merge	branch 'codacy-test' of https://github.com/Amplitude/Amplitude-iOS
+959c5953e010e03b1da9db39e1d0bbf1aa4a55cc	not-for-merge	branch 'codeql-test' of https://github.com/Amplitude/Amplitude-iOS
+376b39446549de72b2f8086aca405ce2456f3ee4	not-for-merge	branch 'end_session_event' of https://github.com/Amplitude/Amplitude-iOS
+538402b9fdbb8342e49b772523403111138f1a46	not-for-merge	branch 'getUserId' of https://github.com/Amplitude/Amplitude-iOS
+23dec19db3184cecfe66f001754961ae4d128542	not-for-merge	branch 'gh-pages' of https://github.com/Amplitude/Amplitude-iOS
+028dc0eca08682fda9072aea26405caf195052de	not-for-merge	branch 'hackathon' of https://github.com/Amplitude/Amplitude-iOS
+e23443447b2f7748fe9ef1d7d7a7ebc56d6be7a7	not-for-merge	branch 'latest-tag-8.3.1' of https://github.com/Amplitude/Amplitude-iOS
+2338a516543b4bf23a8c9c518f7f7ef3d31166fb	not-for-merge	branch 'localstorage' of https://github.com/Amplitude/Amplitude-iOS
+b9512600a0367f5b38c75ad71e822be9ebd9406a	not-for-merge	branch 'main' of https://github.com/Amplitude/Amplitude-iOS
+b3411935d96c3b154753771ab32e1df501fec478	not-for-merge	branch 'main-lts' of https://github.com/Amplitude/Amplitude-iOS
+04dad2a522c64667c098a47c06bdaec2f8653789	not-for-merge	branch 'main-old' of https://github.com/Amplitude/Amplitude-iOS
+73365bd47442ab9cfa7fa42cab3e194ccf6452c8	not-for-merge	branch 'master' of https://github.com/Amplitude/Amplitude-iOS
+73365bd47442ab9cfa7fa42cab3e194ccf6452c8	not-for-merge	branch 'master-backup' of https://github.com/Amplitude/Amplitude-iOS
+88c7a3cd6d62e73b6d7faab450a0c7e43137acde	not-for-merge	branch 'migrate_db' of https://github.com/Amplitude/Amplitude-iOS
+717db1f4327602809281b1755bdac091ba272e0f	not-for-merge	branch 'migrationTest' of https://github.com/Amplitude/Amplitude-iOS
+2ab49a1f89967d4b1b7b16b57efba1e17678bcfa	not-for-merge	branch 'release-pipeline-cache-fix' of https://github.com/Amplitude/Amplitude-iOS
+99093d1042f68b1ebda48ed156dd3bcf1760f758	not-for-merge	branch 'remove-unusued-schemes' of https://github.com/Amplitude/Amplitude-iOS
+472317519588762f1aeb78320d01f016e9f0d0fc	not-for-merge	branch 'remove-url-connection' of https://github.com/Amplitude/Amplitude-iOS
+d54ac4245d795b4ccd39e30c9c96116a6716ec49	not-for-merge	branch 'rename_db_file' of https://github.com/Amplitude/Amplitude-iOS
+08ba626767941b4719e4885ef75e7d2cfc59276d	not-for-merge	branch 'revert-412-checkinForground' of https://github.com/Amplitude/Amplitude-iOS
+939162b851ebd4f741f31ebc8cf5b5e86766d9de	not-for-merge	branch 'test' of https://github.com/Amplitude/Amplitude-iOS
+96b2820f342ad4e6c567f367ad36f959b57cf7c7	not-for-merge	branch 'xcframewrok-support' of https://github.com/Amplitude/Amplitude-iOS
+d74b746e86dc32a50201541c3874602ea6f84cf5	not-for-merge	'refs/notes/semantic-release' of https://github.com/Amplitude/Amplitude-iOS
+9a822b0dedb21416fcc9de6df28ce44d40ab6527	not-for-merge	'refs/pull/101/head' of https://github.com/Amplitude/Amplitude-iOS
+eb3b5458b0c5661bf7dda5a081cfa4e3f8dacbfe	not-for-merge	'refs/pull/101/merge' of https://github.com/Amplitude/Amplitude-iOS
+5bba3147e316ddcefe39d45ee56b2ff4eb8a57bd	not-for-merge	'refs/pull/103/head' of https://github.com/Amplitude/Amplitude-iOS
+89f9b9b63acaf7049e2fd05a11aabba6c9434e5c	not-for-merge	'refs/pull/104/head' of https://github.com/Amplitude/Amplitude-iOS
+c73331d0f7300848f7c813563611763193c3e278	not-for-merge	'refs/pull/105/head' of https://github.com/Amplitude/Amplitude-iOS
+1c27736b9b978ab7734a7df6b43f30445eee58e4	not-for-merge	'refs/pull/106/head' of https://github.com/Amplitude/Amplitude-iOS
+e90347dabab41f0462bc70a0c7b47b3736e98526	not-for-merge	'refs/pull/108/head' of https://github.com/Amplitude/Amplitude-iOS
+88c7a3cd6d62e73b6d7faab450a0c7e43137acde	not-for-merge	'refs/pull/109/head' of https://github.com/Amplitude/Amplitude-iOS
+230b42083abb06aacc1049d243b2fce6a1c733ec	not-for-merge	'refs/pull/109/merge' of https://github.com/Amplitude/Amplitude-iOS
+d54ac4245d795b4ccd39e30c9c96116a6716ec49	not-for-merge	'refs/pull/110/head' of https://github.com/Amplitude/Amplitude-iOS
+abf086775379fb662679f5df4d086e537b12620e	not-for-merge	'refs/pull/110/merge' of https://github.com/Amplitude/Amplitude-iOS
+280e4dd30892c381f62cc785ab329b281a73956f	not-for-merge	'refs/pull/111/head' of https://github.com/Amplitude/Amplitude-iOS
+64457a799a053a1b5880a6fd6736020323781a97	not-for-merge	'refs/pull/112/head' of https://github.com/Amplitude/Amplitude-iOS
+ac2ae7ddcbd18dad21457a46ef07f2dd0cd441d1	not-for-merge	'refs/pull/113/head' of https://github.com/Amplitude/Amplitude-iOS
+3fdd8f3c635ea12916dfe21d84267e56f1936b0e	not-for-merge	'refs/pull/114/head' of https://github.com/Amplitude/Amplitude-iOS
+cf5ae265f23239eeffad8da5a5d72a41a7fc7b32	not-for-merge	'refs/pull/115/head' of https://github.com/Amplitude/Amplitude-iOS
+49fdb53d251b6beada44c6d4065a602aa555ca4c	not-for-merge	'refs/pull/116/head' of https://github.com/Amplitude/Amplitude-iOS
+cbcc8106703df8f3e351245a656e2737e6fb01c9	not-for-merge	'refs/pull/116/merge' of https://github.com/Amplitude/Amplitude-iOS
+6337bbfc8fd4293cfa92756625d58574adf100fb	not-for-merge	'refs/pull/118/head' of https://github.com/Amplitude/Amplitude-iOS
+6e7aee28fb18144800dfb0126bfec028b50c8222	not-for-merge	'refs/pull/119/head' of https://github.com/Amplitude/Amplitude-iOS
+27728bf980df09e98b40cfea7a571467d3db1ac6	not-for-merge	'refs/pull/12/head' of https://github.com/Amplitude/Amplitude-iOS
+071a98ed335288654744141b939f12c7ea6af2c2	not-for-merge	'refs/pull/12/merge' of https://github.com/Amplitude/Amplitude-iOS
+0e185e79e944b42394f96598f349869594853769	not-for-merge	'refs/pull/121/head' of https://github.com/Amplitude/Amplitude-iOS
+3c0d4d567ef32eff5aee391ac9efb8a7058fa789	not-for-merge	'refs/pull/123/head' of https://github.com/Amplitude/Amplitude-iOS
+376b39446549de72b2f8086aca405ce2456f3ee4	not-for-merge	'refs/pull/124/head' of https://github.com/Amplitude/Amplitude-iOS
+163b28f17c12d00dd56dccea7b6ad5d69bc1e7cb	not-for-merge	'refs/pull/124/merge' of https://github.com/Amplitude/Amplitude-iOS
+6f9f252e140323c7e58301648bbd9cef6c18800e	not-for-merge	'refs/pull/125/head' of https://github.com/Amplitude/Amplitude-iOS
+61adeb7990593a1fd43a56f706020309393a21fd	not-for-merge	'refs/pull/126/head' of https://github.com/Amplitude/Amplitude-iOS
+5282379ffc93fcf2a33e3a90a7ab4f7687e28aa1	not-for-merge	'refs/pull/127/head' of https://github.com/Amplitude/Amplitude-iOS
+5be315c0f1463d6103cb3128c578feeb643c822f	not-for-merge	'refs/pull/130/head' of https://github.com/Amplitude/Amplitude-iOS
+5367f41c611eb402acd2b6620750220556b5ffe4	not-for-merge	'refs/pull/131/head' of https://github.com/Amplitude/Amplitude-iOS
+8b85e1141374181bbbfca04e9941559b87b77406	not-for-merge	'refs/pull/133/head' of https://github.com/Amplitude/Amplitude-iOS
+83790b98daf025fb589303a23c715c78df332ce2	not-for-merge	'refs/pull/133/merge' of https://github.com/Amplitude/Amplitude-iOS
+4c80b799a5fb4480655e9b476ebe0e71ea8c5f16	not-for-merge	'refs/pull/135/head' of https://github.com/Amplitude/Amplitude-iOS
+97d58b5f3bf41be2fcb415f1be76bd84de58bb5c	not-for-merge	'refs/pull/135/merge' of https://github.com/Amplitude/Amplitude-iOS
+f8c0ff81ebd926703f3773474769780f745c8a7f	not-for-merge	'refs/pull/136/head' of https://github.com/Amplitude/Amplitude-iOS
+9eba280248819dc69d67a7d60853ca55bb200b86	not-for-merge	'refs/pull/136/merge' of https://github.com/Amplitude/Amplitude-iOS
+15b103402407a883e5a26bdcf6a737f5ea65f96f	not-for-merge	'refs/pull/137/head' of https://github.com/Amplitude/Amplitude-iOS
+a08a1bd46662fc632d01d2d265ca194fe6068534	not-for-merge	'refs/pull/139/head' of https://github.com/Amplitude/Amplitude-iOS
+cc3d7a77c6ec4691bf30f9a01684795c3f0b0c0b	not-for-merge	'refs/pull/143/head' of https://github.com/Amplitude/Amplitude-iOS
+08ae8b0f3b8cdeebd436453c025683ff6f8a1b68	not-for-merge	'refs/pull/146/head' of https://github.com/Amplitude/Amplitude-iOS
+430a3209b4fe47e00685c8a69e7f3433a624d492	not-for-merge	'refs/pull/148/head' of https://github.com/Amplitude/Amplitude-iOS
+93944c9d25efb1618c34dd94f18bb0ed244580bf	not-for-merge	'refs/pull/149/head' of https://github.com/Amplitude/Amplitude-iOS
+3e572f00a0daaf64060f89da28a0477a245c8c69	not-for-merge	'refs/pull/150/head' of https://github.com/Amplitude/Amplitude-iOS
+90079c191d57bb9a9d2d5c0726ee670e8384ce5b	not-for-merge	'refs/pull/152/head' of https://github.com/Amplitude/Amplitude-iOS
+ebe3534ccf2e5c464922ed065fd49a10dbc8c042	not-for-merge	'refs/pull/153/head' of https://github.com/Amplitude/Amplitude-iOS
+3f5252e321643879cfd21e786b6e06ba494b7b81	not-for-merge	'refs/pull/154/head' of https://github.com/Amplitude/Amplitude-iOS
+6c97b22ea22bb80ef29cdfc32f8303ceeec5afde	not-for-merge	'refs/pull/155/head' of https://github.com/Amplitude/Amplitude-iOS
+29e8bdaa9cd5ad01a12ab443818cc9ed20459ed0	not-for-merge	'refs/pull/158/head' of https://github.com/Amplitude/Amplitude-iOS
+2528d2aa1eac07ee67fdecc44a652b81324f24ca	not-for-merge	'refs/pull/16/head' of https://github.com/Amplitude/Amplitude-iOS
+6e04fc10655457580000150f1983153f6793ba18	not-for-merge	'refs/pull/160/head' of https://github.com/Amplitude/Amplitude-iOS
+28aebada63aa3653313aae0fe16caca953a93240	not-for-merge	'refs/pull/162/head' of https://github.com/Amplitude/Amplitude-iOS
+939d3a1e74e0d1ecf1d24e3368fdf4cf56301ae1	not-for-merge	'refs/pull/163/head' of https://github.com/Amplitude/Amplitude-iOS
+c47afccfc5423bcd83c6c052cb9404b8205d832d	not-for-merge	'refs/pull/165/head' of https://github.com/Amplitude/Amplitude-iOS
+c65a27bdd3fb904aee5af853db97aae032c22d6c	not-for-merge	'refs/pull/166/head' of https://github.com/Amplitude/Amplitude-iOS
+09a670de400c84b4969ccda88f4b95efd54afb76	not-for-merge	'refs/pull/167/head' of https://github.com/Amplitude/Amplitude-iOS
+74a37d51c0181482d730547e6ed0093af6d1d735	not-for-merge	'refs/pull/173/head' of https://github.com/Amplitude/Amplitude-iOS
+368a65c5f859fb277fc21ca719a7a5a2359f5117	not-for-merge	'refs/pull/174/head' of https://github.com/Amplitude/Amplitude-iOS
+e55f654163c8f2f19b8779ad2c85e6a0c2654962	not-for-merge	'refs/pull/174/merge' of https://github.com/Amplitude/Amplitude-iOS
+4f30d0c6363505f70f7acbad29499c7c843620ba	not-for-merge	'refs/pull/175/head' of https://github.com/Amplitude/Amplitude-iOS
+55633e39daee60d950cbbcb5e5426f5d92e8291a	not-for-merge	'refs/pull/178/head' of https://github.com/Amplitude/Amplitude-iOS
+85ffa35e321008de84be63ca1ca478bde92bf66e	not-for-merge	'refs/pull/179/head' of https://github.com/Amplitude/Amplitude-iOS
+82fa9ddd2e85538fd6f667ac8ffec4a490c25ca2	not-for-merge	'refs/pull/18/head' of https://github.com/Amplitude/Amplitude-iOS
+bdf7daf6fa9a9f0680d852f68d62e70711b5836a	not-for-merge	'refs/pull/181/head' of https://github.com/Amplitude/Amplitude-iOS
+3e8b0270e31cb67a2a6a38386d81f316567f488c	not-for-merge	'refs/pull/182/head' of https://github.com/Amplitude/Amplitude-iOS
+c0e665b8d7f5ca76b0bb7a2f9e719d945c32f222	not-for-merge	'refs/pull/182/merge' of https://github.com/Amplitude/Amplitude-iOS
+c2c2932f5644ecb4d0069f04a61f2959229e1060	not-for-merge	'refs/pull/183/head' of https://github.com/Amplitude/Amplitude-iOS
+2cffaeb14e4db27ab4c0014b0e69513fa5088d73	not-for-merge	'refs/pull/185/head' of https://github.com/Amplitude/Amplitude-iOS
+f5295e05ce4cb5d03c3b623417d1daf4132516f8	not-for-merge	'refs/pull/186/head' of https://github.com/Amplitude/Amplitude-iOS
+5bf72d25010c8dd032a228bbe2810ca72f6d1cd2	not-for-merge	'refs/pull/187/head' of https://github.com/Amplitude/Amplitude-iOS
+282dbb37d17e4aeed41c131c53b510554888ab65	not-for-merge	'refs/pull/188/head' of https://github.com/Amplitude/Amplitude-iOS
+d824845ce9830dce7b189a75a818a140d6cbf07c	not-for-merge	'refs/pull/189/head' of https://github.com/Amplitude/Amplitude-iOS
+74996753d111e8589c00d93755c7589c03d8b4d4	not-for-merge	'refs/pull/190/head' of https://github.com/Amplitude/Amplitude-iOS
+1002f7f9046b3e4700bc41c010cf328c52da922d	not-for-merge	'refs/pull/194/head' of https://github.com/Amplitude/Amplitude-iOS
+ceaa7e875005d4cd77118f88da564f30b63387b6	not-for-merge	'refs/pull/198/head' of https://github.com/Amplitude/Amplitude-iOS
+ae75593fc68c06a5761ae58c8e0573840b728f02	not-for-merge	'refs/pull/199/head' of https://github.com/Amplitude/Amplitude-iOS
+c037f6950a4f13dbbced9b2ca161878c6e075324	not-for-merge	'refs/pull/2/head' of https://github.com/Amplitude/Amplitude-iOS
+3fc377c5e65077bea060d2d96969798c8dd73267	not-for-merge	'refs/pull/2/merge' of https://github.com/Amplitude/Amplitude-iOS
+9e399a8c24fddbfb75cde057b8b536c5473943c2	not-for-merge	'refs/pull/201/head' of https://github.com/Amplitude/Amplitude-iOS
+eccdf62b034bbce27996c152fdd5d4e9bc19ba4b	not-for-merge	'refs/pull/205/head' of https://github.com/Amplitude/Amplitude-iOS
+303acd555be2900797387666e2a33527b0d6c6ce	not-for-merge	'refs/pull/207/head' of https://github.com/Amplitude/Amplitude-iOS
+5dcddf06aabd2c564ea28485cb33fd5f4bca52e0	not-for-merge	'refs/pull/209/head' of https://github.com/Amplitude/Amplitude-iOS
+856d5acfcddeb118d260c8a659a6bb5f05f048f7	not-for-merge	'refs/pull/211/head' of https://github.com/Amplitude/Amplitude-iOS
+07cd51edf28184fb66ab6d0b87326c5b81dca321	not-for-merge	'refs/pull/213/head' of https://github.com/Amplitude/Amplitude-iOS
+e3f05fd45ea4a7425a8eb8e442c043e248b6eacf	not-for-merge	'refs/pull/214/head' of https://github.com/Amplitude/Amplitude-iOS
+0b98b59d1694952d9520cf13e3b5b6b5fdb67a67	not-for-merge	'refs/pull/216/head' of https://github.com/Amplitude/Amplitude-iOS
+108a55df45bb0d4474f42098a8afeadcf66e94d7	not-for-merge	'refs/pull/217/head' of https://github.com/Amplitude/Amplitude-iOS
+461cf96b4ab7aa2d1e74b5a7c8d3c77ca519ff93	not-for-merge	'refs/pull/219/head' of https://github.com/Amplitude/Amplitude-iOS
+278cf89306cef8569bc4cb716ad9c63fcbbd7e11	not-for-merge	'refs/pull/220/head' of https://github.com/Amplitude/Amplitude-iOS
+add25097f913ccfd3b0c8c0c8408742f850e0d91	not-for-merge	'refs/pull/221/head' of https://github.com/Amplitude/Amplitude-iOS
+9c5c110f3cb9eda68a3a9127687f4ee83c6a51ea	not-for-merge	'refs/pull/222/head' of https://github.com/Amplitude/Amplitude-iOS
+85da662176de7a9b5015bb3e3113c0c2676e5386	not-for-merge	'refs/pull/223/head' of https://github.com/Amplitude/Amplitude-iOS
+7a9bda193381c5a55e3f23f62f2dd6baf78e6e1f	not-for-merge	'refs/pull/224/head' of https://github.com/Amplitude/Amplitude-iOS
+c6bdb8803de063e4f733ea5e6897698fbc248b10	not-for-merge	'refs/pull/225/head' of https://github.com/Amplitude/Amplitude-iOS
+841ac4c8bbc362e71da1af95ac6def0fc3230912	not-for-merge	'refs/pull/227/head' of https://github.com/Amplitude/Amplitude-iOS
+f81af89d03a13a180f8c3d6131f06cbe2ff40fd4	not-for-merge	'refs/pull/229/head' of https://github.com/Amplitude/Amplitude-iOS
+a586e2f6566bd1ec77f2ac396b90ae05051c57ee	not-for-merge	'refs/pull/23/head' of https://github.com/Amplitude/Amplitude-iOS
+03f4d67e2d835179bf0de26bc1f183269de01f70	not-for-merge	'refs/pull/230/head' of https://github.com/Amplitude/Amplitude-iOS
+ea83c30cfe65ca31cfc3d0d3d791d08b6e049d0d	not-for-merge	'refs/pull/231/head' of https://github.com/Amplitude/Amplitude-iOS
+5f3506538426e238ff235b3587fa3511ae5ad31a	not-for-merge	'refs/pull/232/head' of https://github.com/Amplitude/Amplitude-iOS
+1242d24b6b927c2938b5c3f650a4778079cdd9bc	not-for-merge	'refs/pull/234/head' of https://github.com/Amplitude/Amplitude-iOS
+bd0c0a382938494cc5582cd589d77169eb658997	not-for-merge	'refs/pull/237/head' of https://github.com/Amplitude/Amplitude-iOS
+c9e050b070a584f9e785f93272a2be0b4a3c2fdc	not-for-merge	'refs/pull/238/head' of https://github.com/Amplitude/Amplitude-iOS
+8c1c6230309af7b017108fa4020946321181f853	not-for-merge	'refs/pull/239/head' of https://github.com/Amplitude/Amplitude-iOS
+c7f19884e0e7bf56109cbe20af77637328d59a78	not-for-merge	'refs/pull/24/head' of https://github.com/Amplitude/Amplitude-iOS
+1362d00a715ab52c0897217fc974b99670232181	not-for-merge	'refs/pull/240/head' of https://github.com/Amplitude/Amplitude-iOS
+21b1989a2d81db2665ee460e85d84e19ff07f33b	not-for-merge	'refs/pull/243/head' of https://github.com/Amplitude/Amplitude-iOS
+857a19d6a4e6ec02283603d2c5dff005579b412d	not-for-merge	'refs/pull/249/head' of https://github.com/Amplitude/Amplitude-iOS
+fe8d5fdc8868f79f62863352f1b6939da7ac899e	not-for-merge	'refs/pull/25/head' of https://github.com/Amplitude/Amplitude-iOS
+86dc3786b4121c5c4dd54df1bdfbe4836ed1d323	not-for-merge	'refs/pull/251/head' of https://github.com/Amplitude/Amplitude-iOS
+9d7924903886ddc29a85685bd5266fb616bdc589	not-for-merge	'refs/pull/253/head' of https://github.com/Amplitude/Amplitude-iOS
+eb15e68043fecec3e7bf16de1a87559c148e6594	not-for-merge	'refs/pull/254/head' of https://github.com/Amplitude/Amplitude-iOS
+a5ef8424178eea30f49940a1ed4ea4bd7a35e489	not-for-merge	'refs/pull/255/head' of https://github.com/Amplitude/Amplitude-iOS
+3a50bc0159f5d8615d23ab76a8f1549ae067a2be	not-for-merge	'refs/pull/26/head' of https://github.com/Amplitude/Amplitude-iOS
+79451553271574fd9f13f0e081c5f40dcfacb22e	not-for-merge	'refs/pull/261/head' of https://github.com/Amplitude/Amplitude-iOS
+42cec5de439b199dac4a33f9f572b85997548f15	not-for-merge	'refs/pull/262/head' of https://github.com/Amplitude/Amplitude-iOS
+27b3b23a406ec96bd6e4a3281efb1045b34789ed	not-for-merge	'refs/pull/264/head' of https://github.com/Amplitude/Amplitude-iOS
+ee08186bf9c4d25840e0f6628dc8173da8858698	not-for-merge	'refs/pull/265/head' of https://github.com/Amplitude/Amplitude-iOS
+af8c78078df4b8469fc1ae7feb5baefbd316da4b	not-for-merge	'refs/pull/266/head' of https://github.com/Amplitude/Amplitude-iOS
+dbdbfafe8775be9fb80e05d17d5ed181e87b4a21	not-for-merge	'refs/pull/267/head' of https://github.com/Amplitude/Amplitude-iOS
+1c18e7907ac26c34f8a93c87afad85c47ecf62f5	not-for-merge	'refs/pull/268/head' of https://github.com/Amplitude/Amplitude-iOS
+d59dc9ff57ba0b3fe658f5ebb1afff8e6db8e294	not-for-merge	'refs/pull/269/head' of https://github.com/Amplitude/Amplitude-iOS
+19979f63471a1d98a05d59bc6dad4affcc185da6	not-for-merge	'refs/pull/27/head' of https://github.com/Amplitude/Amplitude-iOS
+ab458ef4f0557411c3748b3acd43d4f2deafa998	not-for-merge	'refs/pull/270/head' of https://github.com/Amplitude/Amplitude-iOS
+8e3fbd2c8f7667cf00a27bc03585842f2e134123	not-for-merge	'refs/pull/271/head' of https://github.com/Amplitude/Amplitude-iOS
+c28db7bb54a2742cfff2dc0bbee7222fedacf2ae	not-for-merge	'refs/pull/272/head' of https://github.com/Amplitude/Amplitude-iOS
+22b70ee1c0b20a31b05005a3f58bf01aa8825062	not-for-merge	'refs/pull/273/head' of https://github.com/Amplitude/Amplitude-iOS
+07c9d7b302df83613a6bd9de7e30bb623dddd18d	not-for-merge	'refs/pull/274/head' of https://github.com/Amplitude/Amplitude-iOS
+1002f7f9046b3e4700bc41c010cf328c52da922d	not-for-merge	'refs/pull/277/head' of https://github.com/Amplitude/Amplitude-iOS
+5e0e18ffa95a33ddad13438852f6cb11b913b794	not-for-merge	'refs/pull/278/head' of https://github.com/Amplitude/Amplitude-iOS
+3fae035a30278e6620dd93a2f3f8f8dd4325b6b9	not-for-merge	'refs/pull/279/head' of https://github.com/Amplitude/Amplitude-iOS
+b3de389020b4f81ddbba827f6835d9019e22623e	not-for-merge	'refs/pull/28/head' of https://github.com/Amplitude/Amplitude-iOS
+5a518d60c5be159d8bd4b84bc2bc983c3d656c15	not-for-merge	'refs/pull/280/head' of https://github.com/Amplitude/Amplitude-iOS
+0c14e98050b1f631f24a3b5993f9e25b52cd7c8b	not-for-merge	'refs/pull/281/head' of https://github.com/Amplitude/Amplitude-iOS
+20467f9c0308023cf7b21de0f85362bed9a34030	not-for-merge	'refs/pull/283/head' of https://github.com/Amplitude/Amplitude-iOS
+1029ceb996e91fabdb15b307af194509c1a78d08	not-for-merge	'refs/pull/284/head' of https://github.com/Amplitude/Amplitude-iOS
+2db0da0f64a2f56acf18936f1ccd0f41b3b7bd49	not-for-merge	'refs/pull/287/head' of https://github.com/Amplitude/Amplitude-iOS
+93a7094cc3fef555adde62888b551d807a0d2a6e	not-for-merge	'refs/pull/289/head' of https://github.com/Amplitude/Amplitude-iOS
+1152167d355676b23076fcff22cb3804bc30ba1d	not-for-merge	'refs/pull/29/head' of https://github.com/Amplitude/Amplitude-iOS
+42835428aa6fe7eaba41225c8655097ccb651372	not-for-merge	'refs/pull/29/merge' of https://github.com/Amplitude/Amplitude-iOS
+f9cc12a72413f4c8f61d6ba425d5bade743c55e7	not-for-merge	'refs/pull/290/head' of https://github.com/Amplitude/Amplitude-iOS
+88ce4f2ead83d83be54e573d9e3ab5e7c2bb31e4	not-for-merge	'refs/pull/291/head' of https://github.com/Amplitude/Amplitude-iOS
+1e12cc1c57ee007a227386a392df01af04d7ff08	not-for-merge	'refs/pull/293/head' of https://github.com/Amplitude/Amplitude-iOS
+8b4f955176b1692ffb476f1b2e04f26675d61468	not-for-merge	'refs/pull/295/head' of https://github.com/Amplitude/Amplitude-iOS
+2498d2b015e88898655149299daf4e6e3e00c980	not-for-merge	'refs/pull/299/head' of https://github.com/Amplitude/Amplitude-iOS
+698f67d0e04128a43180459397ce32261a68c698	not-for-merge	'refs/pull/3/head' of https://github.com/Amplitude/Amplitude-iOS
+7e0145e0283d5f063698910cd7463d6ab67e97db	not-for-merge	'refs/pull/3/merge' of https://github.com/Amplitude/Amplitude-iOS
+8f32ac5fd55ea35822f3305691dcfcf4fc31c830	not-for-merge	'refs/pull/300/head' of https://github.com/Amplitude/Amplitude-iOS
+b4fb72993e844a9c849224e52e9a9664e85a58ce	not-for-merge	'refs/pull/301/head' of https://github.com/Amplitude/Amplitude-iOS
+e5f2fd1c2d85916083c6c95aba121d18ffd5fe68	not-for-merge	'refs/pull/302/head' of https://github.com/Amplitude/Amplitude-iOS
+236cfefe3e62f3fbfe2d7fa88d6f7f0b65a1019d	not-for-merge	'refs/pull/303/head' of https://github.com/Amplitude/Amplitude-iOS
+a6fa7d9b6e2ae99798a87f53d455739825522ab2	not-for-merge	'refs/pull/305/head' of https://github.com/Amplitude/Amplitude-iOS
+e41828be19be23315048df1fd7780bccd34e02f0	not-for-merge	'refs/pull/306/head' of https://github.com/Amplitude/Amplitude-iOS
+c56bced8fca3f647386128a19912d8390229b31b	not-for-merge	'refs/pull/307/head' of https://github.com/Amplitude/Amplitude-iOS
+4603f5bcb2aaae67c2cafec168a5d13069cd99ab	not-for-merge	'refs/pull/308/head' of https://github.com/Amplitude/Amplitude-iOS
+0d893b3823042ddaa404c7c3d9fba64e67db1073	not-for-merge	'refs/pull/309/head' of https://github.com/Amplitude/Amplitude-iOS
+6bd15658ba62f9256f1d74d680815424ca2aab13	not-for-merge	'refs/pull/310/head' of https://github.com/Amplitude/Amplitude-iOS
+f1ac6438ca8660724fdebc3ead70a19600af23d1	not-for-merge	'refs/pull/312/head' of https://github.com/Amplitude/Amplitude-iOS
+bee05a37c9564d5f317f27fed699dae39c5fd9bc	not-for-merge	'refs/pull/313/head' of https://github.com/Amplitude/Amplitude-iOS
+9e4277a1be19800cc9de2562cb36a0d7eed82391	not-for-merge	'refs/pull/315/head' of https://github.com/Amplitude/Amplitude-iOS
+f03f5dcc9c15431bed142c2d05c634bcf8b46dfb	not-for-merge	'refs/pull/316/head' of https://github.com/Amplitude/Amplitude-iOS
+a027d6ed4d747f86ed4b3c2b7658074c88a5c92f	not-for-merge	'refs/pull/319/head' of https://github.com/Amplitude/Amplitude-iOS
+559360980278df796516cc255344465714d8820c	not-for-merge	'refs/pull/32/head' of https://github.com/Amplitude/Amplitude-iOS
+b269b47d2eaa5073f16bf834fc1e321c864a5b0f	not-for-merge	'refs/pull/321/head' of https://github.com/Amplitude/Amplitude-iOS
+9d5ac343c7592b7d1442c130771f5518594445fc	not-for-merge	'refs/pull/323/head' of https://github.com/Amplitude/Amplitude-iOS
+3d24a5083151c342f68c05c65d3e63c9873505cf	not-for-merge	'refs/pull/325/head' of https://github.com/Amplitude/Amplitude-iOS
+88c1f42b8f5942cc4fdcae56dfc44a83c8e2eba4	not-for-merge	'refs/pull/328/head' of https://github.com/Amplitude/Amplitude-iOS
+a66d6e961b24afbce76fe7039c46a46486b772ff	not-for-merge	'refs/pull/329/head' of https://github.com/Amplitude/Amplitude-iOS
+82a27f663e4f9de949da6ce3fa307b43b7e1fa61	not-for-merge	'refs/pull/33/head' of https://github.com/Amplitude/Amplitude-iOS
+105b93b268a84107d78eca6cd9d4fde2caf8b6d7	not-for-merge	'refs/pull/330/head' of https://github.com/Amplitude/Amplitude-iOS
+a3f857f3f68dede2e684733bd02d3926d852580d	not-for-merge	'refs/pull/331/head' of https://github.com/Amplitude/Amplitude-iOS
+64c756beaa5f99994dc56e881e926b2d99e8f05e	not-for-merge	'refs/pull/332/head' of https://github.com/Amplitude/Amplitude-iOS
+66169aa6d190f37f7d6003c87ea5bb6947356175	not-for-merge	'refs/pull/335/head' of https://github.com/Amplitude/Amplitude-iOS
+1df860efca2a9ebd018553aa853b18358edc29d2	not-for-merge	'refs/pull/336/head' of https://github.com/Amplitude/Amplitude-iOS
+f0e37d419553a0d2e100890c6c06a8ee7606f592	not-for-merge	'refs/pull/337/head' of https://github.com/Amplitude/Amplitude-iOS
+070c19e3eacd648d1c96f0b1b5d9498dc7eaad89	not-for-merge	'refs/pull/338/head' of https://github.com/Amplitude/Amplitude-iOS
+e0714657e3ac1937015adeac69be04106b4d823d	not-for-merge	'refs/pull/34/head' of https://github.com/Amplitude/Amplitude-iOS
+2d81782e209548c5ebc15ab7dd38b98f4cece603	not-for-merge	'refs/pull/340/head' of https://github.com/Amplitude/Amplitude-iOS
+a0cabb129cc4869faebb1adf2c3dbe73518ad439	not-for-merge	'refs/pull/343/head' of https://github.com/Amplitude/Amplitude-iOS
+5e97c100354dab2deccc35f3309e19ca04caf461	not-for-merge	'refs/pull/345/head' of https://github.com/Amplitude/Amplitude-iOS
+84c8762a82151e12ec70c102e4502dad213f6115	not-for-merge	'refs/pull/346/head' of https://github.com/Amplitude/Amplitude-iOS
+e1b35df1522e7c95ce47037e59a3ca1fa7724c15	not-for-merge	'refs/pull/347/head' of https://github.com/Amplitude/Amplitude-iOS
+9b486d7b477f242d3f798b7fc11934486ba0446a	not-for-merge	'refs/pull/347/merge' of https://github.com/Amplitude/Amplitude-iOS
+45a050e78c1095494c9a7a7ac89761360b5baf9a	not-for-merge	'refs/pull/348/head' of https://github.com/Amplitude/Amplitude-iOS
+413e7f26ad559c7b076eefaf019b8aa0505d5218	not-for-merge	'refs/pull/35/head' of https://github.com/Amplitude/Amplitude-iOS
+b5d3e15c7527cbad1706b278e72e09967c2041a7	not-for-merge	'refs/pull/351/head' of https://github.com/Amplitude/Amplitude-iOS
+c44d1f11a3db4029a4fd2ab80bc276b19d791813	not-for-merge	'refs/pull/353/head' of https://github.com/Amplitude/Amplitude-iOS
+9f8430dcdd40d3320b65a1b8818b9736132d8387	not-for-merge	'refs/pull/354/head' of https://github.com/Amplitude/Amplitude-iOS
+2338a516543b4bf23a8c9c518f7f7ef3d31166fb	not-for-merge	'refs/pull/355/head' of https://github.com/Amplitude/Amplitude-iOS
+94063200ac3b3ae8e8330b0b51bdddadaefeaf20	not-for-merge	'refs/pull/356/head' of https://github.com/Amplitude/Amplitude-iOS
+f106f36341d139ba4c7af5ad3cbd6100777b054d	not-for-merge	'refs/pull/357/head' of https://github.com/Amplitude/Amplitude-iOS
+959c5953e010e03b1da9db39e1d0bbf1aa4a55cc	not-for-merge	'refs/pull/358/head' of https://github.com/Amplitude/Amplitude-iOS
+b5ff99c1dbcf8268d9501a76528aee233909f64d	not-for-merge	'refs/pull/359/head' of https://github.com/Amplitude/Amplitude-iOS
+75f111a62c2df2d9cb2fada54d9ce6ec6a4fc808	not-for-merge	'refs/pull/36/head' of https://github.com/Amplitude/Amplitude-iOS
+a037e0cf7e78bcbe740ff9af2c189ce1e1af80e1	not-for-merge	'refs/pull/360/head' of https://github.com/Amplitude/Amplitude-iOS
+439193450b1252fb3388115baa4738ef60f8465e	not-for-merge	'refs/pull/361/head' of https://github.com/Amplitude/Amplitude-iOS
+bed5ce6b1a364c3d23a0b1a2e67bfc4819fdc991	not-for-merge	'refs/pull/362/head' of https://github.com/Amplitude/Amplitude-iOS
+e23443447b2f7748fe9ef1d7d7a7ebc56d6be7a7	not-for-merge	'refs/pull/363/head' of https://github.com/Amplitude/Amplitude-iOS
+717db1f4327602809281b1755bdac091ba272e0f	not-for-merge	'refs/pull/364/head' of https://github.com/Amplitude/Amplitude-iOS
+c81b0e35811cb54a8bd3465dae606c29adb129bc	not-for-merge	'refs/pull/365/head' of https://github.com/Amplitude/Amplitude-iOS
+73762c074d0b09f279a98b1adafc876f5827360e	not-for-merge	'refs/pull/366/head' of https://github.com/Amplitude/Amplitude-iOS
+4257d91248940d6fa864f468fbc264195cd2e051	not-for-merge	'refs/pull/367/head' of https://github.com/Amplitude/Amplitude-iOS
+5d12aec1177c0ab30c5196e291a6c792db7862f0	not-for-merge	'refs/pull/368/head' of https://github.com/Amplitude/Amplitude-iOS
+371fc26e48e4a17c37a0cf1ee48a9b2987027f54	not-for-merge	'refs/pull/369/head' of https://github.com/Amplitude/Amplitude-iOS
+68099fdbfc1cb6b268dfd45d684ae7eaaf6ff15e	not-for-merge	'refs/pull/371/head' of https://github.com/Amplitude/Amplitude-iOS
+5d945809cbe134adf2dfb44f5011d84bb4358ba9	not-for-merge	'refs/pull/372/head' of https://github.com/Amplitude/Amplitude-iOS
+941a5d08f5e9b282b02f1e4c1fe6a568d1b14a68	not-for-merge	'refs/pull/373/head' of https://github.com/Amplitude/Amplitude-iOS
+79f964420ed708a75e3f1a7984a9fe038d026217	not-for-merge	'refs/pull/374/head' of https://github.com/Amplitude/Amplitude-iOS
+10d4d69329df9e224e5146d1664f86f6204aa8bf	not-for-merge	'refs/pull/375/head' of https://github.com/Amplitude/Amplitude-iOS
+2104deb29bc57dd7477ce21444d2b2922714790e	not-for-merge	'refs/pull/376/head' of https://github.com/Amplitude/Amplitude-iOS
+a4309ed51ae02c08e2f7d3e956ce5b24fcf9ffe4	not-for-merge	'refs/pull/377/head' of https://github.com/Amplitude/Amplitude-iOS
+eeefecfc7fd76bdedb6b5f5022d43c15d007aa3b	not-for-merge	'refs/pull/378/head' of https://github.com/Amplitude/Amplitude-iOS
+932b1c3db6ebec3778955b0086cd8f3a76d37fa9	not-for-merge	'refs/pull/379/head' of https://github.com/Amplitude/Amplitude-iOS
+497ff75bbe19dfe5594365a0268a4712dd4dbbe8	not-for-merge	'refs/pull/38/head' of https://github.com/Amplitude/Amplitude-iOS
+ebf540ae01a42b5e3f6850baed00e66a8f618817	not-for-merge	'refs/pull/38/merge' of https://github.com/Amplitude/Amplitude-iOS
+128fd7e7e43bf174ec693185f1bd0218fbedd0bc	not-for-merge	'refs/pull/381/head' of https://github.com/Amplitude/Amplitude-iOS
+e613890d463115591e1ca9abf2e3de14f929e473	not-for-merge	'refs/pull/383/head' of https://github.com/Amplitude/Amplitude-iOS
+2effa7631297f1d7ebad3367c1f38d1d553a608e	not-for-merge	'refs/pull/385/head' of https://github.com/Amplitude/Amplitude-iOS
+1b0de344c82a705fdbd7f7f76f9f757246fc8c23	not-for-merge	'refs/pull/388/head' of https://github.com/Amplitude/Amplitude-iOS
+4cb73374e5834d8ea95c4f4d8e9b25103de77f43	not-for-merge	'refs/pull/389/head' of https://github.com/Amplitude/Amplitude-iOS
+fe366da8f6dd84380901b7b582f494a33cf8d0f9	not-for-merge	'refs/pull/389/merge' of https://github.com/Amplitude/Amplitude-iOS
+b3c41c255a454cf7650d02ca7442e611f64c51d4	not-for-merge	'refs/pull/39/head' of https://github.com/Amplitude/Amplitude-iOS
+6446fa4e18763eb3eeb3fc7aaa74cd8242976177	not-for-merge	'refs/pull/391/head' of https://github.com/Amplitude/Amplitude-iOS
+757e8317ed0a824482ee2fe159cdee00598caad7	not-for-merge	'refs/pull/392/head' of https://github.com/Amplitude/Amplitude-iOS
+d85f9edd1fcb30ab3b66cceb85796171d1101c14	not-for-merge	'refs/pull/393/head' of https://github.com/Amplitude/Amplitude-iOS
+d142b9af94eeac6147bd8bc280f0b62ff2580c07	not-for-merge	'refs/pull/393/merge' of https://github.com/Amplitude/Amplitude-iOS
+0e646d80607fd48e67fc00ccc142f50a9be9766d	not-for-merge	'refs/pull/394/head' of https://github.com/Amplitude/Amplitude-iOS
+e8d5d394ac71ef649e8dacdf0b43fe64b0ec4e6f	not-for-merge	'refs/pull/398/head' of https://github.com/Amplitude/Amplitude-iOS
+dd4d8ca6b4b19e9e6074515e97b3fc7b7bcde9e3	not-for-merge	'refs/pull/4/head' of https://github.com/Amplitude/Amplitude-iOS
+7e50025fcfb744b1c092354ca56a240dda2615cc	not-for-merge	'refs/pull/4/merge' of https://github.com/Amplitude/Amplitude-iOS
+b697da08c32e1ca669fd1c75d4c03217a5fc05a6	not-for-merge	'refs/pull/400/head' of https://github.com/Amplitude/Amplitude-iOS
+601c2cad28aa817c17c79cbfee037ba849ee7bb5	not-for-merge	'refs/pull/402/head' of https://github.com/Amplitude/Amplitude-iOS
+97ac8d5e7f858445d0dbb8e6d1c883b4b453b6d0	not-for-merge	'refs/pull/403/head' of https://github.com/Amplitude/Amplitude-iOS
+833a4975e66148fffe03497a2bf3434cf95dc9b4	not-for-merge	'refs/pull/404/head' of https://github.com/Amplitude/Amplitude-iOS
+07779834aaf8abe02fbcae500d9b0f97b2abb3c1	not-for-merge	'refs/pull/406/head' of https://github.com/Amplitude/Amplitude-iOS
+8611c88721f2cfe7af81c15a4b35c94b3486b480	not-for-merge	'refs/pull/407/head' of https://github.com/Amplitude/Amplitude-iOS
+26f600565d409bfa9cf561171ddedd43bee6aea5	not-for-merge	'refs/pull/408/head' of https://github.com/Amplitude/Amplitude-iOS
+508e76e258a12166ab5f04c3127ef22c1b004843	not-for-merge	'refs/pull/409/head' of https://github.com/Amplitude/Amplitude-iOS
+b4829fc7350307697c30dab4b36f6ce4792a848c	not-for-merge	'refs/pull/41/head' of https://github.com/Amplitude/Amplitude-iOS
+9f915a7d557c7f449117c01e562792fd6f395e4e	not-for-merge	'refs/pull/410/head' of https://github.com/Amplitude/Amplitude-iOS
+471e544e05c36eeb911653451a3bc7a47ec5b863	not-for-merge	'refs/pull/412/head' of https://github.com/Amplitude/Amplitude-iOS
+afd7518e2155397d65bff698102dbc6a9eec455c	not-for-merge	'refs/pull/414/head' of https://github.com/Amplitude/Amplitude-iOS
+dd18b554e956a8970c46e8664bad40d2639be2bd	not-for-merge	'refs/pull/423/head' of https://github.com/Amplitude/Amplitude-iOS
+d5f958dc3a1f2e034bbf721d2667e91ec34f6522	not-for-merge	'refs/pull/424/head' of https://github.com/Amplitude/Amplitude-iOS
+661713bc53e33584ee880d7003dfa45a6605b179	not-for-merge	'refs/pull/426/head' of https://github.com/Amplitude/Amplitude-iOS
+4af36427402a58483dc4387416ea9a9fac2be484	not-for-merge	'refs/pull/427/head' of https://github.com/Amplitude/Amplitude-iOS
+0daab9de172df75951de1cb02861a7209f221016	not-for-merge	'refs/pull/43/head' of https://github.com/Amplitude/Amplitude-iOS
+958a29d3164369f42e907799513bc4d8c4455849	not-for-merge	'refs/pull/43/merge' of https://github.com/Amplitude/Amplitude-iOS
+213d7269fe3a6dfd367809893fbdab67fee9e1da	not-for-merge	'refs/pull/430/head' of https://github.com/Amplitude/Amplitude-iOS
+12c5be5eb616dbaa3db52afa26ca059ba19d342f	not-for-merge	'refs/pull/431/head' of https://github.com/Amplitude/Amplitude-iOS
+626f6f32721f563c2093b3f7e426cc42123f9e6e	not-for-merge	'refs/pull/431/merge' of https://github.com/Amplitude/Amplitude-iOS
+f07ea75e4094b5e2be3db20c02fd47eab8417556	not-for-merge	'refs/pull/433/head' of https://github.com/Amplitude/Amplitude-iOS
+24af971cbb2236a4f85c4c3663641e8a94501e7a	not-for-merge	'refs/pull/434/head' of https://github.com/Amplitude/Amplitude-iOS
+a5bc868cc39893d6a0b1d92edef054d2ee35f479	not-for-merge	'refs/pull/436/head' of https://github.com/Amplitude/Amplitude-iOS
+735fadff899ec4ea0dd1fa0c3ce538ae8b3dccae	not-for-merge	'refs/pull/437/head' of https://github.com/Amplitude/Amplitude-iOS
+145da67f20188f073103b6d0c7017945227729c4	not-for-merge	'refs/pull/44/head' of https://github.com/Amplitude/Amplitude-iOS
+f0ad154463972a2cb54c1e6916a50d1fd7c4ba35	not-for-merge	'refs/pull/441/head' of https://github.com/Amplitude/Amplitude-iOS
+54d155729510bd7dd5a6eae89520ca02cb061440	not-for-merge	'refs/pull/442/head' of https://github.com/Amplitude/Amplitude-iOS
+5b4e6fc3372f1167e27f5a2575f7fc8589e0558a	not-for-merge	'refs/pull/443/head' of https://github.com/Amplitude/Amplitude-iOS
+d0157315f5a15397e544d7ec537a90d2124886f8	not-for-merge	'refs/pull/443/merge' of https://github.com/Amplitude/Amplitude-iOS
+ff60ff160a1241da06b5e71913ec1b6ffc50d51c	not-for-merge	'refs/pull/444/head' of https://github.com/Amplitude/Amplitude-iOS
+ffaadb039d5d44b17a4a3eae4f7905b79d436e0b	not-for-merge	'refs/pull/445/head' of https://github.com/Amplitude/Amplitude-iOS
+f30e7fd04fc3dece8bd1f9713fd6717041d3a93f	not-for-merge	'refs/pull/445/merge' of https://github.com/Amplitude/Amplitude-iOS
+c1df9ae10bba0695138b99452734f5c6486e1ab0	not-for-merge	'refs/pull/47/head' of https://github.com/Amplitude/Amplitude-iOS
+aae4c716a78a2233f5dc58e0d8bd608804f91281	not-for-merge	'refs/pull/48/head' of https://github.com/Amplitude/Amplitude-iOS
+80722c26c8b98c1d141912bf402034d0223b0f47	not-for-merge	'refs/pull/48/merge' of https://github.com/Amplitude/Amplitude-iOS
+e1d3bb09757f0bb8f8d110225aa549db8c96dbec	not-for-merge	'refs/pull/5/head' of https://github.com/Amplitude/Amplitude-iOS
+39dbc8af7060cbb11003bf483c8ba67aa9f36795	not-for-merge	'refs/pull/5/merge' of https://github.com/Amplitude/Amplitude-iOS
+54ccd687830009a3b7638cd59ce1d0eefe2dade2	not-for-merge	'refs/pull/50/head' of https://github.com/Amplitude/Amplitude-iOS
+ed7e3fec504f74d5462b14b33f913167f1c1746d	not-for-merge	'refs/pull/50/merge' of https://github.com/Amplitude/Amplitude-iOS
+bfe56869bbb034321b1c909dad70ff97b02c3009	not-for-merge	'refs/pull/51/head' of https://github.com/Amplitude/Amplitude-iOS
+0d4db746ce0c369c1c88e3c08eea5a7e8e77066d	not-for-merge	'refs/pull/52/head' of https://github.com/Amplitude/Amplitude-iOS
+96a1e8620eb6018c1a4822a5f78dbdc6a6ffa2ef	not-for-merge	'refs/pull/53/head' of https://github.com/Amplitude/Amplitude-iOS
+db06b777c8feeb4f50b7aeee62888511479fed51	not-for-merge	'refs/pull/54/head' of https://github.com/Amplitude/Amplitude-iOS
+62f63f9ad909a7401facb3ffc296a6a641b43427	not-for-merge	'refs/pull/54/merge' of https://github.com/Amplitude/Amplitude-iOS
+d1155206ed734894d60529351dba5965a3a53ec3	not-for-merge	'refs/pull/56/head' of https://github.com/Amplitude/Amplitude-iOS
+e56da75a85b9af390cb91d662ed5a11bdb62ef72	not-for-merge	'refs/pull/56/merge' of https://github.com/Amplitude/Amplitude-iOS
+b4bc9f735352da5903d2a8bf01f352aaf1641808	not-for-merge	'refs/pull/57/head' of https://github.com/Amplitude/Amplitude-iOS
+82e20be0d4fae220dea25d96a76b76149177809a	not-for-merge	'refs/pull/58/head' of https://github.com/Amplitude/Amplitude-iOS
+6ed2769cf728adfd2159ce9582c395822ce65ed2	not-for-merge	'refs/pull/6/head' of https://github.com/Amplitude/Amplitude-iOS
+c2a016a7c453c8c82d11082a6cf03acffe02d961	not-for-merge	'refs/pull/6/merge' of https://github.com/Amplitude/Amplitude-iOS
+45c542f303d0d83ebc4de8d538c120359d06e251	not-for-merge	'refs/pull/60/head' of https://github.com/Amplitude/Amplitude-iOS
+0264e1eda4a3d35737733c11427d0d23696e8ed4	not-for-merge	'refs/pull/61/head' of https://github.com/Amplitude/Amplitude-iOS
+428dd012be9e32732a34aeb150cea0c6b67f84ef	not-for-merge	'refs/pull/62/head' of https://github.com/Amplitude/Amplitude-iOS
+c0954b0faf48744f72a1eb5697dd3feb18848ec3	not-for-merge	'refs/pull/62/merge' of https://github.com/Amplitude/Amplitude-iOS
+45d505f1b589772d932bd6a0524b7c2def9fd94f	not-for-merge	'refs/pull/65/head' of https://github.com/Amplitude/Amplitude-iOS
+53d6040777fee89f661d380ba20dfbc8db536bdd	not-for-merge	'refs/pull/66/head' of https://github.com/Amplitude/Amplitude-iOS
+690a3ba2f7ada20a05dd3514e1d7e19c322e12e6	not-for-merge	'refs/pull/66/merge' of https://github.com/Amplitude/Amplitude-iOS
+6772ccda8a48f92deea05959b6de1cd8069b50c5	not-for-merge	'refs/pull/68/head' of https://github.com/Amplitude/Amplitude-iOS
+370b497ac940b82969e3e86b2bafae9cde459a53	not-for-merge	'refs/pull/70/head' of https://github.com/Amplitude/Amplitude-iOS
+1152167d355676b23076fcff22cb3804bc30ba1d	not-for-merge	'refs/pull/74/head' of https://github.com/Amplitude/Amplitude-iOS
+9c5878d37eb4d566f9690c06820d08df6db9dbb4	not-for-merge	'refs/pull/75/head' of https://github.com/Amplitude/Amplitude-iOS
+0f1cd0b1cc2fdf853137648c6ee46eaac3c62868	not-for-merge	'refs/pull/77/head' of https://github.com/Amplitude/Amplitude-iOS
+72a1fd246372207a5ac48f9d98e0809e76e91bc7	not-for-merge	'refs/pull/78/head' of https://github.com/Amplitude/Amplitude-iOS
+5c09ca43bf8b817d55187e9183dc597ddd8eae6b	not-for-merge	'refs/pull/78/merge' of https://github.com/Amplitude/Amplitude-iOS
+140ee05326e05ec901ae371763b38665fcfa577d	not-for-merge	'refs/pull/79/head' of https://github.com/Amplitude/Amplitude-iOS
+c1ce579e338c1185ce021da4cbe1c92139762014	not-for-merge	'refs/pull/79/merge' of https://github.com/Amplitude/Amplitude-iOS
+23061e6ef01216fb78689fda4898dff30bedb973	not-for-merge	'refs/pull/8/head' of https://github.com/Amplitude/Amplitude-iOS
+572ad5fdb47da0519b47706716a869a50b38ace0	not-for-merge	'refs/pull/80/head' of https://github.com/Amplitude/Amplitude-iOS
+15a45a6d2f485435486584b434eea40ebae256a8	not-for-merge	'refs/pull/80/merge' of https://github.com/Amplitude/Amplitude-iOS
+930576fb5854ef317cfc3cda120822c46183bc37	not-for-merge	'refs/pull/81/head' of https://github.com/Amplitude/Amplitude-iOS
+5b3eec1b9d404692193368f2451633406da14401	not-for-merge	'refs/pull/81/merge' of https://github.com/Amplitude/Amplitude-iOS
+1aa545ed366f387620a0d8252420b4f6244eb349	not-for-merge	'refs/pull/82/head' of https://github.com/Amplitude/Amplitude-iOS
+4a323ea595bbade58aa8270aee7cba9f271bc8e1	not-for-merge	'refs/pull/83/head' of https://github.com/Amplitude/Amplitude-iOS
+78497491be7d6b10a882f4f08f2968d6a0d0e8e4	not-for-merge	'refs/pull/84/head' of https://github.com/Amplitude/Amplitude-iOS
+183e82d22799540de146d98a00f43ba82c691463	not-for-merge	'refs/pull/85/head' of https://github.com/Amplitude/Amplitude-iOS
+df964e90f41d3ae0536f3fe6755bcd960131a2ac	not-for-merge	'refs/pull/86/head' of https://github.com/Amplitude/Amplitude-iOS
+6123e16ad3c54c8a026c0e6b842d168e42064604	not-for-merge	'refs/pull/87/head' of https://github.com/Amplitude/Amplitude-iOS
+d8329a564b4c7d78b0eddcef7f95d23dbbfdd0a9	not-for-merge	'refs/pull/88/head' of https://github.com/Amplitude/Amplitude-iOS
+81be4d0101471e625df26e3d5d624e8bf950ab90	not-for-merge	'refs/pull/90/head' of https://github.com/Amplitude/Amplitude-iOS
+59166967120cd84174346a4efb239fe6715dcff7	not-for-merge	'refs/pull/91/head' of https://github.com/Amplitude/Amplitude-iOS
+934536d24cb9ce5c567c74ff12e2955faed74bc3	not-for-merge	'refs/pull/92/head' of https://github.com/Amplitude/Amplitude-iOS
+a906bd0b57a97d20b2eb9a50fa743d588cd8a52c	not-for-merge	'refs/pull/94/head' of https://github.com/Amplitude/Amplitude-iOS
+4f430f1a0e7896ca60df0089ae90348013be2a21	not-for-merge	'refs/pull/95/head' of https://github.com/Amplitude/Amplitude-iOS
+a8686db6fd2d08fd0175a2f3b62e19054346aaf1	not-for-merge	'refs/pull/95/merge' of https://github.com/Amplitude/Amplitude-iOS
+d08e2a0276f38ac0270c7bb2c06bdf9ca7d53f75	not-for-merge	'refs/pull/96/head' of https://github.com/Amplitude/Amplitude-iOS
+36c30e099a5b9a4147e081692423fcdd22956973	not-for-merge	'refs/pull/97/head' of https://github.com/Amplitude/Amplitude-iOS
+9653541bd086349026a61f4ab9c59963de42cf65	not-for-merge	'refs/pull/98/head' of https://github.com/Amplitude/Amplitude-iOS
+0a5d2693f9ed7dfad36175ba8bc482cdd40f80f5	not-for-merge	'refs/pull/99/head' of https://github.com/Amplitude/Amplitude-iOS
+4c79ff70a3d17eca9abc93f3192a56cd69340de9	not-for-merge	tag 'v1.0.0' of https://github.com/Amplitude/Amplitude-iOS
+efa761ba200191e5cc79b4c2f7059a2bf3fca388	not-for-merge	tag 'v1.0.1' of https://github.com/Amplitude/Amplitude-iOS
+4dbcc1330046ac342b9dac9d0f19c6a6e727ef84	not-for-merge	tag 'v1.0.2' of https://github.com/Amplitude/Amplitude-iOS
+f2b9824d756c973ee91b9079c108871ce0d9facd	not-for-merge	tag 'v2.0.0' of https://github.com/Amplitude/Amplitude-iOS
+3f921c0b3d0525beeb50d7187fe2f918e910821d	not-for-merge	tag 'v2.1.0' of https://github.com/Amplitude/Amplitude-iOS
+1ebb6dcd0902b275834854fc5948954c104042b3	not-for-merge	tag 'v2.1.1' of https://github.com/Amplitude/Amplitude-iOS
+4c9e933af86a6fb6c16ec3ab79bddf1a85a2f88e	not-for-merge	tag 'v2.2.0' of https://github.com/Amplitude/Amplitude-iOS
+8d19ac08915f3dd23b39de31e419474039f3dfdd	not-for-merge	tag 'v2.2.1' of https://github.com/Amplitude/Amplitude-iOS
+45d42f4aae0c383b27bcd5d7b1ba33c7146fe773	not-for-merge	tag 'v2.2.2' of https://github.com/Amplitude/Amplitude-iOS
+de45ba68e3f50f354db43a848a1c57164aa2cf82	not-for-merge	tag 'v2.2.3' of https://github.com/Amplitude/Amplitude-iOS
+da2fc42c9fc0edb9ad4c9786836d46e857700501	not-for-merge	tag 'v2.2.4' of https://github.com/Amplitude/Amplitude-iOS
+dc5e247a58137fa5e77d764dd6c9a64c48ce1622	not-for-merge	tag 'v2.3.0' of https://github.com/Amplitude/Amplitude-iOS
+b26056b1917bc08e4da2f4a965cc320e81390b92	not-for-merge	tag 'v2.4.0' of https://github.com/Amplitude/Amplitude-iOS
+06730a64a0772acadd00a813b59941f076ed7ab4	not-for-merge	tag 'v2.5.0' of https://github.com/Amplitude/Amplitude-iOS
+e512e25fceb8ef6497bc1f66bac2abc3fed37c27	not-for-merge	tag 'v2.5.1' of https://github.com/Amplitude/Amplitude-iOS
+b3c41c255a454cf7650d02ca7442e611f64c51d4	not-for-merge	tag 'v2.5.2' of https://github.com/Amplitude/Amplitude-iOS
+6b061443d9204f08b356d8138827ba10d8be862a	not-for-merge	tag 'v3.0.0' of https://github.com/Amplitude/Amplitude-iOS
+c9e28022e83ab8bc8c2394f5a51bdd95104ed99c	not-for-merge	tag 'v3.0.1' of https://github.com/Amplitude/Amplitude-iOS
+8251bd6ec176e6f3afd05255ba101c189cf4f4c3	not-for-merge	tag 'v3.1.0' of https://github.com/Amplitude/Amplitude-iOS
+35d81883e694d1e7b5737cd0ea84c0e2f9c76ced	not-for-merge	tag 'v3.1.1' of https://github.com/Amplitude/Amplitude-iOS
+005d86628d3a7603119488fd0762135c699f40b0	not-for-merge	tag 'v3.10.0' of https://github.com/Amplitude/Amplitude-iOS
+58eb85e38f2b6040fda666fe3ca1d60c0f96979d	not-for-merge	tag 'v3.10.1' of https://github.com/Amplitude/Amplitude-iOS
+83445b0b155723c5dd7744867c0d70642b72d6a7	not-for-merge	tag 'v3.11.0' of https://github.com/Amplitude/Amplitude-iOS
+1c6b94ea522b1d747c15e2a6e2864c10eee3edf6	not-for-merge	tag 'v3.11.1' of https://github.com/Amplitude/Amplitude-iOS
+806f63aeca71ac4342cca4dd53e69bc0f3d773f4	not-for-merge	tag 'v3.12.0' of https://github.com/Amplitude/Amplitude-iOS
+ada3d12b5e8d2512f27c44976f493b5cb554a009	not-for-merge	tag 'v3.12.1' of https://github.com/Amplitude/Amplitude-iOS
+d3ed9f1cec272ec32297e4bc094c6a0d05f5cff1	not-for-merge	tag 'v3.13.0' of https://github.com/Amplitude/Amplitude-iOS
+f13ed6fd43046c1114c72a301059220286360601	not-for-merge	tag 'v3.14.0' of https://github.com/Amplitude/Amplitude-iOS
+25a478086db0883e336bd7f6db7eccbfd8b27053	not-for-merge	tag 'v3.14.1' of https://github.com/Amplitude/Amplitude-iOS
+105924b0426f2bb3d4fbfebb7ca90cde6feb2636	not-for-merge	tag 'v3.2.0' of https://github.com/Amplitude/Amplitude-iOS
+7cceece9320d67fe866c0dd85bbbad0082bf3c97	not-for-merge	tag 'v3.2.1' of https://github.com/Amplitude/Amplitude-iOS
+61ccbb3092f8aa5992207b54504457e434d29741	not-for-merge	tag 'v3.3.0' of https://github.com/Amplitude/Amplitude-iOS
+29ebccf24cd128e584e518f7e94efc58e5fb8137	not-for-merge	tag 'v3.4.0' of https://github.com/Amplitude/Amplitude-iOS
+81de6c4072a1e4a90203c6ff4e5176fd3c911743	not-for-merge	tag 'v3.4.1' of https://github.com/Amplitude/Amplitude-iOS
+8e81f6302ded94ce1677f4b814325790d68bc628	not-for-merge	tag 'v3.5.0' of https://github.com/Amplitude/Amplitude-iOS
+784d34804142829d2b34cdf1dce47a0c0b5836c4	not-for-merge	tag 'v3.6.0' of https://github.com/Amplitude/Amplitude-iOS
+ca4aec8a692de92fbfec555cbc57e8f48b9f4309	not-for-merge	tag 'v3.7.0' of https://github.com/Amplitude/Amplitude-iOS
+bd83e2b79704488298de865c1beb0fb75436a791	not-for-merge	tag 'v3.7.1' of https://github.com/Amplitude/Amplitude-iOS
+e431639b703a8a8a48a50a3c1644197599b3632b	not-for-merge	tag 'v3.8.0' of https://github.com/Amplitude/Amplitude-iOS
+cb17e9762bd9fc57841111b8afa41080aad22881	not-for-merge	tag 'v3.8.1' of https://github.com/Amplitude/Amplitude-iOS
+865129b62e8b76a281978b302ca49406e15d7ecf	not-for-merge	tag 'v3.8.2' of https://github.com/Amplitude/Amplitude-iOS
+5418e08cea2aacdbd595c5cfc353206a3f28421f	not-for-merge	tag 'v3.8.3' of https://github.com/Amplitude/Amplitude-iOS
+837be3e539f9229a14030e75e12121523141f367	not-for-merge	tag 'v3.8.4' of https://github.com/Amplitude/Amplitude-iOS
+616d22723f76de59884ade295a034be9eab0f84b	not-for-merge	tag 'v3.8.5' of https://github.com/Amplitude/Amplitude-iOS
+6ee642293c7c22f876b42abcbd3e7cd27a2caee8	not-for-merge	tag 'v3.9.0' of https://github.com/Amplitude/Amplitude-iOS
+1b2a65118dbc14863340c0b3a05a50dfda45454c	not-for-merge	tag 'v4.0.0' of https://github.com/Amplitude/Amplitude-iOS
+3ff38fc345a08c3f6be3c41a413a42b41df17115	not-for-merge	tag 'v4.0.1' of https://github.com/Amplitude/Amplitude-iOS
+56f651e735c3ee71f4aa33a9527e27693e37bef2	not-for-merge	tag 'v4.0.2' of https://github.com/Amplitude/Amplitude-iOS
+83afb3f669aa5a0df2b3d0f44802bafb1ba1fb1b	not-for-merge	tag 'v4.0.3' of https://github.com/Amplitude/Amplitude-iOS
+8a579b5cf9423b8d1908c1061d11be8948064b2d	not-for-merge	tag 'v4.0.4' of https://github.com/Amplitude/Amplitude-iOS
+fdf4fee5baa57a029980971c6f1f514ef7342815	not-for-merge	tag 'v4.1.0' of https://github.com/Amplitude/Amplitude-iOS
+ab1bdb9b3e71ea355596f5890f5f89c635dcdc42	not-for-merge	tag 'v4.10.0' of https://github.com/Amplitude/Amplitude-iOS
+81459d28be1aa9611e102612143e7d15039fb206	not-for-merge	tag 'v4.2.0' of https://github.com/Amplitude/Amplitude-iOS
+cae362ec02a13fd47a1a598cff0f1bb3851114ce	not-for-merge	tag 'v4.2.1' of https://github.com/Amplitude/Amplitude-iOS
+c39d8372bea0648feb81a7d11455e3798104e435	not-for-merge	tag 'v4.3.0' of https://github.com/Amplitude/Amplitude-iOS
+cf5789e9212bc6dc68e4f62084d8782f14a7a5f8	not-for-merge	tag 'v4.3.1' of https://github.com/Amplitude/Amplitude-iOS
+0537e0da14079467cf054944b70e4be6af058c57	not-for-merge	tag 'v4.4.0' of https://github.com/Amplitude/Amplitude-iOS
+7f4d46e47e74f84a836a79e5ec3ea325dc1d3977	not-for-merge	tag 'v4.5.0' of https://github.com/Amplitude/Amplitude-iOS
+f8b0322a68a71644dabd39c25dee6d309123ae4b	not-for-merge	tag 'v4.6.0' of https://github.com/Amplitude/Amplitude-iOS
+ae46a5fd63db451cbd45c3131bf792d7e2cd1c2a	not-for-merge	tag 'v4.7.0' of https://github.com/Amplitude/Amplitude-iOS
+9d640b0070026ae2a2a60054d9baa3247581f4c2	not-for-merge	tag 'v4.7.1' of https://github.com/Amplitude/Amplitude-iOS
+972583722ce4c471ecd534974d0d7872ae6bd40c	not-for-merge	tag 'v4.8.0' of https://github.com/Amplitude/Amplitude-iOS
+5bcc778cd88c2698a61ca74a769877a26b4dafc5	not-for-merge	tag 'v4.8.1' of https://github.com/Amplitude/Amplitude-iOS
+5dcddf06aabd2c564ea28485cb33fd5f4bca52e0	not-for-merge	tag 'v4.8.2' of https://github.com/Amplitude/Amplitude-iOS
+7e79c415c91088f4e533bd7adcd22a9cd344b56a	not-for-merge	tag 'v4.9.0' of https://github.com/Amplitude/Amplitude-iOS
+3f377b9d768ead4d49bd776cbdb51c1534153106	not-for-merge	tag 'v4.9.1' of https://github.com/Amplitude/Amplitude-iOS
+531ea8655a83926fc007d60f296ade661a21443c	not-for-merge	tag 'v4.9.2' of https://github.com/Amplitude/Amplitude-iOS
+876f685f78097e1df31d6ba2a7754176fcaa65e5	not-for-merge	tag 'v4.9.3' of https://github.com/Amplitude/Amplitude-iOS
+62aa03cece7d4566970f416abc20b8326064e6d0	not-for-merge	tag 'v5.0.0' of https://github.com/Amplitude/Amplitude-iOS
+908df62a67bc1816d3eae82ce0ce8a1c0c1131ac	not-for-merge	tag 'v5.1.0' of https://github.com/Amplitude/Amplitude-iOS
+7c5966203d18ce78d9f4bcb9ac46acda4f395b2c	not-for-merge	tag 'v5.2.0' of https://github.com/Amplitude/Amplitude-iOS
+a66e1b6504265abe70044ce06ac8de7de1521c2d	not-for-merge	tag 'v5.2.1' of https://github.com/Amplitude/Amplitude-iOS
+3948ac38ee6c35f82a89eac864003e1641e386d7	not-for-merge	tag 'v5.3.0' of https://github.com/Amplitude/Amplitude-iOS
+44812abd03bac032f16c28a552a3de5c399a9d86	not-for-merge	tag 'v6.0.0' of https://github.com/Amplitude/Amplitude-iOS
+d7f81d3ca3aa2d00ba83f1095857e808faaa43de	not-for-merge	tag 'v7.0.0' of https://github.com/Amplitude/Amplitude-iOS
+eaed8f8f4547ca1b6af096fc04153884f945e495	not-for-merge	tag 'v7.0.1' of https://github.com/Amplitude/Amplitude-iOS
+3006833a3aae96206535de06bba1980371c5389d	not-for-merge	tag 'v7.1.0' of https://github.com/Amplitude/Amplitude-iOS
+0ae76b2280e2200b814ea3462b48b3ef06511325	not-for-merge	tag 'v7.1.1' of https://github.com/Amplitude/Amplitude-iOS
+f6b19721defbb5424941a4ff80407804a664d15b	not-for-merge	tag 'v7.2.0' of https://github.com/Amplitude/Amplitude-iOS
+d8047b99b5069289acc0be8e6f615cff64b8ae7c	not-for-merge	tag 'v7.2.1' of https://github.com/Amplitude/Amplitude-iOS
+4f6c93759068225549b4b3fc614a036bfa958a75	not-for-merge	tag 'v7.2.2' of https://github.com/Amplitude/Amplitude-iOS
+b8fd7cce6708fe49b7d07c0a777b72f231b4b919	not-for-merge	tag 'v7.3.0' of https://github.com/Amplitude/Amplitude-iOS
+092b627b79c0bdb8f595152bda6ad249cd8ce585	not-for-merge	tag 'v8.0.0' of https://github.com/Amplitude/Amplitude-iOS
+242acc544ca53da2087985d41c43dde1af8a0c1b	not-for-merge	tag 'v8.1.0' of https://github.com/Amplitude/Amplitude-iOS
+e135cfe3b4fc13fbf17e7e475b8d0053aa44eeec	not-for-merge	tag 'v8.10.0' of https://github.com/Amplitude/Amplitude-iOS
+7ee7f89fc00a52ef6e17f38618f284f58f815163	not-for-merge	tag 'v8.10.1' of https://github.com/Amplitude/Amplitude-iOS
+06afbb8b9b8da89fa1e7fc58c6342400b77a9ca1	not-for-merge	tag 'v8.10.2' of https://github.com/Amplitude/Amplitude-iOS
+c48a5937dd2f62a598c054dac79bc73e6116653e	not-for-merge	tag 'v8.11.0' of https://github.com/Amplitude/Amplitude-iOS
+6948ca28f39f5133e4d9ae3ea8ac8a944fdc83ea	not-for-merge	tag 'v8.11.1' of https://github.com/Amplitude/Amplitude-iOS
+f07749967fb8e628f9f2c743fab2ba6600574d85	not-for-merge	tag 'v8.12.0' of https://github.com/Amplitude/Amplitude-iOS
+9e3081af2f3d45931b5404c4276c6c2e21ecd671	not-for-merge	tag 'v8.13.0' of https://github.com/Amplitude/Amplitude-iOS
+483ec5c74b50f0d483013fc910fe890ec34e54d2	not-for-merge	tag 'v8.14.0' of https://github.com/Amplitude/Amplitude-iOS
+aead6e7c88a8668841f2f05307b00d52ea6ade74	not-for-merge	tag 'v8.14.1' of https://github.com/Amplitude/Amplitude-iOS
+3d9fd1532c867c54b8e05cf45b7b36d3822ad70c	not-for-merge	tag 'v8.15.0' of https://github.com/Amplitude/Amplitude-iOS
+a02a97c78b63576b441900e12e06df335672e7da	not-for-merge	tag 'v8.15.1' of https://github.com/Amplitude/Amplitude-iOS
+83b6c60321e0d5a6824e89aa45699c557cca5531	not-for-merge	tag 'v8.15.2' of https://github.com/Amplitude/Amplitude-iOS
+e818b182f5c3d5ce5035deab90bca108175b3561	not-for-merge	tag 'v8.16.0' of https://github.com/Amplitude/Amplitude-iOS
+b9512600a0367f5b38c75ad71e822be9ebd9406a	not-for-merge	tag 'v8.16.1' of https://github.com/Amplitude/Amplitude-iOS
+9187e7584d11bdb772aec898d742bf682446c6fd	not-for-merge	tag 'v8.2.0' of https://github.com/Amplitude/Amplitude-iOS
+a3f405a2c29547d69d10d3904233a4d42ef9575f	not-for-merge	tag 'v8.2.1' of https://github.com/Amplitude/Amplitude-iOS
+68eea8100a84d26c3d81997851965ec3efbe61fc	not-for-merge	tag 'v8.3.0' of https://github.com/Amplitude/Amplitude-iOS
+e23443447b2f7748fe9ef1d7d7a7ebc56d6be7a7	not-for-merge	tag 'v8.3.1' of https://github.com/Amplitude/Amplitude-iOS
+fa2af27371ef3eaf54e839b84ee7238a8b95344c	not-for-merge	tag 'v8.4.0' of https://github.com/Amplitude/Amplitude-iOS
+b3411935d96c3b154753771ab32e1df501fec478	not-for-merge	tag 'v8.5.0' of https://github.com/Amplitude/Amplitude-iOS
+ad9d48a81cb1adf056a515f05724e57b98341ce4	not-for-merge	tag 'v8.6.0' of https://github.com/Amplitude/Amplitude-iOS
+7f68d5d356b2ff6b4366d881638fbf6651f4378a	not-for-merge	tag 'v8.7.0' of https://github.com/Amplitude/Amplitude-iOS
+b8a0d51fd414db206050ac83806795a8fab6f447	not-for-merge	tag 'v8.7.1' of https://github.com/Amplitude/Amplitude-iOS
+27af7b7dc8f0f70b388238e6255b957a9a285434	not-for-merge	tag 'v8.7.2' of https://github.com/Amplitude/Amplitude-iOS
+e402b0bc1305158b41a9a296defa77031e718de4	not-for-merge	tag 'v8.8.0' of https://github.com/Amplitude/Amplitude-iOS
+e8a972204bd3c35e51f992c3e35bb810a9f9cc6c	not-for-merge	tag 'v8.9.0' of https://github.com/Amplitude/Amplitude-iOS

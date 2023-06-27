@@ -1,0 +1,95 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "alamofire",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/Alamofire/Alamofire.git",
+          "name" : "Alamofire"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+            "version" : "5.7.1"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "Alamofire"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "alamofireimage",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/Alamofire/AlamofireImage.git",
+          "name" : "AlamofireImage"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "98cbb00ce0ec5fc8e52a5b50a6bfc08d3e5aee10",
+            "version" : "4.2.0"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "AlamofireImage"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "amplitude-ios",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/Amplitude/Amplitude-iOS.git",
+          "name" : "Amplitude"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "b9512600a0367f5b38c75ad71e822be9ebd9406a",
+            "version" : "8.16.1"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "Amplitude-iOS"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "analytics-connector-ios",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/amplitude/analytics-connector-ios.git",
+          "name" : "analytics-connector-ios"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "d3d682a26ca6f4947ece2c2e627971bb41b940fa",
+            "version" : "1.0.1"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "analytics-connector-ios"
+      },
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "promisekit",
+          "kind" : "remoteSourceControl",
+          "location" : "https://github.com/mxcl/PromiseKit.git",
+          "name" : "PromiseKit"
+        },
+        "state" : {
+          "checkoutState" : {
+            "revision" : "8a98e31a47854d3180882c8068cc4d9381bf382d",
+            "version" : "6.22.1"
+          },
+          "name" : "sourceControlCheckout"
+        },
+        "subpath" : "PromiseKit"
+      }
+    ]
+  },
+  "version" : 5
+}

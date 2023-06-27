@@ -1,0 +1,53 @@
+//
+//  File 2.swift
+//  
+//
+//  Created by Maxim Okolokulak on 21.06.23.
+//
+
+import Foundation
+import PromiseKit
+import UserNotifications
+
+public class PushNotification {
+    
+    static func checkAccess() -> Guarantee<Bool> {
+        return Guarantee { seal in
+            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
+                switch settings.authorizationStatus {
+                case .authorized:
+                    _ = registerForRemote()
+                    seal(true)
+                case .denied, .provisional:
+                    seal(false)
+                case .notDetermined:
+                    _ = self.registerForRemote()
+                        .done { success in
+                            seal(success)
+                    }
+                case .ephemeral:
+                    //TODO SASHA
+                    assertionFailure("dont implementd")
+                }
+            })
+        }
+    }
+    
+    static func registerForRemote() -> Guarantee<Bool> {
+        return getAccess()
+            .map { success in
+                if success {
+//                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                return success
+        }
+    }
+    
+    static private func getAccess() -> Guarantee<Bool> {
+        return Guarantee { seal in
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound, .carPlay], completionHandler: { success, error in
+                seal(success)
+            })
+        }
+    }
+}
