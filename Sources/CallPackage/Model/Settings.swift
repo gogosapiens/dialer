@@ -6,8 +6,6 @@ import KeychainAccess
 public class Settings {
     
     public struct Key {
-        
-        
         fileprivate static var bundle: String {
             if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
                let dict = NSDictionary(contentsOfFile: path),

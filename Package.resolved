@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Amplitude/Amplitude-iOS.git",
       "state" : {
-        "revision" : "084a48e2ecd904c00cc5c9345d233f9395e196fa",
-        "version" : "8.16.3"
+        "revision" : "94b4dcfda9ed9edd6463d9a657bf30c9cf075f09",
+        "version" : "8.16.4"
       }
     },
     {
@@ -34,6 +34,15 @@
       "state" : {
         "revision" : "d3d682a26ca6f4947ece2c2e627971bb41b940fa",
         "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "facebook-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/facebook-ios-sdk",
+      "state" : {
+        "revision" : "7fd8a930a5b2c940a22efafe0e214ed0df671312",
+        "version" : "15.1.0"
       }
     },
     {
@@ -64,6 +73,15 @@
       }
     },
     {
+      "identity" : "metrica-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yandexmobile/metrica-sdk-ios",
+      "state" : {
+        "revision" : "13d8b11181a33938ef42759d49466a621df5e7db",
+        "version" : "4.5.2"
+      }
+    },
+    {
       "identity" : "promisekit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mxcl/PromiseKit.git",
@@ -77,17 +95,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "93cc224680a520a84e1c01aa8866042c52eb7958",
-        "version" : "13.15.0"
+        "revision" : "f1434caadda443b4ed2261b91ea4f43ab1ee2aa5",
+        "version" : "13.15.1"
       }
     },
     {
       "identity" : "realm-swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift.git",
+      "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "2d7d1463a765c8835262dc09da83906e7cea166c",
-        "version" : "10.40.2"
+        "revision" : "b287dc102036ff425bd8a88483f0a5596871f05e",
+        "version" : "10.41.0"
       }
     },
     {
@@ -95,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/twilio/twilio-voice-ios",
       "state" : {
-        "revision" : "dad629fd2c9a3e05ded749f16384b4fa8fa0fc48",
-        "version" : "6.8.0"
+        "revision" : "56267525deb20d7f553951a0e136caf39ae102bf",
+        "version" : "6.8.1"
       }
     }
   ],
