@@ -2,7 +2,7 @@
 import Foundation
 import PromiseKit
 
-public class CallPackage {
+public class Voiper {
     
     public let nw = NW.shared
     public let accountManager = AccountManager(service: Service.shared)

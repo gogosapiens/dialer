@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "CallPackage",
+    name: "Voiper",
     platforms: [
           .iOS(.v13)
       ],
     products: [
         .library(
-            name: "CallPackage",
-            targets: ["CallPackage"]),
+            name: "Voiper",
+            targets: ["Voiper"]),
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.6.1"),
@@ -28,7 +28,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "CallPackage",
+            name: "Voiper",
             dependencies: [
                .product(name: "YandexMobileMetrica", package: "metrica-sdk-ios"),
                 .product(name: "FacebookCore", package: "facebook-ios-sdk"),
