@@ -3,8 +3,8 @@ import Foundation
 
 
 public struct Pricing: Decodable {
-    let inbound: [Int]?
-    let outbound: [Int]?
+    public let inbound: [Int]?
+    public let outbound: [Int]?
 }
 
 extension Pricing: CustomStringConvertible {
@@ -15,9 +15,9 @@ extension Pricing: CustomStringConvertible {
 }
 
 public struct PricingResponse: Decodable {
-    let voice: Pricing
-    let sms: Pricing
-    let mms: Pricing
+    public let voice: Pricing
+    public let sms: Pricing
+    public let mms: Pricing
 }
 
 extension PricingResponse: CustomStringConvertible {
