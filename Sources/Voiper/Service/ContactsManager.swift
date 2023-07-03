@@ -102,29 +102,30 @@ public class ContactsManager {
     }
     
     
-    public func contactCNBy(phone: String, completion: (CNContact?) -> Void) {
-        let contactStore = CNContactStore()
-        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
-        var contacts = [CNContact]()
-        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
-        do {
-            try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, _) in
-                for phoneNumberValue in contact.phoneNumbers {
-                    if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
-                        if number.range(of: phone.lowercased(), options: .caseInsensitive) != nil {
-                            contacts.append(contact)
-                            break
+    func searchContactWithPhoneNumber(phoneNumber: String, completion: @escaping (CNContact?) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let contactStore = CNContactStore()
+            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+            let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
+            var matchingContact: CNContact?
+            do {
+                try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
+                    for phoneNumberValue in contact.phoneNumbers {
+                        if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
+                            if number.range(of: phoneNumber.lowercased(), options: .caseInsensitive) != nil {
+                                matchingContact = contact
+                                stop.pointee = true
+                                break
+                            }
                         }
                     }
                 }
-                if let contact = contacts.first {
-                    return completion(contact)
-                } else {
-                    completion(nil)
-                }
-            })
-        } catch {
-            completion(nil)
+            } catch {
+                completion(nil)
+            }
+            DispatchQueue.main.async {
+                completion(matchingContact)
+            }
         }
     }
     
