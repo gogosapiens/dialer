@@ -121,7 +121,7 @@ public class ContactsManager {
                     }
                 }
             } catch {
-                completion(nil)
+                
             }
             DispatchQueue.main.async {
                 completion(matchingContact)
