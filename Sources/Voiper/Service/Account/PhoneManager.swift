@@ -85,11 +85,14 @@ public class PhoneManager: Observable1 {
         }
     }
     
-    public var activePhoneModel: PhoneModel? {
+    public func setActiveNumber(phoneNumber: PhoneModel) {
+        self.activePhoneModel = phoneNumber
+        SubscriptionManager.shared.sendChangeNumberEvents()
+    }
+    
+    private(set) var activePhoneModel: PhoneModel? {
         didSet {
-            
             Storage.defaultNumberId = self.activePhoneModel?.phoneNumber.id
-            
             if oldValue?.phoneNumber.id != activePhoneModel?.phoneNumber.id {
                 notifyObservers(.changedActiveModel)
             }
