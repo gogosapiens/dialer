@@ -102,10 +102,29 @@ public class ContactsManager {
     }
     
     public func contactBy(phone: String) -> Contact? {
-        let phone = phone.replacingOccurrences(of: "+", with: "")
-        return contacts.first { contact in
-            contact.phones.contains { $0.phone == phone }
+        let contactStore = CNContactStore()
+        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        var contacts = [CNContact]()
+        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
+        do {
+            try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, _) in
+                for phoneNumberValue in contact.phoneNumbers {
+                    if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
+                        if number.range(of: phone.lowercased(), options: .caseInsensitive) != nil {
+                            contacts.append(contact)
+                            break
+                        }
+                    }
+                }
+            })
+        } catch {
+            print("Error fetching contacts: \(error)")
         }
+        
+        if let contact = contacts.first {
+            return Contact(cnContact: contact)
+        }
+        return nil
     }
     
     public func cnContact(by id: String) -> CNContact? {

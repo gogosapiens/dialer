@@ -27,7 +27,7 @@ public class CallModel {
     var callVC: CallVCDatasource? {
         didSet {
             callVC?.updateUI()
-            callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)!
+            callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
         }
     }
     private let callKitCallController = CXCallController()
@@ -48,7 +48,7 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
-        callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)!
+        callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
     }
     
     func handleCall(completion: (()->())? = nil) {
