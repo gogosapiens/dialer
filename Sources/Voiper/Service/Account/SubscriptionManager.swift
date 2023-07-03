@@ -1,12 +1,12 @@
 
 import Foundation
 
-protocol SubscriptionDelegate: AnyObject {
+public protocol SubscriptionDelegate: AnyObject {
     func didChangeActiveNumber()
 }
 
 
-class SubscriptionManager {
+public class SubscriptionManager {
     
     static let shared = SubscriptionManager()
     private init() {}
