@@ -112,7 +112,7 @@ public class ContactsManager {
                 try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
                     for phoneNumberValue in contact.phoneNumbers {
                         if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
-                            if number.range(of: phoneNumber.lowercased(), options: .caseInsensitive) != nil {
+                            if number == phoneNumber.lowercased() {
                                 matchingContact = contact
                                 stop.pointee = true
                                 break
