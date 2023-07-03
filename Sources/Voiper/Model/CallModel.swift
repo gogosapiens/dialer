@@ -27,7 +27,9 @@ public class CallModel {
     var callVC: CallVCDatasource? {
         didSet {
             callVC?.updateUI()
-            callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
+            ContactsManager.shared.contactBy(phone: call.handle) { contact in
+                callVC?.contact = contact
+            }
         }
     }
     private let callKitCallController = CXCallController()
@@ -48,7 +50,9 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
-        callVC?.contact = ContactsManager.shared.contactBy(phone: call.handle)
+        ContactsManager.shared.contactBy(phone: call.handle) { contact in
+            callVC?.contact = contact
+        }
     }
     
     func handleCall(completion: (()->())? = nil) {
@@ -79,8 +83,9 @@ extension CallModel {
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
         
         let startCallAction = CXStartCallAction(call: call.uuid, handle: callHandle)
-        let contact = ContactsManager.shared.contactBy(phone: call.handle)
-        startCallAction.contactIdentifier = contact?.fullName
+        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+            startCallAction.contactIdentifier = contact?.fullName
+        })
         let transaction = CXTransaction(action: startCallAction)
         
         callKitCallController.request(transaction)  { error in
@@ -96,15 +101,17 @@ extension CallModel {
             print("StartCallAction transaction request successful")
             print("call UUID \(call.uuid)")
             
-            let contact = ContactsManager.shared.contactBy(phone: call.handle)
             let callUpdate = CXCallUpdate()
+            ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+                callUpdate.localizedCallerName = contact?.fullName
+            })
             callUpdate.remoteHandle = callHandle
             callUpdate.supportsDTMF = true
             callUpdate.supportsHolding = false
             callUpdate.supportsGrouping = false
             callUpdate.supportsUngrouping = false
             callUpdate.hasVideo = false
-            callUpdate.localizedCallerName = contact?.fullName
+            
             
             self.callProvider.updateCall(with: call.uuid, callUpdate)
         }
@@ -112,7 +119,9 @@ extension CallModel {
     
     private func reportIncoming(_ call: SPCall) {
         call.state = .pending
-        let contact = ContactsManager.shared.contactBy(phone: call.handle)
+        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+            CallMagic.update?.localizedCallerName = contact?.fullName
+        })
         callVC?.updateUI()
         
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
@@ -123,7 +132,7 @@ extension CallModel {
         CallMagic.update?.supportsGrouping = false
         CallMagic.update?.supportsUngrouping = false
         CallMagic.update?.hasVideo = false
-        CallMagic.update?.localizedCallerName = contact?.fullName
+       
         
         if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
             CallMagic.update = nil

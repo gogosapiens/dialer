@@ -111,7 +111,9 @@ extension VoipNotification: PKPushRegistryDelegate {
             CallMagic.update?.supportsGrouping = false
             CallMagic.update?.supportsUngrouping = false
             CallMagic.update?.hasVideo = false
-            CallMagic.update?.localizedCallerName = ContactsManager.shared.contactBy(phone: cleanHandle)?.fullName
+            ContactsManager.shared.contactBy(phone: cleanHandle) { contact in
+                CallMagic.update?.localizedCallerName = contact?.fullName
+            }
                
             if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
                 CallMagic.update = nil

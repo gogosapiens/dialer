@@ -101,7 +101,7 @@ public class ContactsManager {
         }
     }
     
-    public func contactBy(phone: String) -> Contact? {
+    public func contactBy(phone: String, completion: (Contact?) -> Void) {
         let contactStore = CNContactStore()
         let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
         var contacts = [CNContact]()
@@ -116,15 +116,15 @@ public class ContactsManager {
                         }
                     }
                 }
+                if let contact = contacts.first {
+                    return completion(Contact(cnContact: contact))
+                } else {
+                    completion(nil)
+                }
             })
         } catch {
-            print("Error fetching contacts: \(error)")
+            completion(nil)
         }
-        
-        if let contact = contacts.first {
-            return Contact(cnContact: contact)
-        }
-        return nil
     }
     
     public func cnContact(by id: String) -> CNContact? {
