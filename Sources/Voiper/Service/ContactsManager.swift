@@ -101,6 +101,34 @@ public class ContactsManager {
         }
     }
     
+    
+    public func contactCNBy(phone: String, completion: (CNContact?) -> Void) {
+        let contactStore = CNContactStore()
+        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        var contacts = [CNContact]()
+        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
+        do {
+            try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { (contact, _) in
+                for phoneNumberValue in contact.phoneNumbers {
+                    if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
+                        if number.range(of: phone.lowercased(), options: .caseInsensitive) != nil {
+                            contacts.append(contact)
+                            break
+                        }
+                    }
+                }
+                if let contact = contacts.first {
+                    return completion(contact)
+                } else {
+                    completion(nil)
+                }
+            })
+        } catch {
+            completion(nil)
+        }
+    }
+    
+    
     public func contactBy(phone: String, completion: (Contact?) -> Void) {
         let contactStore = CNContactStore()
         let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
