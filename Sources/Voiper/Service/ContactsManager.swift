@@ -102,7 +102,7 @@ public class ContactsManager {
     }
     
     
-    func searchContactWithPhoneNumber(phoneNumber: String, completion: @escaping (CNContact?) -> Void) {
+    public func searchContactWithPhoneNumber(phoneNumber: String, completion: @escaping (CNContact?) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let contactStore = CNContactStore()
             let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
