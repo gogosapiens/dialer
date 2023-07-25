@@ -172,6 +172,7 @@ public class ContactsManager {
             self.cnContacts = cnContacts
             self.contacts = allContacts.filter({!$0.phones.isEmpty && !$0.firstName.isEmpty && $0.firstName != ""})
             completion?()
+            NotificationCenter.default.post(Notification(name: ContactsManager.contactsUpdateNotification))
         }
     }
 }
