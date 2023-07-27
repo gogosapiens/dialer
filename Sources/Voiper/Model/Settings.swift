@@ -54,10 +54,12 @@ public class Settings {
     
     public static var userToken: String? {
         get {
+            #if DEBUG
+            return "KT1ffhr1bpb5aPUkpB2IWYuD"
+            #else
             let keychain = Keychain(service: Key.keychainName)
-//            return keychain[Key.userToken]
-            return "AdoRQi72EgJHlvmb46w65xn3"
-//            return nil
+            return keychain[Key.userToken]
+            #endif
         }
         set {
             let keychain = Keychain(service: Key.keychainName)

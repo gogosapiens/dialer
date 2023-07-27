@@ -7,7 +7,6 @@ public enum ServiceError: Error {
     case purchaseError(String)
     case undecodable
     case networkError(API, Int, String)
-    case networkError_2(String, Int, String)
     case undefined
     case other(Error)
     case restoreUnavailable

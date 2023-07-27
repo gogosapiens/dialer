@@ -235,7 +235,53 @@ public class AccountManager: Observable1, OnNotification {
             }
         }
     }
+
+    public func addProduct(_ product: TheProduct, with result: PurchaseManager.PurchaseResult, and number: RegionNumber) -> Promise<Void> {
+        firstly {
+            if Settings.isUserAuthorized {
+                return Promise.value(())
+            } else {
+                return create()
+            }
+        }.then { [service] _ -> Promise<AddSubscriptionResponse> in
+            service.execute(
+                .addSubscription(Bundle.main.bundleIdentifier!,
+                                 result.reciept,
+                                 result.price,
+                                 result.currency)
+            ).then { response -> Promise<AddSubscriptionResponse> in
+                self.loadSubscriptions()
+                    .then { _ -> Promise<AddSubscriptionResponse> in
+                        self.updateCallFlow()
+                        return Promise.value(response)
+                    }
+            }
+        }.then { response -> Promise<Void> in
+            let backendID: Int
+            if product.type.isFirstNumber, let firstSubscriptionId = response.firstSubscriptionId {
+                backendID = firstSubscriptionId
+            } else if product.type.isSecondNumber, let secondSubscriptionId = response.secondSubscriptionId {
+                backendID = secondSubscriptionId
+            } else {
+                return Promise(error: ServiceError.purchaseError("Wrong subscription, please try again later!"))
+            }
+            return self.addLocalNumber(number, subscriptionId: backendID)
+        }
+    }
     
+    func addLocalNumber(_ number: RegionNumber, subscriptionId: Int) -> Promise<Void> {
+        let promise: Promise<EmptyResponse> = service.execute(.addLocalNumber(number: number, subscriptionId: subscriptionId))
+        return promise.then { _ -> Promise<Void> in
+                return self.loadPhones()
+            }.then { _ -> Promise<Void> in
+                return self.loadAccount()
+            }.then { _ -> Promise<Void> in
+                return self.loadSubscriptions()
+            }.done {
+                self.updateCallFlow()
+        }
+    }
+
     func add(number: RegionNumber, type: NumberType, addressId: Int?, subscriptionId: Int?) -> Promise<Void> {
         let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, type: type, addressId: addressId, subscriptionId: subscriptionId))
         return promise.then { _ -> Promise<Void> in
@@ -248,19 +294,6 @@ public class AccountManager: Observable1, OnNotification {
                 self.updateCallFlow()
         }
     }
-    
-//    func addSubscription(with result: Purchases.PurchaseResult) -> Promise<AddSubscriptionResponse> {
-//        let addSubscription: Promise<AddSubscriptionResponse> = service.execute(.addSubscription(Bundle.main.bundleIdentifier!,
-//                                                                                                 result.reciept,
-//                                                                                                 result.price,
-//                                                                                                 result.currency))
-//        return addSubscription.then { response -> Promise<AddSubscriptionResponse> in
-//            return self.loadSubscriptions().then { _ -> Promise<AddSubscriptionResponse> in
-//                self.updateCallFlow()
-//                return Promise.value(response)
-//            }
-//        }
-//    }
     
 //    func addInAppPurchase(with result: Purchases.PurchaseResult) -> Promise<Void> {
 //        let addInAppPurchase: Promise<EmptyResponse> = service.execute(.addInAppPurchase(bundle: Bundle.main.bundleIdentifier!, receipt: result.reciept, price: result.price, currency: result.currency))
