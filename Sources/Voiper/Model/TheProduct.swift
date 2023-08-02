@@ -178,6 +178,24 @@ extension TheProduct {
                 return false
             }
         }
+        
+        var group: Int {
+            switch self {
+            case .oneNumberWeekly, .oneNumberWeeklyTrial,
+                 .oneNumberMonthly, .oneNumberMonthlyTrial,
+                 .oneNumberThreeMonths,
+                 .oneNumberSixMonthsTrial,
+                 .oneNumberYearly:
+                
+                return 1
+            case .secondNumberWeekly:
+                return 2
+            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000:
+                return 3
+            case .unknown:
+                return -1
+            }
+        }
     }
 }
 

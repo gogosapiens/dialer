@@ -14,6 +14,7 @@ public struct SubscriptionInfo: Decodable {
     public let bundle: String
     public let priceGroup: String
     public var accountNumberId: Int?
+    public var subscriptionGroup: Int
     
     enum CodingKeys: String, CodingKey {
         case id, refunded, cancelled, bundle
@@ -23,6 +24,7 @@ public struct SubscriptionInfo: Decodable {
         case expiredAt = "expired_at"
         case priceGroup = "price_group"
         case accountNumberId = "account_number_id"
+        case subscriptionGroup = "subscr_group"
     }
     
 }
@@ -38,8 +40,11 @@ extension SubscriptionInfo {
                   expiredAt: realmObject.expiredAt,
                   bundle: realmObject.bundle,
                   priceGroup: realmObject.priceGroup,
-                  accountNumberId: realmObject.accountNumberId)
+                  accountNumberId: realmObject.accountNumberId,
+                  subscriptionGroup: realmObject.subscriptionGroup)
         self.accountNumberId = realmObject.accountNumberId == -1 ? nil : realmObject.accountNumberId
+        guard realmObject.subscriptionGroup == -1, let subscription = TheProduct.ProductType.allCases.first(where: { $0.id == realmObject.productId }) else { return }
+        self.subscriptionGroup = subscription.group
     }
 }
 
@@ -54,6 +59,7 @@ public class SubscriptionInfoRealm: Object {
     @objc public dynamic var bundle: String = ""
     @objc public dynamic var priceGroup: String = ""
     @objc public dynamic var accountNumberId: Int = -1
+    @objc public dynamic var subscriptionGroup: Int = -1
     
     
     static func create(with subscriptionInfo: SubscriptionInfo) -> SubscriptionInfoRealm {
@@ -68,6 +74,7 @@ public class SubscriptionInfoRealm: Object {
         realmObject.bundle = subscriptionInfo.bundle
         realmObject.priceGroup = subscriptionInfo.priceGroup
         realmObject.accountNumberId = subscriptionInfo.accountNumberId ?? -1
+        realmObject.subscriptionGroup = subscriptionInfo.subscriptionGroup
         return realmObject
     }
     

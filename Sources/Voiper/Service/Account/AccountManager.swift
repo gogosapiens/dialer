@@ -40,6 +40,37 @@ public class AccountManager: Observable1, OnNotification {
     }
     private var localAccount: Results<AccountRealm>?
     
+    
+    public var hasFirsSubscription: Bool {
+        guard let _ = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 1 && $0.expiredAt == nil }) else { return false }
+        return true
+    }
+    
+    public var hasFirstNumber: Bool {
+        guard let _ = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 1 && $0.accountNumberId != nil }) else { return false }
+        return true
+    }
+    
+    public var firstSubscriptionID: Int {
+        guard let subscription = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 1 }) else { return -1 }
+        return subscription.id
+    }
+    
+    public var hasSecondSubscription: Bool {
+        guard let _ = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 2 && $0.expiredAt == nil }) else { return false }
+        return true
+    }
+    
+    public var hasSecondNumber: Bool {
+        guard let _ = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 2 && $0.accountNumberId != nil }) else { return false }
+        return true
+    }
+    
+    public var secondSubscriptionID: Int {
+        guard let subscription = subscriptionModel.subscriptions.first(where: { $0.subscriptionGroup == 2 }) else { return -1 }
+        return subscription.id
+    }
+    
     init(service: Service) {
         self.service = service
         phoneManager = PhoneManager(service: service)

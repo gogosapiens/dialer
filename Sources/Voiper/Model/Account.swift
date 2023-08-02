@@ -16,12 +16,19 @@ public class Account: Decodable {
     public var paused = false
     public let lastSignIn: Date?
     public let insertedAt: Date?
+    public let notificationsCheckin: Bool
     
-    public init(id: Int, paused: Bool = false, lastSignIn: Date? = nil, insertedAt: Date? = nil) {
+    public init(id: Int,
+                paused: Bool = false,
+                lastSignIn: Date? = nil,
+                insertedAt: Date? = nil,
+                notificationsCheckin: Bool
+    ) {
         self.id = id
         self.lastSignIn = lastSignIn
         self.insertedAt = insertedAt
         self.paused = paused
+        self.notificationsCheckin = notificationsCheckin
     }
     
     enum CodingKeys: String, CodingKey {
@@ -31,6 +38,7 @@ public class Account: Decodable {
         case locale
         case lastSignIn = "last_signin_at"
         case insertedAt = "inserted_at"
+        case notificationsCheckin = "notifications_checkin"
     }
 }
 
@@ -51,7 +59,8 @@ public extension Account {
         self.init(id: realmObject.id,
                   paused: realmObject.paused,
                   lastSignIn: realmObject.lastSignIn,
-                  insertedAt: realmObject.insertedAt)
+                  insertedAt: realmObject.insertedAt,
+                  notificationsCheckin: realmObject.notificationsCheckin)
         self.hasSubscription = realmObject.hasSubscription
         self.balance = realmObject.balance
         self.locale = realmObject.locale
@@ -67,6 +76,7 @@ public extension Account {
     @objc dynamic var paused: Bool = false
     @objc dynamic var lastSignIn: Date? = nil
     @objc dynamic var insertedAt: Date? = nil
+    @objc dynamic var notificationsCheckin: Bool = true
     
     
     static func create(with account: Account, token: String) -> AccountRealm {
@@ -78,6 +88,7 @@ public extension Account {
         realmObject.balance = account.balance
         realmObject.locale = account.locale
         realmObject.lastSignIn = account.lastSignIn
+        realmObject.notificationsCheckin = account.notificationsCheckin
         return realmObject
     }
     

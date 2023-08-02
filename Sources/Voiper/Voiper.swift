@@ -1,7 +1,6 @@
 
 import Foundation
 import PromiseKit
-
 public class Voiper {
     
     public let nw = NW.shared
