@@ -1,5 +1,4 @@
-
-
+import PhoneNumberKit
 import Foundation
 
 class VerificationUserManager {
@@ -17,10 +16,16 @@ class VerificationUserManager {
     }
 
     func canAction(phoneNumber: String, action: Action, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let activeNumber = accountManager.phoneManager.activePhoneModel?.phoneNumber else {
-            //TODO: Add error handling limited to cases
-            return completion(.failure(NSError(domain: "no Active phone", code: 123)))
+        
+        if !isValidPhoneNumber(phoneNumber) {
+            completion(.failure(LocalError.noInternationalFormat))
+            return
         }
+        
+        guard let activeNumber = accountManager.phoneManager.activePhoneModel?.phoneNumber else {
+            return completion(.failure(LocalError.noActiveNumber))
+        }
+        
         let balance = self.accountManager.account?.balance ?? 0
         switch action {
         case .call:
@@ -31,7 +36,7 @@ class VerificationUserManager {
                     if result.canCall && result.minutes < balance {
                         completion(.success(()))
                     } else {
-                        completion(.failure(NSError(domain: "", code: 124)))
+                        completion(.failure(LocalError.notEnoughFundsCall))
                     }
                 case .failure(let failure):
                      completion(.failure(failure))
@@ -45,7 +50,7 @@ class VerificationUserManager {
                     if result.canSms && result.smsPricing.outbound?.first ?? 1 < balance {
                         completion(.success(()))
                     } else {
-                        completion(.failure(NSError(domain: "", code: 124)))
+                        completion(.failure(LocalError.notEnoughFundsSMS))
                     }
                 case .failure(let failure):
                     completion(.failure(failure))
@@ -59,12 +64,17 @@ class VerificationUserManager {
                     if result.canMms && result.mmsPricing.outbound?.first ?? 1 < balance {
                         completion(.success(()))
                     } else {
-                        completion(.failure(NSError(domain: "", code: 124)))
+                        completion(.failure(LocalError.notEnoughFundsMMS))
                     }
                 case .failure(let failure):
                     completion(.failure(failure))
                 }
             }
         }
+    }
+    
+    private func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
+        let phoneNumberKit = PhoneNumberKit()
+        return phoneNumberKit.isValidPhoneNumber(phoneNumber)
     }
 }
