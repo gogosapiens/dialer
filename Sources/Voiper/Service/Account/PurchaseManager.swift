@@ -59,7 +59,9 @@ public class PurchaseManager: NSObject {
     public func buyPoduct(_ product: TheProduct, completion: @escaping (Swift.Result<PurchaseResult, ServiceError>) -> Void) {
         purchaseProduct(product) { [weak self] purchaseResult in
             guard let self = self else {
-                completion(.failure(ServiceError.undefined))
+                DispatchQueue.main.async {
+                    completion(.failure(ServiceError.undefined))
+                }
                 return
             }
     
@@ -68,14 +70,20 @@ public class PurchaseManager: NSObject {
                 guard IDs.contains(product.skProduct.productIdentifier) else { return }
 
                 guard let receipt = self.receipt else {
-                    completion(.failure(ServiceError.undefined))
+                    DispatchQueue.main.async {
+                        completion(.failure(ServiceError.undefined))
+                    }
                     return
                 }
-                completion(.success(PurchaseResult(reciept: receipt, price: "\(product.skProduct.price)", currency: product.currency)))
+                DispatchQueue.main.async {
+                    completion(.success(PurchaseResult(reciept: receipt, price: "\(product.skProduct.price)",
+                                                       currency: product.currency)))
+                }
 
             case .failure(let skError):
-                completion(.failure(.purchaseError(skError.localizedDescription)))
-                
+                DispatchQueue.main.async {
+                    completion(.failure(.purchaseError(skError.localizedDescription)))
+                }
             }
             
         }
@@ -89,7 +97,9 @@ public class PurchaseManager: NSObject {
     public func fetchProducts(_ productTypes: Set<TheProduct.ProductType>, completion: Completion? = nil) {
         let prefetchedProducts = products.compactMap { productTypes.contains($0.type) ? $0 : nil }
         if prefetchedProducts.count == productTypes.count {
-            completion?(.success(Set(prefetchedProducts.compactMap { $0.type.id } )))
+            DispatchQueue.main.async {
+                completion?(.success(Set(prefetchedProducts.compactMap { $0.type.id } )))
+            }
         } else {
             let request = ProductsRequest(productIdentifiers: Set(productTypes.compactMap { $0.id } ))
             request.id = "\(Date.timeIntervalSinceReferenceDate)"
@@ -101,9 +111,11 @@ public class PurchaseManager: NSObject {
     }
     
     public func restorePurchases(completion: Completion? = nil) {
-        restoreCompletion = completion
-        restoredProductIds.removeAll()
-        SKPaymentQueue.default().restoreCompletedTransactions()
+        DispatchQueue.main.async {
+            SKPaymentQueue.default().restoreCompletedTransactions()
+            self.restoreCompletion = completion
+            self.restoredProductIds.removeAll()
+        }
     }
 }
 
@@ -117,20 +129,24 @@ extension PurchaseManager: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         guard let request = request as? ProductsRequest else { return }
         response.products.forEach { products.insert(TheProduct(with: $0)) }
-        if response.invalidProductIdentifiers.isEmpty {
-            fetchingCompletions[request.id]?(.success(Set(response.products.map { $0.productIdentifier })))
-        } else {
-            print(response.invalidProductIdentifiers)
-            fetchingCompletions[request.id]?(.failure(SKError.init(SKError.unknown, userInfo: [:])))
+        DispatchQueue.main.async {
+            if response.invalidProductIdentifiers.isEmpty {
+                self.fetchingCompletions[request.id]?(.success(Set(response.products.map { $0.productIdentifier })))
+            } else {
+                print(response.invalidProductIdentifiers)
+                self.fetchingCompletions[request.id]?(.failure(SKError.init(SKError.unknown, userInfo: [:])))
+            }
+            self.fetchingCompletions[request.id] = nil
+            self.requests.remove(request)
         }
-        fetchingCompletions[request.id] = nil
-        requests.remove(request)
     }
     
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         guard let request = request as? ProductsRequest, let error = error as? SKError else { return }
-        fetchingCompletions[request.id]?(.failure(error))
-        fetchingCompletions[request.id] = nil
+        DispatchQueue.main.async {
+            self.fetchingCompletions[request.id]?(.failure(error))
+            self.fetchingCompletions[request.id] = nil
+        }
     }
 }
 
@@ -159,24 +175,30 @@ extension PurchaseManager: SKPaymentTransactionObserver {
                 break
             }
             if let result = result {
-                observeHandler?(result)
-                purchaseCompletions[id]?(result)
-                purchaseCompletions[id] = nil
+                DispatchQueue.main.async {
+                    self.observeHandler?(result)
+                    self.purchaseCompletions[id]?(result)
+                    self.purchaseCompletions[id] = nil
+                }
             }
         }
     }
     
     public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        restoreCompletion?(.success(restoredProductIds))
-        restoreCompletion = nil
-        restoredProductIds.removeAll()
+        DispatchQueue.main.async {
+            self.restoreCompletion?(.success(self.restoredProductIds))
+            self.restoreCompletion = nil
+            self.restoredProductIds.removeAll()
+        }
     }
 
     public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         guard let error = error as? SKError else { return }
-        restoreCompletion?(.failure(error))
-        restoreCompletion = nil
-        restoredProductIds.removeAll()
+        DispatchQueue.main.async {
+            self.restoreCompletion?(.failure(error))
+            self.restoreCompletion = nil
+            self.restoredProductIds.removeAll()
+        }
     }
 }
 

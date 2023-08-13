@@ -5,6 +5,7 @@ import RealmSwift
 
 public class AccountManager: Observable1, OnNotification {
     
+    public static let shared = AccountManager(service: Service.shared)
     public var handler: NotificationHandler = NotificationHandler()
     public var observerTokenGenerator: Int = 0
     public var observers: [Int : (AccountManager.Event) -> Void] = [:]
@@ -71,7 +72,7 @@ public class AccountManager: Observable1, OnNotification {
         return subscription.id
     }
     
-    init(service: Service) {
+    private init(service: Service) {
         self.service = service
         phoneManager = PhoneManager(service: service)
         subscriptionModel = SubscriptionModel()
@@ -194,7 +195,7 @@ public class AccountManager: Observable1, OnNotification {
  
     func loadAccount() -> Promise<Void> {
         let loadAccount: Promise<AccountResponse> = service.execute(.getAccount)
-        return loadAccount.then(on: DispatchQueue.global()) { response -> Promise<Void> in
+        return loadAccount.then(on: DispatchQueue.main) { [unowned self] response -> Promise<Void> in
             let account = response.account
             let realm = try! Realm()
             let objectsToDelete = realm.objects(AccountRealm.self).filter { $0.id != account.id }
@@ -203,12 +204,11 @@ public class AccountManager: Observable1, OnNotification {
                 let accountRealm = AccountRealm.create(with: account, token: Settings.userToken!)
                 realm.add(accountRealm, update: .all)
             }
-            return Promise.value(())
-        }.done {
-            let realm = try! Realm()
-            self.localAccount = realm.objects(AccountRealm.self)
+            localAccount = realm.objects(AccountRealm.self)
                 .filter(NSPredicate(format: "token == %@", Settings.userToken!))
             NotificationCenter.default.post(name: Account.updateNotification, object: nil)
+            self.notifyObservers(.loaded)
+            return Promise.value(())
         }
     }
     
@@ -326,14 +326,24 @@ public class AccountManager: Observable1, OnNotification {
         }
     }
     
-//    func addInAppPurchase(with result: Purchases.PurchaseResult) -> Promise<Void> {
-//        let addInAppPurchase: Promise<EmptyResponse> = service.execute(.addInAppPurchase(bundle: Bundle.main.bundleIdentifier!, receipt: result.reciept, price: result.price, currency: result.currency))
-//        return addInAppPurchase.then { _ -> Promise<Void> in
-//            return self.loadAccount()
-//        }.done {
-//            self.updateCallFlow()
-//        }
-//    }
+    public func addInAppPurchase(with result: PurchaseManager.PurchaseResult) -> Promise<Void> {
+        firstly {
+            if Settings.isUserAuthorized {
+                return Promise.value(())
+            } else {
+                return create()
+            }
+        }.then { [service] _ -> Promise<EmptyResponse> in
+            service.execute(.addInAppPurchase(bundle: Bundle.main.bundleIdentifier!,
+                                                                                   receipt: result.reciept,
+                                                                                   price: result.price,
+                                                                                   currency: result.currency))
+        }.then { _ -> Promise<Void> in
+            self.loadAccount()
+        }.done {
+            self.updateCallFlow()
+        }
+    }
     
     func updateLocale(_ locale: String) {
         account?.locale = locale

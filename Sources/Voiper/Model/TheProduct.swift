@@ -69,6 +69,8 @@ extension TheProduct {
         case coinPack200
         case coinPack500
         case coinPack1000
+        case coinPack1200
+        case coinPack2000
         
         case unknown
         
@@ -106,6 +108,10 @@ extension TheProduct {
                 self = .coinPack500
             case "\(ProductType.bundleId).creditspack1000":
                 self = .coinPack1000
+            case "\(ProductType.bundleId).creditspack1200":
+                self = .coinPack1200
+            case "\(ProductType.bundleId).creditspack2000":
+                self = .coinPack2000
             default:
                 self = .unknown
             }
@@ -140,7 +146,11 @@ extension TheProduct {
             case .coinPack500:
                 return "\(ProductType.bundleId).creditspack500"
             case .coinPack1000:
+                return "\(ProductType.bundleId).creditspack1000"
+            case .coinPack1200:
                 return "\(ProductType.bundleId).creditspack1200"
+            case .coinPack2000:
+                return "\(ProductType.bundleId).creditspack2000"
 
             default:
                 return nil
@@ -149,7 +159,7 @@ extension TheProduct {
         
         var isSubscription: Bool {
             switch self {
-            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000:
+            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000, .coinPack1200, .coinPack2000:
                 return false
             default:
                 return true
@@ -190,12 +200,14 @@ extension TheProduct {
                 return 1
             case .secondNumberWeekly:
                 return 2
-            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000:
+            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000, .coinPack1200, .coinPack2000:
                 return 3
             case .unknown:
                 return -1
             }
         }
+        
+        public static var coinsPacks: Set<Self> { [.coinPack100, .coinPack500, .coinPack1000, .coinPack2000] }
     }
 }
 

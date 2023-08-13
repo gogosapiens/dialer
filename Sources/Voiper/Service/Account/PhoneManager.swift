@@ -54,8 +54,7 @@ public class PhoneManager: Observable1 {
                 models.append(PhoneModel(phoneNumber: phoneNumber, service: self.service))
             }
         }
-        
-        notifyObservers(.update)
+
         phoneModels = models
         
         if let activeID = Storage.defaultNumberId, activeID != 0  {
@@ -72,6 +71,7 @@ public class PhoneManager: Observable1 {
         if (self.activePhoneModel == nil)  {
             self.activePhoneModel = phoneModels.max(by: { $0.phoneNumber.inserted < $1.phoneNumber.inserted })
         }
+        notifyObservers(.update)
     }
     
     public func delete(numberId: Int) -> Promise<Void> {
@@ -82,8 +82,8 @@ public class PhoneManager: Observable1 {
                 phoneModels.removeAll(where: { $0.phoneNumber.id == numberId })
                 if let activeNumber = phoneModels.first(where: { $0.phoneNumber.status == .active }) {
                     activePhoneModel = activeNumber
-                } else if let first {
-                    activePhoneModel = phoneModels.first()
+                } else {
+                    activePhoneModel = phoneModels.first
                 }
                 let queue = DispatchQueue(label: "realm-subscriptions-queue")
                 queue.async {

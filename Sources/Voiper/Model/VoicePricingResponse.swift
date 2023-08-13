@@ -3,9 +3,9 @@
 import Foundation
 
 public struct VoicePricingResponse: Decodable {
-    let canCall: Bool
+    public let canCall: Bool
     let minutes: Int
-    let voice: [Int]
+    public let voice: [Int]
     
     enum CodingKeys: String, CodingKey {
         case canCall = "can_call"

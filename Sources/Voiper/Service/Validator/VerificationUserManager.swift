@@ -4,7 +4,7 @@ import Foundation
 class VerificationUserManager {
     
     static var shared = VerificationUserManager()
-    let accountManager = AccountManager(service: Service.shared)
+    private var accountManager: AccountManager { AccountManager.shared }
     let nw = NW.shared
     
     private init() {}

@@ -238,7 +238,12 @@ extension Activity: MessageType {
     }
     
     public var sentDate: Date {
-        return insertedAt ?? (sentAt ?? Date())
+        switch type {
+        case .call:
+            return startedAt ?? Date()
+        case .message:
+            return insertedAt ?? (sentAt ?? Date())
+        }
     }
     
     public var kind: MessageKind {
@@ -265,8 +270,6 @@ extension Activity: MessageType {
             return .text(text)
         }
     }
-    
-    
 }
 
 public class PhotoMediaItem:MediaItem {
