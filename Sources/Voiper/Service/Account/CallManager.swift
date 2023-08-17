@@ -1,5 +1,3 @@
-
-
 import Foundation
 import PromiseKit
 import AVFoundation
@@ -90,20 +88,14 @@ public class CallManager: NSObject {
     
     
     public func call(for number: String, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
-        VerificationUserManager.shared.canAction(phoneNumber: number, action: .call) { result in
-            switch result {
-            case .success:
-                self.accountManager?.updateCallFlow()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                    AccountManager.callFlow.start(SPCall(source: "Keypad", uuid: UUID(), handle: "+14846736390", isOutgoing: true), service: Service.shared).done { _ in
-                    }.catch { error in
-                        completion(.failure(error))
-                    }
-                })
-            case .failure(let failure):
-                completion(.failure(failure))
+        self.accountManager?.updateCallFlow()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            AccountManager.callFlow.start(SPCall(source: "Keypad", uuid: UUID(), handle: number, isOutgoing: true), service: Service.shared).done { _ in
+            }.catch { error in
+                completion(.failure(error))
             }
-        }
+        })
     }
 }
+
 

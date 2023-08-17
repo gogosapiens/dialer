@@ -1,5 +1,3 @@
-
-
 import Foundation
 import TwilioVoice
 import PromiseKit
@@ -23,13 +21,13 @@ public class CallModel {
     private unowned let callManager: CallManager
     private unowned let callProvider: CallProvider
     
-    let call: SPCall
+    public let call: SPCall
     var callVC: CallVCDatasource? {
         didSet {
             callVC?.updateUI()
-            ContactsManager.shared.contactBy(phone: call.handle) { contact in
-                callVC?.contact = contact
-            }
+//            ContactsManager.shared.contactBy(phone: call.handle) { contact in
+//                callVC?.contact = contact
+//            }
         }
     }
     private let callKitCallController = CXCallController()
@@ -50,9 +48,9 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
-        ContactsManager.shared.contactBy(phone: call.handle) { contact in
-            callVC?.contact = contact
-        }
+//        ContactsManager.shared.contactBy(phone: call.handle) { contact in
+//            callVC?.contact = contact
+//        }
     }
     
     func handleCall(completion: (()->())? = nil) {
@@ -83,9 +81,9 @@ extension CallModel {
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
         
         let startCallAction = CXStartCallAction(call: call.uuid, handle: callHandle)
-        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-            startCallAction.contactIdentifier = contact?.fullName
-        })
+//        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+//            startCallAction.contactIdentifier = contact?.fullName
+//        })
         let transaction = CXTransaction(action: startCallAction)
         
         callKitCallController.request(transaction)  { error in
@@ -102,9 +100,9 @@ extension CallModel {
             print("call UUID \(call.uuid)")
             
             let callUpdate = CXCallUpdate()
-            ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-                callUpdate.localizedCallerName = contact?.fullName
-            })
+//            ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+//                callUpdate.localizedCallerName = contact?.fullName
+//            })
             callUpdate.remoteHandle = callHandle
             callUpdate.supportsDTMF = true
             callUpdate.supportsHolding = false
@@ -119,9 +117,9 @@ extension CallModel {
     
     private func reportIncoming(_ call: SPCall) {
         call.state = .pending
-        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-            CallMagic.update?.localizedCallerName = contact?.fullName
-        })
+//        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+//            CallMagic.update?.localizedCallerName = contact?.fullName
+//        })
         callVC?.updateUI()
         
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
@@ -151,7 +149,7 @@ extension CallModel {
         }
     }
     
-    func requestEnd(_ call: SPCall) {
+    public func requestEnd(_ call: SPCall) {
         call.state = .ending
         callVC?.updateUI()
         let endCallAction = CXEndCallAction(call: call.uuid)
@@ -168,7 +166,7 @@ extension CallModel {
         }
     }
     
-    func requestAction(_ action: CXAction) {
+    public func requestAction(_ action: CXAction) {
         let transaction = CXTransaction(action: action)
         callKitCallController.request(transaction) { error in
             if let error = error {
@@ -181,7 +179,7 @@ extension CallModel {
 // MARK: - CXProviderDelegate
 extension CallModel: CallProviderDelegate {
     
-    func providerReportStartCall(with uuid: UUID, with completion: @escaping (Bool) -> ()) {
+     public func providerReportStartCall(with uuid: UUID, with completion: @escaping (Bool) -> ()) {
         guard call.uuid == uuid else {
             completion(false)
             return
@@ -190,7 +188,7 @@ extension CallModel: CallProviderDelegate {
         createTwilioCall(for: call, with: completion)
     }
     
-    func providerReportAnswerCall(with uuid: UUID, with completion: @escaping (Bool) -> ()) {
+    public func providerReportAnswerCall(with uuid: UUID, with completion: @escaping (Bool) -> ()) {
         guard call.uuid == uuid else {
             completion(false)
             return
@@ -200,7 +198,7 @@ extension CallModel: CallProviderDelegate {
         NotificationCenter.default.post(name: Notification.Name(rawValue: "ShowCall"), object: nil)
     }
     
-    func providerReportEndCall(with uuid: UUID) {
+    public func providerReportEndCall(with uuid: UUID) {
         guard call.uuid == uuid else {
             return
         }
@@ -218,12 +216,12 @@ extension CallModel: CallProviderDelegate {
         }
     }
     
-    func providerReportHoldCall(with uuid: UUID, _ onHold: Bool) -> Bool {
+    public func providerReportHoldCall(with uuid: UUID, _ onHold: Bool) -> Bool {
         // TODO: Add Hold
         return false
     }
     
-    func providerReportMuteCall(with uuid: UUID, _ onMute: Bool) -> Bool {
+    public func providerReportMuteCall(with uuid: UUID, _ onMute: Bool) -> Bool {
         guard call.uuid == uuid else {
             return false
         }
@@ -232,7 +230,7 @@ extension CallModel: CallProviderDelegate {
         return true
     }
     
-    func providerReportSendDTMF(with uuid: UUID, _ digits: String) -> Bool {
+    public func providerReportSendDTMF(with uuid: UUID, _ digits: String) -> Bool {
         guard call.uuid == uuid else {
             return false
         }

@@ -24,14 +24,12 @@ let package = Package(
         .package(url: "https://github.com/facebook/facebook-ios-sdk", from: "15.0.0"),
         .package(url: "https://github.com/Amplitude/Amplitude-iOS.git", from: "8.15.0"),
         .package(url: "https://github.com/yandexmobile/metrica-sdk-ios", from: "4.5.0"),
-        .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "3.0.0")
         
     ],
     targets: [
         .target(
             name: "Voiper",
             dependencies: [
-                .product(name: "PhoneNumberKit", package: "phonenumberkit"),
                 .product(name: "YandexMobileMetrica", package: "metrica-sdk-ios"),
                 .product(name: "FacebookCore", package: "facebook-ios-sdk"),
                 .product(name: "Amplitude", package: "Amplitude-iOS"),
@@ -40,7 +38,7 @@ let package = Package(
                 .product(name: "PromiseKit", package: "PromiseKit"),
                 .product(name: "RealmSwift", package: "realm-swift"),
                 .product(name: "MessageKit", package: "MessageKit"),
-                .product(name: "KeychainAccess", package: "KeychainAccess")
+                .product(name: "KeychainAccess", package: "KeychainAccess"),
             ]),
     ]
 )
