@@ -1,5 +1,4 @@
 import Foundation
-import PhoneNumberKit
 
 public class VerificationUserManager {
     

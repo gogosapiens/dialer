@@ -9,6 +9,7 @@ public class Voiper {
     public let contactManager = ContactsManager.shared
     public let analyticManager = AnalyticManager.shared
     public let subscriptionManager = SubscriptionManager.shared
+    public let verificationManager = VerificationUserManager.shared
     
     public init() {
         contactManager.loadContacts(filter: .none)
