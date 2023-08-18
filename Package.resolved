@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Amplitude/Amplitude-iOS.git",
       "state" : {
-        "revision" : "94b4dcfda9ed9edd6463d9a657bf30c9cf075f09",
-        "version" : "8.16.4"
+        "revision" : "94160a550835e6f0a1df9fa76ab3902ac4648a9c",
+        "version" : "8.17.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/amplitude/analytics-connector-ios.git",
       "state" : {
-        "revision" : "d3d682a26ca6f4947ece2c2e627971bb41b940fa",
-        "version" : "1.0.1"
+        "revision" : "d2f3ec4b022211a67d5d4509135d84359f7f8b8d",
+        "version" : "1.0.2"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "f1434caadda443b4ed2261b91ea4f43ab1ee2aa5",
-        "version" : "13.15.1"
+        "revision" : "c04f5e401a1ec682e6b08b1ee157e19a0f834a5f",
+        "version" : "13.17.1"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "b287dc102036ff425bd8a88483f0a5596871f05e",
-        "version" : "10.41.0"
+        "revision" : "933abaa8076966e237e66497def74df84c6adbb4",
+        "version" : "10.42.0"
       }
     },
     {

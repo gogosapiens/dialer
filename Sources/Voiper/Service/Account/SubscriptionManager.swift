@@ -2,13 +2,14 @@
 import Foundation
 
 public protocol SubscriptionDelegate: AnyObject {
-    func didChangeActiveNumber()
+    func didChangeActivePhoneNumber()
+    func didDeletePhoneNumber()
+    func didAddPhoneNumber()
 }
 
-
-public class SubscriptionManager {
+public class EventManager {
     
-    static let shared = SubscriptionManager()
+    static let shared = EventManager()
     private init() {}
     
     private var delegates: [SubscriptionDelegate] = []
@@ -28,4 +29,11 @@ public class SubscriptionManager {
         delegates.forEach({$0.didChangeActiveNumber()})
     }
     
+    func sendDeleteNumberEvent() {
+        delegates?.forEach({$0.didDeleteNumber()})
+    }
+    
+    func sendAddNumberEvent() {
+        delegates?.forEach({$0.didAddPhoneNumber()})
+    }
 }
