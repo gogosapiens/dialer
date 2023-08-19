@@ -20,6 +20,10 @@ extension String {
         return String(format: self, arguments: values)
     }
     
+    var phoneNumberClean: String {
+        return self.replacingOccurrences(of: "[^+0-9]", with: "", options: .regularExpression)
+    }
+    
     
     // Returns true if the String starts with a substring matching to the prefix-parameter.
     // If isCaseSensitive-parameter is true, the function returns false,

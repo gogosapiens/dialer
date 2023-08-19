@@ -121,7 +121,7 @@ public class ContactsManager {
             do {
                 try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
                     for phoneNumberValue in contact.phoneNumbers {
-                        if let number = phoneNumberValue.value.stringValue.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
+                        if let number = phoneNumberValue.value.stringValue.phoneNumberClean.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
                             if number == phoneNumber {
                                 matchingContact = contact
                                 stop.pointee = true
