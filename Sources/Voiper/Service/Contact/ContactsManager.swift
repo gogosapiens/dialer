@@ -103,27 +103,26 @@ public class ContactsManager {
     public func searchContactWithPhoneNumber(phoneNumber: String, completion: @escaping (CNContact?) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let contactStore = CNContactStore()
- 
-            let keysToFetch = [
+            let keysToFetch: [CNKeyDescriptor] = [
                 CNContactPhoneNumbersKey as CNKeyDescriptor,
                 CNContactIdentifierKey as CNKeyDescriptor,
                 CNContactImageDataKey as CNKeyDescriptor,
                 CNContactThumbnailImageDataKey as CNKeyDescriptor,
                 CNContactImageDataAvailableKey as CNKeyDescriptor,
                 CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
-                CNContactPhoneNumbersKey as CNKeyDescriptor,
                 CNContactViewController.descriptorForRequiredKeys() as CNKeyDescriptor,
                 CNContactGivenNameKey as CNKeyDescriptor,
-                CNContactFamilyNameKey as CNKeyDescriptor] as [CNKeyDescriptor]
-            
-            
+                CNContactFamilyNameKey as CNKeyDescriptor
+            ]
+
             let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
             var matchingContact: CNContact?
+
             do {
                 try contactStore.enumerateContacts(with: fetchRequest) { contact, stop in
                     for phoneNumberValue in contact.phoneNumbers {
-                        if let number = phoneNumberValue.value.stringValue.lowercased().components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
-                            if number == phoneNumber.lowercased() {
+                        if let number = phoneNumberValue.value.stringValue.components(separatedBy: CharacterSet.decimalDigits.inverted).joined() as String? {
+                            if number == phoneNumber {
                                 matchingContact = contact
                                 stop.pointee = true
                                 break
@@ -132,13 +131,14 @@ public class ContactsManager {
                     }
                 }
             } catch {
-                
+                print("Error enumerating contacts: \(error)")
             }
             DispatchQueue.main.async {
                 completion(matchingContact)
             }
         }
     }
+
     
     
     public func contactBy(phone: String, completion: (Contact?) -> Void) {
