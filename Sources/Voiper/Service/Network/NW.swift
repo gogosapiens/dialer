@@ -160,7 +160,15 @@ public class NW {
     public func addPhoneNumber(number: RegionNumber, addressId: Int?, subscriptionId: Int?, completion: ((Swift.Result<Void, Error>) -> Void)? = nil) {
         let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
         promise.done { _ in
-            completion?(.success(()))
+            self.loadAccount { result in
+                switch result {
+                case .success:
+                    EventManager.shared.sendAddNumberEvent()
+                    completion?(.success(()))
+                case .failure(let error):
+                    completion?(.failure(error))
+                }
+            }
         }.catch { error in
             completion?(.failure(error))
         }
