@@ -31,7 +31,15 @@ public class NW {
     public func deletePhoneNumber(with id: Int, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
         let promise: Promise<EmptyResponse> = service.execute(.deleteNumber(id: id))
         promise.done { _ in
-            completion(.success(()))
+            self.loadAccount { result in
+                switch result {
+                case .success:
+                    EventManager.shared.sendDeleteNumberEvent()
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }.catch { error in
             completion(.failure(error))
         }
