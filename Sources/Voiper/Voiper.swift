@@ -13,6 +13,7 @@ public class Voiper {
     
     public init() {
         contactManager.loadContacts(filter: .none)
+        verificationManager.accountManager = accountManager
         analyticManager.setupAnalytic()
     }
 }
