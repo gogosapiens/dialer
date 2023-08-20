@@ -109,7 +109,7 @@ extension VoipNotification: PKPushRegistryDelegate {
             CallMagic.update?.supportsGrouping = false
             CallMagic.update?.supportsUngrouping = false
             CallMagic.update?.hasVideo = false
-            CallMagic.update?.localizedCallerName = "twi_from"
+            CallMagic.update?.localizedCallerName = twi_from
                
             if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
                 CallMagic.update = nil
