@@ -103,7 +103,7 @@ extension VoipNotification: PKPushRegistryDelegate {
             .trimmingCharacters(in: set.inverted)
             
             CallMagic.update = CXCallUpdate()
-            CallMagic.update?.remoteHandle = CXHandle(type: .generic, value: twi_from)
+            CallMagic.update?.remoteHandle = CXHandle(type: .phoneNumber, value: twi_from)
             CallMagic.update?.supportsDTMF = true
             CallMagic.update?.supportsHolding = false
             CallMagic.update?.supportsGrouping = false
