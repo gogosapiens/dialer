@@ -11,7 +11,8 @@ let package = Package(
     products: [
         .library(
             name: "Voiper",
-            targets: ["Voiper"]),
+            targets: ["Voiper"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.6.1"),
@@ -41,6 +42,7 @@ let package = Package(
                 .product(name: "RealmSwift", package: "realm-swift"),
                 .product(name: "MessageKit", package: "MessageKit"),
                 .product(name: "KeychainAccess", package: "KeychainAccess")
-            ]),
+            ]
+        )
     ]
 )
