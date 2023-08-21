@@ -167,7 +167,7 @@ public class NW {
     public func addPhoneNumber(number: RegionNumber, addressId: Int?, subscriptionId: Int?, completion: ((Swift.Result<Void, Error>) -> Void)? = nil) {
         let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
         promise.done { _ in
-            self.loadAccount { result in
+            self.getNumbers { result in
                 switch result {
                 case .success:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
