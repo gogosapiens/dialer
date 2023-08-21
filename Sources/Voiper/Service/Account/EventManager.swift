@@ -33,7 +33,7 @@ public class EventManager {
         delegates.forEach({$0.didDeletePhoneNumber()})
     }
     
-    func sendAddNumberEvent() {
+    public func sendAddNumberEvent() {
         delegates.forEach({$0.didAddPhoneNumber()})
     }
 }
