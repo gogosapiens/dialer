@@ -35,6 +35,14 @@ public struct NumberType: Decodable {
         case addressRequired = "address_required"
         case priceGroup = "price_group"
     }
+    
+    public init(type: TypeId, dual: Bool, addressRequired: AddressRequiredType, capabilities: [Capability], priceGroup: String) {
+        self.type = type
+        self.dual = dual
+        self.addressRequired = addressRequired
+        self.capabilities = capabilities
+        self.priceGroup = priceGroup
+    }
 }
 
 extension NumberType: CustomStringConvertible {
