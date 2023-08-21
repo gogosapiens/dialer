@@ -157,7 +157,6 @@ public class NW {
             }
             return Promise.value(account)
         }.done { result in
-            let realm = try! Realm()
             NotificationCenter.default.post(name: Account.updateNotification, object: nil)
             completion(.success(result))
         }.catch { error in
@@ -171,8 +170,10 @@ public class NW {
             self.loadAccount { result in
                 switch result {
                 case .success:
-                    EventManager.shared.sendAddNumberEvent()
-                    completion?(.success(()))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                        EventManager.shared.sendAddNumberEvent()
+                        completion?(.success(()))
+                    })
                 case .failure(let error):
                     completion?(.failure(error))
                 }
