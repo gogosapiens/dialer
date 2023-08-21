@@ -9,7 +9,7 @@ public protocol EventManagerDelegate: AnyObject {
 
 public class EventManager {
     
-    static let shared = EventManager()
+    public static let shared = EventManager()
     private init() {}
     
     private var delegates: [EventManagerDelegate] = []
