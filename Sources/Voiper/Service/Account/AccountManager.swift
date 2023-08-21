@@ -45,6 +45,18 @@ public class AccountManager: Observable1, OnNotification {
         subscriptionModel = SubscriptionModel()
         voipNotification = VoipNotification()
         load()
+        
+        
+        handler.registerNotificationName(Constant.startCallIntentNotification) { [unowned self] notification in
+            guard let handle = notification.userInfo?[Constant.intentHandleKey] as? String else {
+                return
+            }
+            self.callIntentHandle = handle
+            if self.initialEvent == .loaded {
+                self.handleCallIntent()
+            }
+        }
+        
         var lastBalance = account?.balance ?? 0
         handler.registerNotificationName(Account.updateNotification) { [unowned self] _ in
             let currentBalance = self.account?.balance ?? 0
