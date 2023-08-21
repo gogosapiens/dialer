@@ -232,7 +232,7 @@ public class AccountManager: Observable1, OnNotification {
         }
     }
     
-    func add(number: RegionNumber, type: NumberType, addressId: Int?, subscriptionId: Int?) -> Promise<Void> {
+    public func add(number: RegionNumber, type: NumberType, addressId: Int?, subscriptionId: Int?) -> Promise<Void> {
         let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
         return promise.then { _ -> Promise<Void> in
                 return self.loadPhones()
