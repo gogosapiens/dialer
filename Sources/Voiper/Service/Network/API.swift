@@ -1,5 +1,3 @@
-
-
 import Foundation
 import Alamofire
 
@@ -32,14 +30,14 @@ public enum API {
     case getFastPhonesCountryRegion(country: String,region:String)
 
     case createAccount
-    case restoreAccount(String, String)
+    case restoreAccount(receipt: String)
     case getAccount
     case deleteAccount
-    case addSubscription(String, String, String, String)
+    case addSubscription(receipt: String, price: String, currency: String)
     case getSubscriptions
-    case addInAppPurchase(bundle: String, receipt: String, price: String, currency: String)
+    case addInAppPurchase(receipt: String, price: String, currency: String)
     case addAddress(customerName: String, country: String, city: String, region: String, street: String, postalCode: String)
-    case addNumber(number: RegionNumber, type: NumberType, addressId: Int?, subscriptionId: Int?)
+    case addNumber(number: RegionNumber, addressId: Int?, subscriptionId: Int?)
     case addLocalNumber(number: RegionNumber, subscriptionId: Int)
     case getNumbers
     case lockNumber(number:String)
@@ -154,23 +152,23 @@ extension API {
                 "push_token": tokenId,
                 "bundle": Bundle.main.bundleIdentifier!
             ]
-        case .addSubscription(let bundle, let receipt, let price, let currency):
+        case .addSubscription(let receipt, let price, let currency):
             return [
-                "bundle": bundle,
+                "bundle": Bundle.main.bundleIdentifier!,
                 "receipt": receipt,
                 "price": price,
                 "currency": currency
                 ]
-        case .addInAppPurchase(let bundle, let receipt, let price, let currency):
+        case .addInAppPurchase(let receipt, let price, let currency):
             return [
-                "bundle": bundle,
+                "bundle": Bundle.main.bundleIdentifier!,
                 "receipt": receipt,
                 "price": price,
                 "currency": currency
             ]
-        case .restoreAccount(let bundle, let receipt):
+        case .restoreAccount(let receipt):
             return [
-                "bundle": bundle,
+                "bundle": Bundle.main.bundleIdentifier!,
                 "receipt": receipt
             ]
         case .addAddress(let customerName, let country, let city, let region, let street, let postalCode):
@@ -184,11 +182,11 @@ extension API {
                     "postal_code": postalCode
                 ]
             ]
-        case .addNumber(let phone, let type, let addressId, let subscriptionId):
+        case .addNumber(let phone, let addressId, let subscriptionId):
             var params: [String: Any] = [
                 "number": phone.number,
                 "country": phone.country,
-                "type": type.type.rawValue
+                "type": "Local"
             ]
             if let region = phone.region {
                 params["region"] = region

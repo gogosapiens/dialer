@@ -1,5 +1,3 @@
-
-
 import Foundation
 import KeychainAccess
 
@@ -54,12 +52,14 @@ public class Settings {
     
     public static var userToken: String? {
         get {
-            #if DEBUG
-            return "hwpa8KgybneTGMh0VrqK8TgC"
-            #else
-            let keychain = Keychain(service: Key.keychainName)
-            return keychain[Key.userToken]
-            #endif
+            if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
+               let dict = NSDictionary(contentsOfFile: path),
+               let token = dict["testToken"] as? String {
+                return token
+            } else {
+                let keychain = Keychain(service: Key.keychainName)
+                return keychain[Key.userToken]
+            }
         }
         set {
             let keychain = Keychain(service: Key.keychainName)

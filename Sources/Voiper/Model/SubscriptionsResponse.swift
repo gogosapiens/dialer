@@ -1,11 +1,9 @@
-
-
 import Foundation
 
 public struct SubscriptionsResponse: Decodable {
-    let first_number_subscr_id : Int?
-    let second_number_subscr_id : Int?
-    let subscriptions: [SubscriptionInfo]
+    public let first_number_subscr_id : Int?
+    public let second_number_subscr_id : Int?
+    public let subscriptions: [SubscriptionInfo]
 }
 
 extension SubscriptionsResponse: CustomStringConvertible {

@@ -1,16 +1,14 @@
-
-
 import Foundation
 import UIKit
 import TwilioVoice
 import PromiseKit
 import CallKit
 
-protocol CallIntentHandler {
+public protocol CallIntentHandler {
     func handleStartCallIntent(_ handle: String)
 }
 
-protocol VoipNotificationHandler: AnyObject {
+public protocol VoipNotificationHandler: AnyObject {
     func handleVoipNotification(_ payload: [AnyHashable: Any])
 }
 
@@ -20,6 +18,7 @@ public class CallFlow: NSObject, OnNotification {
     static let windowLevel = UIWindow.Level.alert + 2
     private var callModel: CallModel?
     weak var callManager: CallManager?
+    private var callViewController: CallVCDatasource?
     
     private let provider: CallProvider = {
         if let provider = CallMagic.provider {
@@ -54,9 +53,6 @@ public class CallFlow: NSObject, OnNotification {
     }
     
     func start(_ call: SPCall, service: Service) -> Promise<Void> {
-        if call.isOutgoing {
-//            trackEvent("CallOrMessage")
-        }
         return Promise { seal in
           
             guard callModel == nil,
@@ -70,19 +66,10 @@ public class CallFlow: NSObject, OnNotification {
                     return
             }
             
-//            guard AppDelegate.shared.accountManager.account?.paused == false else {
-//                seal.reject(ServiceError.accountPaused)
-//                return
-//            }
-            
-//            guard callManager.phoneNumber.isActive else {
-//                if Settings.isRestoringPeriod {
-//                    seal.reject(ServiceError.phoneRestoring(callManager.phoneNumber.number))
-//                } else {
-//                    seal.resolve(nil)
-//                }
-//                return
-//            }
+            guard callManager.phoneNumber.isActive else {
+                seal.resolve(nil)
+                return
+            }
              
             self.callModel = CallModel(call: call, callFlow: self, callProvider: self.provider, callManager: callManager)
             
@@ -96,40 +83,43 @@ public class CallFlow: NSObject, OnNotification {
         }
     }
     
-    func endCall() {
-//        hideCall().done { _ in
-//            self.callModel = nil
-//            self.hideWindow()
-//            self.callManager?.phoneModel.activityModel.update()
-//        }
+    public func endCall() {
+        hideCall(completion: { [weak self] in
+            self?.callModel = nil
+            self?.hideWindow()
+            self?.callManager?.phoneModel.activityModel.update()
+        })
     }
-    
-//    func hideCall() -> Guarantee<Void> {
-//        return UIView.animate(.promise, duration: 0.25) {
-//                self.window.alpha = 0
-//            }.done { _ in
-//                self.window.isHidden = true
-//                self.window.alpha = 1
-//        }
-//    }
+
+    func hideCall(completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.window.alpha = 0
+        }, completion: { _ in
+            self.window.isHidden = true
+            self.window.alpha = 1
+            completion()
+        })
+    }
     
     func showCall() {
         guard let callModel = callModel else { return }
-        
         DispatchQueue.main.async {
-//            if callModel.callVC == nil {
-//                let controller = CallVC(callModel: callModel)
-//                self.window.rootViewController = controller
-//                self.window.makeKeyAndVisible()
-//                callModel.callVC = controller
-//            }
+            if callModel.callVC == nil {
+                let controller = self.callViewController
+                controller?.configure(callModel: callModel)
+                self.window.rootViewController = controller
+                self.window.makeKeyAndVisible()
+                callModel.callVC = controller
+            }
             
-//            self.window.isHidden = false
-//            self.window.alpha = 0
-//            UIView.animate(.promise, duration: 0.25) {
-//                self.window.alpha = 1
-//            }
+            self.window.isHidden = false
+            self.window.alpha = 1
         }
+    }
+    
+    
+    public func setCallVC(vc: CallVCDatasource) {
+        self.callViewController = vc
     }
     
     private func hideWindow() {
@@ -139,7 +129,7 @@ public class CallFlow: NSObject, OnNotification {
 }
 
 extension CallFlow: VoipNotificationHandler {
-    func handleVoipNotification(_ payload: [AnyHashable: Any]) {
+    public func handleVoipNotification(_ payload: [AnyHashable: Any]) {
         print("TWILIO HANDLE VOIP")
         TwilioVoiceSDK.handleNotification(payload, delegate: self, delegateQueue: nil)
     }
@@ -147,7 +137,7 @@ extension CallFlow: VoipNotificationHandler {
 
 extension CallFlow: CallIntentHandler {
     
-    func handleStartCallIntent(_ handle: String) {
+    public func handleStartCallIntent(_ handle: String) {
         let set = CharacterSet(charactersIn: "+1234567890")
         let cleanHandle = handle.replacingOccurrences(of: " ", with: "")
         .replacingOccurrences(of: "-", with: "")
@@ -156,7 +146,7 @@ extension CallFlow: CallIntentHandler {
         .trimmingCharacters(in: set.inverted)
         
         if let uid = CallMagic.UID {
-            let call = SPCall(source:"Intent" ,uuid: uid, handle: cleanHandle, isOutgoing: true)
+            let call = SPCall(uuid: uid, handle: cleanHandle, isOutgoing: true)
             _ = start(call, service: Service.shared)
         } else {
             print("TWILIO INVITE NO UID")
@@ -172,7 +162,7 @@ extension CallFlow: NotificationDelegate {
     
     public func callInviteReceived(callInvite: CallInvite) {
         if let uid = CallMagic.UID {
-            let call = SPCall(source:"Notification", uuid: uid , handle: callInvite.from ?? "")
+            let call = SPCall(uuid: uid , handle: callInvite.from ?? "")
             call.twilioCallInvite = callInvite
             _ = start(call, service: Service.shared)
         }
@@ -182,3 +172,4 @@ extension CallFlow: NotificationDelegate {
         print("Twilio notification error: \(error.localizedDescription)")
     }
 }
+

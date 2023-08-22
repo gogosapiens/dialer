@@ -1,5 +1,3 @@
-
-
 import CallKit
 import Contacts
 import ContactsUI
@@ -61,7 +59,7 @@ public class ContactsManager {
                 CNContactPhoneNumbersKey as CNKeyDescriptor,
                 CNContactViewController.descriptorForRequiredKeys() as CNKeyDescriptor,
                 CNContactGivenNameKey as CNKeyDescriptor,
-                CNContactFamilyNameKey as CNKeyDescriptor] as [Any]
+                CNContactFamilyNameKey as CNKeyDescriptor] as [CNKeyDescriptor]
             
             var allContainers: [CNContainer] = []
             do {
@@ -105,7 +103,20 @@ public class ContactsManager {
     public func searchContactWithPhoneNumber(phoneNumber: String, completion: @escaping (CNContact?) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let contactStore = CNContactStore()
-            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+ 
+            let keysToFetch = [
+                CNContactPhoneNumbersKey as CNKeyDescriptor,
+                CNContactIdentifierKey as CNKeyDescriptor,
+                CNContactImageDataKey as CNKeyDescriptor,
+                CNContactThumbnailImageDataKey as CNKeyDescriptor,
+                CNContactImageDataAvailableKey as CNKeyDescriptor,
+                CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+                CNContactPhoneNumbersKey as CNKeyDescriptor,
+                CNContactViewController.descriptorForRequiredKeys() as CNKeyDescriptor,
+                CNContactGivenNameKey as CNKeyDescriptor,
+                CNContactFamilyNameKey as CNKeyDescriptor] as [CNKeyDescriptor]
+            
+            
             let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
             var matchingContact: CNContact?
             do {
@@ -166,7 +177,9 @@ public class ContactsManager {
             let cnContacts = ContactsManager.getContacts(filter: filter)
             
             for contact in cnContacts {
-                allContacts.append(Contact(cnContact: contact)!)
+                if let contact = Contact(cnContact: contact) {
+                    allContacts.append(contact)
+                }
             }
             
             self.cnContacts = cnContacts

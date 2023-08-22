@@ -1,4 +1,3 @@
-
 import Foundation
 import PromiseKit
 import RealmSwift
@@ -78,25 +77,10 @@ public class AccountManager: Observable1, OnNotification {
         subscriptionModel = SubscriptionModel()
         voipNotification = VoipNotification()
         load()
-        
-//        handler.registerNotificationName(AppDelegate.startCallIntentNotification) { [unowned self] notification in
-//            guard let handle = notification.userInfo?[AppDelegate.intentHandleKey] as? String else {
-//                return
-//            }
-//            self.callIntentHandle = handle
-//            if self.initialEvent == .loaded {
-//                self.handleCallIntent()
-//            }
-//        }
-//        handler.registerNotificationName(UIApplication.didBecomeActiveNotification) { [unowned self] _ in
-//            self.load()
-//        }
-//
         var lastBalance = account?.balance ?? 0
         handler.registerNotificationName(Account.updateNotification) { [unowned self] _ in
             let currentBalance = self.account?.balance ?? 0
             if currentBalance < lastBalance {
-//                trackSpentCredits(lastBalance - currentBalance)
                 lastBalance = currentBalance
             }
         }
@@ -111,7 +95,7 @@ public class AccountManager: Observable1, OnNotification {
     }
     
     public func restore(with receipt: String) -> Promise<Void> {
-        let promise: Promise<CreateAccountResponse> = service.execute(.restoreAccount(Bundle.main.bundleIdentifier!, receipt))
+        let promise: Promise<CreateAccountResponse> = service.execute(.restoreAccount(receipt: receipt))
         return promise.then { response -> Promise<Void> in
             Settings.userToken = response.token
             return self.load()
@@ -134,7 +118,7 @@ public class AccountManager: Observable1, OnNotification {
     }
     
     @discardableResult
-    func load() -> Promise<Void> {
+    private func load() -> Promise<Void> {
         return loadLocal()
             .then({ _ -> Promise<Void> in
                 return self.loadAccount()
@@ -193,7 +177,7 @@ public class AccountManager: Observable1, OnNotification {
         
     }
  
-    func loadAccount() -> Promise<Void> {
+    public func loadAccount() -> Promise<Void> {
         let loadAccount: Promise<AccountResponse> = service.execute(.getAccount)
         return loadAccount.then(on: DispatchQueue.main) { [unowned self] response -> Promise<Void> in
             let account = response.account
@@ -276,10 +260,9 @@ public class AccountManager: Observable1, OnNotification {
             }
         }.then { [service] _ -> Promise<AddSubscriptionResponse> in
             service.execute(
-                .addSubscription(Bundle.main.bundleIdentifier!,
-                                 result.reciept,
-                                 result.price,
-                                 result.currency)
+                .addSubscription(receipt: result.reciept,
+                                 price: result.price,
+                                 currency: result.currency)
             ).then { response -> Promise<AddSubscriptionResponse> in
                 self.loadSubscriptions()
                     .then { _ -> Promise<AddSubscriptionResponse> in
@@ -314,7 +297,7 @@ public class AccountManager: Observable1, OnNotification {
     }
 
     func add(number: RegionNumber, type: NumberType, addressId: Int?, subscriptionId: Int?) -> Promise<Void> {
-        let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, type: type, addressId: addressId, subscriptionId: subscriptionId))
+        let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
         return promise.then { _ -> Promise<Void> in
                 return self.loadPhones()
             }.then { _ -> Promise<Void> in
@@ -334,10 +317,9 @@ public class AccountManager: Observable1, OnNotification {
                 return create()
             }
         }.then { [service] _ -> Promise<EmptyResponse> in
-            service.execute(.addInAppPurchase(bundle: Bundle.main.bundleIdentifier!,
-                                                                                   receipt: result.reciept,
-                                                                                   price: result.price,
-                                                                                   currency: result.currency))
+            service.execute(.addInAppPurchase(receipt: result.reciept,
+                                              price: result.price,
+                                              currency: result.currency))
         }.then { _ -> Promise<Void> in
             self.loadAccount()
         }.done {
@@ -358,7 +340,7 @@ public class AccountManager: Observable1, OnNotification {
         return promise
     }
     
-    func updateBalance(_ balance: Int) throws {
+    public func updateBalance(_ balance: Int) throws {
         guard let account = self.account else { return }
         let realm = try Realm()
         account.balance = balance

@@ -1,5 +1,3 @@
-
-
 import Foundation
 import PromiseKit
 import RealmSwift
@@ -38,12 +36,9 @@ public class ActivityModel: Observable1 {
     }
     
     func initialLoad() -> Promise<Void> {
-//        handler.registerNotificationName(UIApplication.willEnterForegroundNotification) { [unowned self] _ in
-//            self.update()
-//        }
-//        handler.registerNotificationName(AppDelegate.newPushNotification) { [unowned self] notification in
+        handler.registerNotificationName(Constant.newPushNotification) { [unowned self] notification in
             self.update()
-//        }
+        }
         
         _ = PushNotification.checkAccess()
             .done { success in
@@ -75,7 +70,7 @@ public class ActivityModel: Observable1 {
     public func update() -> Promise<Void> {
         return remoteActivities()
             .done { activities in
-                activities.forEach {
+                activities.activity.forEach {
                     if let chat = self.chats[$0.participant] {
                         chat.update(with: $0)
                     } else {
@@ -87,7 +82,7 @@ public class ActivityModel: Observable1 {
                 var messageCount = 0
                 var callsCount = 0
                 
-                activities.forEach { activity in
+                activities.activity.forEach { activity in
                     if  activity.type == .message && activity.isRead == false {
                         messageCount +=  1
                     }
@@ -95,6 +90,7 @@ public class ActivityModel: Observable1 {
                         callsCount +=  1
                     }
                 }
+                NotificationCenter.default.post(name: Constant.reloadBadges , object: nil, userInfo: ["message":"\(messageCount)","call":"\(callsCount)", "phoneNumberID": activities.phoneNumberID])
         }
     }
     
@@ -118,9 +114,9 @@ public class ActivityModel: Observable1 {
         update()
     }
     
-    private func remoteActivities() -> Promise<[Activity]> {
+    private func remoteActivities() -> Promise<(activity: [Activity], phoneNumberID: Int)> {
         let promise: Promise<ActivitiesResponse> = service.execute(.getActivities(phoneNumber.id))
-        return promise.then(on: DispatchQueue.global()) { response -> Promise<[Activity]> in
+        return promise.then(on: DispatchQueue.global()) { response -> Promise<(activity: [Activity], phoneNumberID: Int)> in
             let activities = response.activities
             let realm = try! Realm()
             try! realm.write {
@@ -129,7 +125,7 @@ public class ActivityModel: Observable1 {
                 })
             }
             
-            return Promise.value(activities)
+            return Promise.value((activities, self.phoneNumber.id))
         }
     }
 }
