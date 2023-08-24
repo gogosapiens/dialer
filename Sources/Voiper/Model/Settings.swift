@@ -24,7 +24,7 @@ public class Settings {
         public static let lastVisitDateKey =  "\(bundle).lastVisit.key"
     }
     
-    static var deviceId: String {
+    public static var deviceId: String {
         if let deviceId = UserDefaults.standard.string(forKey: Key.deviceId) {
             return deviceId
         } else {
