@@ -52,7 +52,7 @@ public class CallFlow: NSObject, OnNotification {
         }
     }
     
-    func start(_ call: SPCall, service: Service) -> Promise<Void> {
+    public func start(_ call: SPCall) -> Promise<Void> {
         return Promise { seal in
           
             guard callModel == nil,
@@ -146,8 +146,8 @@ extension CallFlow: CallIntentHandler {
         .trimmingCharacters(in: set.inverted)
         
         if let uid = CallMagic.UID {
-            let call = SPCall(uuid: uid, handle: cleanHandle, isOutgoing: true)
-            _ = start(call, service: Service.shared)
+            let call = SPCall(source:"Intent" ,uuid: uid, handle: cleanHandle, isOutgoing: true)
+            _ = start(call)
         } else {
             print("TWILIO INVITE NO UID")
         }
@@ -164,7 +164,7 @@ extension CallFlow: NotificationDelegate {
         if let uid = CallMagic.UID {
             let call = SPCall(uuid: uid , handle: callInvite.from ?? "")
             call.twilioCallInvite = callInvite
-            _ = start(call, service: Service.shared)
+            _ = start(call)
         }
     }
     

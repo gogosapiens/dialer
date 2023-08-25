@@ -103,13 +103,13 @@ extension VoipNotification: PKPushRegistryDelegate {
             .trimmingCharacters(in: set.inverted)
             
             CallMagic.update = CXCallUpdate()
-            CallMagic.update?.remoteHandle = CXHandle(type: .generic, value: twi_from)
+            CallMagic.update?.remoteHandle = CXHandle(type: .phoneNumber, value: twi_from)
             CallMagic.update?.supportsDTMF = true
             CallMagic.update?.supportsHolding = false
             CallMagic.update?.supportsGrouping = false
             CallMagic.update?.supportsUngrouping = false
             CallMagic.update?.hasVideo = false
-            CallMagic.update?.localizedCallerName  = cleanHandle
+            CallMagic.update?.localizedCallerName = twi_from
                
             if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
                 CallMagic.update = nil

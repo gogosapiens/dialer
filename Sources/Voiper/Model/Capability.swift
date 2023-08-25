@@ -25,6 +25,24 @@ extension Capability: CustomStringConvertible {
     }
 }
 
+
+extension Capability {
+    public init?(rawValue: String) {
+        switch rawValue {
+        case "sms":
+            self = .sms
+        case "voice":
+            self = .voice
+        case "mms":
+            self = .mms
+        case "fax":
+            self = .fax
+        default:
+            return nil
+        }
+    }
+}
+
 fileprivate extension String {
     static var sms: String { "SMS".localized }
     static var mms: String { "MMS".localized }

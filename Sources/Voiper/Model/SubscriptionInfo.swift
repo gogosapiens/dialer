@@ -12,7 +12,7 @@ public struct SubscriptionInfo: Decodable {
     public let expiresDate: Date
     public let expiredAt: Date?
     public let bundle: String
-    public let priceGroup: String
+    public let priceGroup: String?
     public var accountNumberId: Int?
     public var subscriptionGroup: Int
     
@@ -72,7 +72,7 @@ public class SubscriptionInfoRealm: Object {
         realmObject.expiresDate = subscriptionInfo.expiresDate
         realmObject.expiredAt = subscriptionInfo.expiredAt
         realmObject.bundle = subscriptionInfo.bundle
-        realmObject.priceGroup = subscriptionInfo.priceGroup
+        realmObject.priceGroup = subscriptionInfo.priceGroup ?? ""
         realmObject.accountNumberId = subscriptionInfo.accountNumberId ?? -1
         realmObject.subscriptionGroup = subscriptionInfo.subscriptionGroup
         return realmObject

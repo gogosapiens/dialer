@@ -102,6 +102,7 @@ public class PhoneManager: Observable1 {
 
     public func setActiveNumber(phoneNumber: PhoneModel) {
         self.activePhoneModel = phoneNumber
+        EventManager.shared.sendChangeNumberEvents()
     }
     
     
