@@ -1,5 +1,3 @@
-
-
 import Foundation
 import TwilioVoice
 import PromiseKit
@@ -7,9 +5,9 @@ import CallKit
 
 
 public class SPCall: NSObject {
-    enum State:Equatable {
+    public enum State:Equatable {
         
-        static func == (lhs: SPCall.State, rhs: SPCall.State) -> Bool {
+        public static func == (lhs: SPCall.State, rhs: SPCall.State) -> Bool {
             switch (lhs, rhs ) {
                 case (.none, .none):
                     return true
@@ -36,19 +34,17 @@ public class SPCall: NSObject {
         case failed(Error?)
     }
     
-    let uuid: UUID
-    let isOutgoing: Bool
-    var handle: String
-    var state: State = .none
+    public let uuid: UUID
+    public let isOutgoing: Bool
+    public var handle: String
+    public var state: State = .none
     
-    var source:String = "Keypad"
+    public var twilioCallInvite: CallInvite?
+    public var twilioCall: Call?
     
-    var twilioCallInvite: CallInvite?
-    var twilioCall: Call?
-    
-    var connectingDate: Date?
-    var connectDate: Date?
-    var endDate: Date?
+    public var connectingDate: Date?
+    public var connectDate: Date?
+    public var endDate: Date?
     var isOnHold: Bool {
         set {
             twilioCall?.isOnHold = newValue
@@ -57,7 +53,7 @@ public class SPCall: NSObject {
             return twilioCall?.isOnHold ?? false
         }
     }
-    var isMuted: Bool {
+    public var isMuted: Bool {
         set {
             twilioCall?.isMuted = newValue
         }
@@ -77,8 +73,7 @@ public class SPCall: NSObject {
         return Date().timeIntervalSince(connectDate)
     }
     
-    public init(source:String, uuid: UUID, handle: String, isOutgoing: Bool = false) {
-        self.source = source
+    public init(uuid: UUID, handle: String, isOutgoing: Bool = false) {
         self.uuid = uuid
         self.isOutgoing = isOutgoing
         self.handle = handle
@@ -150,11 +145,8 @@ extension SPCall: CallDelegate {
   
     public func callDidConnect(call twilioCall: Call) {
         print("callDidConnect:")
-        
-        //self.twilioCall = twilioCall
         state = .connected
         connectDate = Date()
         callConnectBlock?()
     }
-
 }

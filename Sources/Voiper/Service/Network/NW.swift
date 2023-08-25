@@ -1,8 +1,7 @@
-
-
 import Foundation
 import PromiseKit
 import RealmSwift
+import KeychainAccess
 
 
 public class NW {
@@ -10,7 +9,7 @@ public class NW {
     private let service = Service.shared
     
     private init () {}
-
+    
     public func getRegion(with regionCode: String, completion: @escaping (Swift.Result<RegionsResponse, Error>) -> Void) {
         let promise: Promise<RegionsResponse> = service.execute(.getRegions(regionCode))
         promise.done { result in
@@ -24,6 +23,15 @@ public class NW {
         let promise: Promise<RegionNumbersResponse> = service.execute(.getRegionPhones(country: country, region: region, type: type))
         promise.done { result in
             completion(.success(result))
+        }.catch { error in
+            completion(.failure(error))
+        }
+    }
+    
+    public func deletePhoneNumber(with id: Int, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+        let promise: Promise<EmptyResponse> = service.execute(.deleteNumber(id: id))
+        promise.done { _ in
+            completion(.success(()))
         }.catch { error in
             completion(.failure(error))
         }
@@ -64,7 +72,7 @@ public class NW {
             completion(.failure(error))
         }
     }
-
+    
     
     public func loadAccount(completion: @escaping (Swift.Result<Account, Error>) -> Void) {
         let loadAccount: Promise<AccountResponse> = service.execute(.getAccount)
@@ -114,11 +122,47 @@ public class NW {
             try! realm.write {
                 realm.deleteAll()
             }
+            let keychain = Keychain(service: Settings.Key.keychainName)
+            do {
+                try! keychain.synchronizable(true).removeAll()
+            } catch {
+                print(error)
+            }
             DispatchQueue.main.async {
                 completion(.success(()))
             }
         }.catch { error in
             completion(.failure(error))
+        }
+    }
+    
+    public func restoreAccount(receipt: String, completion: @escaping(Swift.Result<Account, Error>) -> Void) {
+        let promise: Promise<AccountResponse> = service.execute(.restoreAccount(receipt: receipt))
+        promise.then(on: DispatchQueue.global()) { response -> Promise<Account> in
+            let account = response.account
+            let realm = try! Realm()
+            let objectsToDelete = realm.objects(AccountRealm.self).filter { $0.id != account.id }
+            try realm.write {
+                realm.delete(objectsToDelete)
+                let accountRealm = AccountRealm.create(with: account, token: Settings.userToken!)
+                realm.add(accountRealm, update: .all)
+            }
+            return Promise.value(account)
+        }.done { result in
+            let realm = try! Realm()
+            NotificationCenter.default.post(name: Account.updateNotification, object: nil)
+            completion(.success(result))
+        }.catch { error in
+            completion(.failure(error))
+        }
+    }
+    
+    public func addPhoneNumber(number: RegionNumber, addressId: Int?, subscriptionId: Int?, completion: ((Swift.Result<Void, Error>) -> Void)? = nil) {
+        let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
+        promise.done { _ in
+            completion?(.success(()))
+        }.catch { error in
+            completion?(.failure(error))
         }
     }
     
@@ -162,13 +206,47 @@ public class NW {
         
     }
     
+    public func registerPush( deviceID: String, token: String, completion: (() -> Void)? = nil) {
+        let promise: Promise<EmptyResponse> = service.execute(.registerPush(deviceID, token))
+        promise.done { _ in
+            completion?()
+        }
+    }
+    
+    public func addInAppPurchase(
+        receipt: String,
+        price: String,
+        currency: String,
+        completion: @escaping (Swift.Result<Void, Error>) -> Void) {
+            let promise: Promise<EmptyResponse> = service.execute(.addInAppPurchase(receipt: receipt, price: price, currency: currency))
+            promise.done { _ in
+                completion(.success(()))
+            }.catch { error in
+                completion(.failure(error))
+            }
+        }
+    
+    public func addSubscription(
+        receipt: String,
+        price: String,
+        currency: String,
+        completion: @escaping (Swift.Result<SubscriptionsResponse, Error>) -> Void) {
+            let promise: Promise<SubscriptionsResponse> = service.execute(.addSubscription(receipt: receipt, price: price, currency: currency))
+            promise.done { result in
+                completion(.success(result))
+            }.catch { error in
+                completion(.failure(error))
+            }
+        }
+    
+    
     public func read(numberID: Int, participant: String, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
         let promise: Promise<EmptyResponse> = service.execute(.readChat(numberID, participant))
-         promise.done { _ in
-             completion(.success(()))
-         }.catch { error in
-             completion(.failure(error))
-         }
+        promise.done { _ in
+            completion(.success(()))
+        }.catch { error in
+            completion(.failure(error))
+        }
     }
     
     public func sendMessage(
@@ -214,14 +292,14 @@ public class NW {
         to: String,
         completion: @escaping (Swift.Result<VoicePricingResponse, Error>) -> Void)
     {
-        let promise: Promise<VoicePricingResponse> = service.execute(.getVoicePricing(numberId: numberId, to: "+" + to))
+        let promise: Promise<VoicePricingResponse> = service.execute(.getVoicePricing(numberId: numberId, to: to))
         promise.done { result in
             completion(.success(result))
         }.catch { error in
             completion(.failure(error))
         }
     }
-
+    
     public func getMessagePricing(with numberID: Int, to participant: String, completion: @escaping (Swift.Result<MessagePricingResponse, Error>) -> Void) {
         let promise: Promise<MessagePricingResponse> = service.execute(.getMessagePricing(numberId: numberID, to: participant))
         promise.done { result in

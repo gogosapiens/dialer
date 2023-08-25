@@ -1,10 +1,9 @@
-import PhoneNumberKit
 import Foundation
 
-class VerificationUserManager {
+public class VerificationUserManager {
     
     static var shared = VerificationUserManager()
-    let accountManager = AccountManager(service: Service.shared)
+    private var accountManager: AccountManager { AccountManager.shared }
     let nw = NW.shared
     
     private init() {}
@@ -15,17 +14,17 @@ class VerificationUserManager {
         case mms
     }
 
-    func canAction(phoneNumber: String, action: Action, completion: @escaping (Result<Void, Error>) -> Void) {
+    public func canAction(phoneNumber: String, action: Action, completion: @escaping (Result<Void, Error>) -> Void) {
         
         if !isValidPhoneNumber(phoneNumber) {
             completion(.failure(LocalError.noInternationalFormat))
             return
         }
-        
+
         guard let activeNumber = accountManager.phoneManager.activePhoneModel?.phoneNumber else {
+            //TODO: Add error handling limited to cases
             return completion(.failure(LocalError.noActiveNumber))
         }
-        
         let balance = self.accountManager.account?.balance ?? 0
         switch action {
         case .call:
@@ -42,7 +41,7 @@ class VerificationUserManager {
                      completion(.failure(failure))
                 }
             }
-        case .mms:
+        case .sms:
             nw.getMessagePricing(with: activeNumber.id, to: phoneNumber) { result in
                 switch result {
                 case .success(let result):
@@ -56,7 +55,7 @@ class VerificationUserManager {
                     completion(.failure(failure))
                 }
             }
-        case .sms:
+        case .mms:
             nw.getMessagePricing(with: activeNumber.id, to: phoneNumber) { result in
                 switch result {
                 case .success(let result):
@@ -74,7 +73,8 @@ class VerificationUserManager {
     }
     
     private func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
-        let phoneNumberKit = PhoneNumberKit()
-        return phoneNumberKit.isValidPhoneNumber(phoneNumber)
+        let regex = try? NSRegularExpression(pattern: "^\\+[1-9][0-9]{1,14}$", options: .caseInsensitive)
+        let range = NSRange(location: 0, length: phoneNumber.count)
+        return regex?.firstMatch(in: phoneNumber, options: [], range: range) != nil
     }
 }

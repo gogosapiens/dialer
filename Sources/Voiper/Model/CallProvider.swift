@@ -7,7 +7,7 @@ import CallKit
 import TwilioVoice
 import UIKit
 
-protocol CallProviderDelegate: AnyObject {
+public protocol CallProviderDelegate: AnyObject {
     func providerReportStartCall(with uuid: UUID, with completion: @escaping (Bool) -> ())
     func providerReportAnswerCall(with uuid: UUID, with completion: @escaping (Bool) -> ())
     func providerReportEndCall(with uuid: UUID)
@@ -18,11 +18,11 @@ protocol CallProviderDelegate: AnyObject {
 
 public class CallProvider: NSObject {
     private let provider: CXProvider
-    weak var delegate: CallProviderDelegate?
+    public weak var delegate: CallProviderDelegate?
     
     var audioDevice = DefaultAudioDevice()
 
-    override init() {
+    public override init() {
         
         let configuration = CXProviderConfiguration(localizedName: "Second Phone")
         
@@ -39,19 +39,19 @@ public class CallProvider: NSObject {
         TwilioVoiceSDK.audioDevice = audioDevice
     }
     
-    func updateCall(with uuid: UUID, _ callUpdate: CXCallUpdate) {
+    public func updateCall(with uuid: UUID, _ callUpdate: CXCallUpdate) {
         self.provider.reportCall(with: uuid, updated: callUpdate)
     }
     
-    func reportIncomingCall(from uuid: UUID, with update: CXCallUpdate, _ completion: @escaping (Error?) -> ()) {
+    public func reportIncomingCall(from uuid: UUID, with update: CXCallUpdate, _ completion: @escaping (Error?) -> ()) {
         provider.reportNewIncomingCall(with: uuid, update: update, completion: completion)
     }
     
-    func close(from uuid: UUID) {
+    public func close(from uuid: UUID) {
         provider.reportCall(with: uuid, endedAt: Date(), reason: .failed)
     }
     
-    func invilidate() {
+    public func invilidate() {
         provider.invalidate()
     }
 }

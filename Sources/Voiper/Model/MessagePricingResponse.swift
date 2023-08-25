@@ -4,12 +4,12 @@ import Foundation
 
 
 public struct MessagePricingResponse: Decodable {
-    let canSms: Bool
-    let canMms: Bool
-    let maxSmsCount: Int
-    let maxMmsCount: Int
-    let smsPricing: Pricing
-    let mmsPricing: Pricing
+    public let canSms: Bool
+    public let canMms: Bool
+    public let maxSmsCount: Int
+    public let maxMmsCount: Int
+    public let smsPricing: Pricing
+    public let mmsPricing: Pricing
     
     enum CodingKeys: String, CodingKey {
         case canSms =       "can_sms"

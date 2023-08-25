@@ -27,5 +27,5 @@ public class SubscriptionManager {
     func sendChangeNumberEvents() {
         delegates.forEach({$0.didChangeActiveNumber()})
     }
-    
 }
+

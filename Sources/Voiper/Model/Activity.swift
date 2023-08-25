@@ -238,7 +238,12 @@ extension Activity: MessageType {
     }
     
     public var sentDate: Date {
-        return insertedAt ?? (sentAt ?? Date())
+        switch type {
+        case .call:
+            return startedAt ?? Date()
+        case .message:
+            return insertedAt ?? (sentAt ?? Date())
+        }
     }
     
     public var kind: MessageKind {
@@ -265,11 +270,9 @@ extension Activity: MessageType {
             return .text(text)
         }
     }
-    
-    
 }
 
-public class PhotoMediaItem:MediaItem {
+public class PhotoMediaItem: MediaItem {
     
     public let url:URL?
     public let placeholderImage:UIImage
@@ -278,7 +281,7 @@ public class PhotoMediaItem:MediaItem {
     
     public init(url:URL) {
         self.url = url
-        self.placeholderImage = #imageLiteral(resourceName: "1*mbcSMZM8mcUPpqfC_K6nnQ")
+        self.placeholderImage = UIImage(named: "MessagePlaceholder", in: Bundle.module, compatibleWith: nil)!
         self.size = self.placeholderImage.size
         self.image = nil
     }

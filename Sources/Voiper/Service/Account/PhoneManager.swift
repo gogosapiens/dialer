@@ -2,6 +2,7 @@
 
 import Foundation
 import RealmSwift
+import PromiseKit
 
 public class PhoneManager: Observable1 {
     public enum Event {
@@ -53,8 +54,7 @@ public class PhoneManager: Observable1 {
                 models.append(PhoneModel(phoneNumber: phoneNumber, service: self.service))
             }
         }
-        
-        notifyObservers(.update)
+
         phoneModels = models
         
         if let activeID = Storage.defaultNumberId, activeID != 0  {
@@ -71,23 +71,37 @@ public class PhoneManager: Observable1 {
         if (self.activePhoneModel == nil)  {
             self.activePhoneModel = phoneModels.max(by: { $0.phoneNumber.inserted < $1.phoneNumber.inserted })
         }
+        notifyObservers(.update)
     }
     
-    func delete(numberId: Int) {
-        guard
-            let realm = try? Realm(),
-            let objectToDelete = realm.object(ofType: PhoneNumberRealm.self, forPrimaryKey: numberId)
-        else { return }
+    public func delete(numberId: Int) -> Promise<Void> {
+        let promise: Promise<EmptyResponse> = service.execute(.deleteNumber(id: numberId))
         
-        try? realm.write {
-            realm.delete(objectToDelete)
-            phoneModels.removeAll(where: { $0.phoneNumber.id == numberId })
-        }
+        return promise
+            .map { [unowned self] _ in
+                phoneModels.removeAll(where: { $0.phoneNumber.id == numberId })
+                if let activeNumber = phoneModels.first(where: { $0.phoneNumber.status == .active }) {
+                    activePhoneModel = activeNumber
+                } else {
+                    activePhoneModel = phoneModels.first
+                }
+                let queue = DispatchQueue(label: "realm-subscriptions-queue")
+                queue.async {
+                    guard
+                        let realm = try? Realm(),
+                        let objectToDelete = realm.object(ofType: PhoneNumberRealm.self, forPrimaryKey: numberId)
+                    else { return }
+                    
+                    try? realm.write {
+                        realm.delete(objectToDelete)
+                    }
+                }
+                return Void()
+            }
     }
-    
+
     public func setActiveNumber(phoneNumber: PhoneModel) {
         self.activePhoneModel = phoneNumber
-        SubscriptionManager.shared.sendChangeNumberEvents()
     }
     
     
@@ -97,6 +111,7 @@ public class PhoneManager: Observable1 {
             if oldValue?.phoneNumber.id != activePhoneModel?.phoneNumber.id {
                 notifyObservers(.changedActiveModel)
             }
+            SubscriptionManager.shared.sendChangeNumberEvents()
         }
     }
 }

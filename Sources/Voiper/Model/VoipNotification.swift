@@ -1,5 +1,3 @@
-
-
 import Foundation
 import PushKit
 import CallKit
@@ -111,9 +109,7 @@ extension VoipNotification: PKPushRegistryDelegate {
             CallMagic.update?.supportsGrouping = false
             CallMagic.update?.supportsUngrouping = false
             CallMagic.update?.hasVideo = false
-            ContactsManager.shared.contactBy(phone: cleanHandle) { contact in
-                CallMagic.update?.localizedCallerName = contact?.fullName
-            }
+            CallMagic.update?.localizedCallerName  = cleanHandle
                
             if let uid = CallMagic.UID , let provider = CallMagic.provider, let update = CallMagic.update {
                 CallMagic.update = nil
@@ -140,10 +136,4 @@ extension VoipNotification: PKPushRegistryDelegate {
             }
         }
     }
-}
-
-class CallMagic {
-    static var UID: UUID? = UUID()
-    static var provider: CallProvider? = nil
-    static var update: CXCallUpdate? = nil
 }
