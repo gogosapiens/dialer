@@ -12,7 +12,6 @@ public class Voiper {
     public let verificationManager = VerificationUserManager.shared
     
     public init() {
-        contactManager.loadContacts(filter: .none)
         analyticManager.setupAnalytic()
     }
 }
