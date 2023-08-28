@@ -112,7 +112,7 @@ public class PhoneManager: Observable1 {
             if oldValue?.phoneNumber.id != activePhoneModel?.phoneNumber.id {
                 notifyObservers(.changedActiveModel)
             }
-            SubscriptionManager.shared.sendChangeNumberEvents()
+            EventManager.shared.sendChangeNumberEvents()
         }
     }
 }
