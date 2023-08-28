@@ -8,6 +8,7 @@ public class Voiper {
     public let contactManager = ContactsManager.shared
     public let analyticManager = AnalyticManager.shared
     public let purchaseManager = PurchaseManager.shared
+    public let eventManager = EventManager.shared
     public let verificationManager = VerificationUserManager.shared
     
     public init() {
