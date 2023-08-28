@@ -146,7 +146,7 @@ extension CallFlow: CallIntentHandler {
         .trimmingCharacters(in: set.inverted)
         
         if let uid = CallMagic.UID {
-            let call = SPCall(source:"Intent" ,uuid: uid, handle: cleanHandle, isOutgoing: true)
+            let call = SPCall(uuid: uid, handle: cleanHandle, isOutgoing: true)
             _ = start(call)
         } else {
             print("TWILIO INVITE NO UID")

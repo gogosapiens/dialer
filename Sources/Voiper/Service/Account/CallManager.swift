@@ -90,7 +90,7 @@ public class CallManager: NSObject {
     public func call(for number: String, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
         self.accountManager?.updateCallFlow()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            AccountManager.callFlow.start(SPCall(source: "Keypad", uuid: UUID(), handle: number, isOutgoing: true)).done { _ in
+            AccountManager.callFlow.start(SPCall(uuid: UUID(), handle: number, isOutgoing: true)).done { _ in
             }.catch { error in
                 completion(.failure(error))
             }
