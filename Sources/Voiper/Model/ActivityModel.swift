@@ -40,16 +40,6 @@ public class ActivityModel: Observable1 {
             self.update()
         }
         
-        _ = PushNotification.checkAccess()
-            .done { success in
-                if !success {
-                    self.updateTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(self.timerUpdate), userInfo: nil, repeats: true)
-                } else {
-                    self.updateTimer?.invalidate()
-                    self.updateTimer = nil
-                }
-        }
-        
         token = localActivities.observe { [unowned self] changes in
             switch changes {
             case .initial:
@@ -64,6 +54,19 @@ public class ActivityModel: Observable1 {
         }
         
         return update()
+    }
+    
+    
+    public func checkAccessNotification() {
+        _ = PushNotification.checkAccess()
+            .done { success in
+                if !success {
+                    self.updateTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(self.timerUpdate), userInfo: nil, repeats: true)
+                } else {
+                    self.updateTimer?.invalidate()
+                    self.updateTimer = nil
+                }
+            }
     }
     
     @discardableResult
