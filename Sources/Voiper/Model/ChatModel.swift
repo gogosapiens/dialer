@@ -34,7 +34,7 @@ public class ChatModel: Observable1 {
     private let localActivities: Results<ChatActivityRealm>
     private var token: NotificationToken?
     
-    private var activities: [Activity] = []
+    public var activities: [Activity] = []
     
     public var activitiesWithFuture: [Activity] {
         var candidate = self.activities
