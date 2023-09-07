@@ -59,6 +59,46 @@ extension Activity {
 
 public struct Activity: Decodable {
     
+    
+    
+    public init(
+        id: Int,
+        type: ActivityType,
+        from: String,
+        to: String,
+        numberId: Int,
+        participant: String,
+        status: Status,
+        direction: Direction,
+        read: Bool,
+        duration: Int?,
+        body: String?,
+        images: [String]?,
+        startedAt: Date?,
+        endedAt: Date?,
+        sentAt: Date?,
+        insertedAt: Date?
+    ) {
+        self.id = id
+        self.type = type
+        self.from = from
+        self.to = to
+        self.numberId = numberId
+        self.participant = participant
+        self.status = status
+        self.direction = direction
+        self.read = read
+        self.duration = duration
+        self.body = body
+        self.images = images
+        self.startedAt = startedAt
+        self.endedAt = endedAt
+        self.sentAt = sentAt
+        self.insertedAt = insertedAt
+    }
+    
+    
+    
     public enum ActivityType: String, Decodable {
         case message, call
     }
