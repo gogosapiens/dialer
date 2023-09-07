@@ -24,7 +24,7 @@ public class Settings {
         public static let lastVisitDateKey =  "\(bundle).lastVisit.key"
     }
     
-    static var deviceId: String {
+    public static var deviceId: String {
         if let deviceId = UserDefaults.standard.string(forKey: Key.deviceId) {
             return deviceId
         } else {
@@ -52,6 +52,7 @@ public class Settings {
     
     public static var userToken: String? {
         get {
+            #if DEBUG
             if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
                let dict = NSDictionary(contentsOfFile: path),
                let token = dict["testToken"] as? String {
@@ -60,6 +61,10 @@ public class Settings {
                 let keychain = Keychain(service: Key.keychainName)
                 return keychain[Key.userToken]
             }
+            #else
+            let keychain = Keychain(service: Key.keychainName)
+            return keychain[Key.userToken]
+            #endif
         }
         set {
             let keychain = Keychain(service: Key.keychainName)

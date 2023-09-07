@@ -2,6 +2,7 @@
 import Foundation
 import PromiseKit
 import UserNotifications
+import UIKit
 
 public class PushNotification {
     
@@ -31,10 +32,10 @@ public class PushNotification {
         return getAccess()
             .map { success in
                 if success {
-//                    UIApplication.shared.registerForRemoteNotifications()
+                    UIApplication.shared.registerForRemoteNotifications()
                 }
                 return success
-        }
+            }
     }
     
     static private func getAccess() -> Guarantee<Bool> {
