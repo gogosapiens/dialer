@@ -31,6 +31,7 @@ public class AccountManager: Observable1, OnNotification {
     public let voipNotification: VoipNotification
     private var callIntentHandle: String?
     public let service: Service
+    private var phoneManagerObserverToken: Int = -1
     
     public var account: Account? {
         guard let result = localAccount,
@@ -84,6 +85,11 @@ public class AccountManager: Observable1, OnNotification {
                 lastBalance = currentBalance
             }
         }
+        phoneManagerObserverToken = phoneManager.observe { [weak self] _ in
+            guard let self = self else { return }
+            updateCallFlow()
+        }
+        
     }
     
     public func create() -> Promise<Void> {
