@@ -33,6 +33,7 @@ public struct PhoneNumber: Decodable {
     public let label: String
     public let renewPrice: Int
     public let billedUntil: Date
+    public let expiresDate: Date
     public let autorenew: Bool
     public let status: PhonenumberStatus?
     public let subscription:SubscriptionInfo?
@@ -45,6 +46,7 @@ public struct PhoneNumber: Decodable {
         case number
         case inserted =         "inserted_at"
         case expired =          "expired_at"
+        case expiresDate =      "expires_date"
         case country
         case capabilities
         case addressRequired =  "address_required"
@@ -97,6 +99,7 @@ extension PhoneNumber {
                   label: realmObject.label,
                   renewPrice: realmObject.renewPrice,
                   billedUntil: realmObject.billedUntil,
+                  expiresDate: realmObject.expiresDate,
                   autorenew: realmObject.autorenew,
                   status: PhoneNumber.PhonenumberStatus(rawValue: realmObject.status) ?? .expired  , subscription: nil, subscriptionID: realmObject.subscriptionID)
     }
@@ -110,6 +113,7 @@ public class PhoneNumberRealm: Object {
     @objc dynamic var number: String = ""
     @objc dynamic var inserted: Date = Date()
     @objc dynamic var expired: Date?
+    @objc dynamic var expiresDate: Date = Date()
     @objc dynamic var country: String = ""
     @objc dynamic var addressRequired: Int = 0
     @objc dynamic var capabilities: String? = nil
@@ -127,6 +131,7 @@ public class PhoneNumberRealm: Object {
         realmObject.formattedNumber = phoneNumber.formattedNumber
         realmObject.number = phoneNumber.number
         realmObject.inserted = phoneNumber.inserted
+        realmObject.expiresDate = phoneNumber.expiresDate
         realmObject.expired = phoneNumber.expired
         realmObject.country = phoneNumber.country
         realmObject.addressRequired = phoneNumber.addressRequired
