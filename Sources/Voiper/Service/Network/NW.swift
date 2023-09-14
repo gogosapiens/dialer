@@ -29,8 +29,8 @@ public class NW {
     }
     
     public func deletePhoneNumber(with id: Int, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
-        let promise: Promise<EmptyResponse> = service.execute(.deleteNumber(id: id))
-        promise.done { _ in
+        AccountManager.shared.phoneManager.delete(numberId: id).done { _ in
+            EventManager.shared.sendDeleteNumberEvent()
             completion(.success(()))
         }.catch { error in
             completion(.failure(error))
@@ -149,7 +149,6 @@ public class NW {
             }
             return Promise.value(account)
         }.done { result in
-            let realm = try! Realm()
             NotificationCenter.default.post(name: Account.updateNotification, object: nil)
             completion(.success(result))
         }.catch { error in
@@ -160,7 +159,17 @@ public class NW {
     public func addPhoneNumber(number: RegionNumber, addressId: Int?, subscriptionId: Int?, completion: ((Swift.Result<Void, Error>) -> Void)? = nil) {
         let promise: Promise<EmptyResponse> = service.execute(.addNumber(number: number, addressId: addressId, subscriptionId: subscriptionId))
         promise.done { _ in
-            completion?(.success(()))
+            self.getNumbers { result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                        EventManager.shared.sendAddNumberEvent()
+                        completion?(.success(()))
+                    })
+                case .failure(let error):
+                    completion?(.failure(error))
+                }
+            }
         }.catch { error in
             completion?(.failure(error))
         }

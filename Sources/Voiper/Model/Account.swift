@@ -6,7 +6,7 @@ import RealmSwift
 
 public class Account: Decodable {
     
-    static let updateNotification = Notification.Name("accountUpdateNotification")
+    public static let updateNotification = Notification.Name("accountUpdateNotification")
     public var hasSubscription = false
     public var balance = 0
     
