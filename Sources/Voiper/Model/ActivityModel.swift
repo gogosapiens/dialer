@@ -56,7 +56,7 @@ public class ActivityModel: Observable1 {
         return update()
     }
     
-    public func checkAccessForPush() {
+    public func checkAccessNotification() {
         _ = PushNotification.checkAccess()
             .done { success in
                 if !success {
@@ -65,7 +65,7 @@ public class ActivityModel: Observable1 {
                     self.updateTimer?.invalidate()
                     self.updateTimer = nil
                 }
-        }
+            }
     }
     
     @discardableResult

@@ -5,7 +5,6 @@ import UserNotifications
 import UIKit
 
 public class PushNotification {
-    
     static func checkAccess() -> Guarantee<Bool> {
         return Guarantee { seal in
             UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
@@ -27,7 +26,7 @@ public class PushNotification {
             })
         }
     }
-    
+
     static func registerForRemote() -> Guarantee<Bool> {
         return getAccess()
             .map { success in
@@ -37,7 +36,7 @@ public class PushNotification {
                 return success
             }
     }
-    
+
     static private func getAccess() -> Guarantee<Bool> {
         return Guarantee { seal in
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound, .carPlay], completionHandler: { success, error in
