@@ -24,13 +24,21 @@ public class CallProvider: NSObject {
 
     public override init() {
         
-        let configuration = CXProviderConfiguration(localizedName: "Second Phone")
-        
-//        configuration.ringtoneSound = UserDefaults.standard.rindSound
+        var name: String
+
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path),
+           let productName = dict["CFBundleName"] as? String {
+            name = productName
+        } else {
+            name = "Voiper"
+            
+        }
+
+        let configuration = CXProviderConfiguration(localizedName: name)
         
         configuration.maximumCallGroups = 1
         configuration.maximumCallsPerCallGroup = 1
-//        configuration.iconTemplateImageData = #imageLiteral(resourceName: "logo").pngData()
         configuration.supportedHandleTypes = [.phoneNumber]
         provider = CXProvider(configuration: configuration)
         
@@ -40,7 +48,7 @@ public class CallProvider: NSObject {
     }
     
     public func updateCall(with uuid: UUID, _ callUpdate: CXCallUpdate) {
-        self.provider.reportCall(with: uuid, updated: callUpdate)
+        provider.reportCall(with: uuid, updated: callUpdate)
     }
     
     public func reportIncomingCall(from uuid: UUID, with update: CXCallUpdate, _ completion: @escaping (Error?) -> ()) {
@@ -72,8 +80,7 @@ extension CallProvider: CXProviderDelegate {
         audioDevice.isEnabled = false
     }
     
-    public func provider(_ provider: CXProvider, timedOutPerforming action: CXAction) {
-    }
+    public func provider(_ provider: CXProvider, timedOutPerforming action: CXAction) { }
     
     public func provider(_ provider: CXProvider, perform action: CXStartCallAction) {
         guard let delegate = delegate else {

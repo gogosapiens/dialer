@@ -55,20 +55,14 @@ public class CallFlow: NSObject, OnNotification {
     public func start(_ call: SPCall) -> Promise<Void> {
         return Promise { seal in
           
-            guard callModel == nil,
-                let callManager = callManager else {
-                    seal.resolve(ServiceError.innactiveNumber)
-                    return
+            guard callModel == nil, let callManager = callManager, callManager.phoneNumber.isActive else {
+                seal.reject(ServiceError.innactiveNumber)
+                return
             }
             
             guard call.handle.count > 5 else {
                     seal.resolve(nil)
                     return
-            }
-            
-            guard callManager.phoneNumber.isActive else {
-                seal.resolve(nil)
-                return
             }
              
             self.callModel = CallModel(call: call, callFlow: self, callProvider: self.provider, callManager: callManager)
