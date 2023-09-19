@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import PromiseKit
 import RealmSwift
 
@@ -124,6 +125,7 @@ public class AccountManager: Observable1, OnNotification {
         let promise: Promise<EmptyResponse> = service.execute(.deleteAccount)
         return promise.done(on: DispatchQueue.global()) { _ in
             Settings.userToken = nil
+            UIApplication.shared.applicationIconBadgeNumber = 0
             self.notifyObservers(.removed)
             let realm = try! Realm()
             try! realm.write {
