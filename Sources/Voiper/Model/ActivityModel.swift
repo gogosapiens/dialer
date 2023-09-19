@@ -92,7 +92,13 @@ public class ActivityModel: Observable1 {
                         callsCount +=  1
                     }
                 }
-                NotificationCenter.default.post(name: Constant.reloadBadges , object: nil, userInfo: ["message":"\(messageCount)","call":"\(callsCount)", "phoneNumberID": activities.phoneNumberID])
+                NotificationCenter.default.post(
+                    name: Constant.reloadBadges ,
+                    object: nil,
+                    userInfo: ["message": messageCount,
+                               "call":callsCount,
+                               "phoneNumberID": activities.phoneNumberID]
+                )
         }
     }
     
