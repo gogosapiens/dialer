@@ -44,7 +44,7 @@ public class PurchaseManager: NSObject {
     private var restoreCompletion: Completion?
     private var restoredProductIds = Set<String>()
 
-    private var observeHandler: Completion?
+    private var observeHandler: ((SKProduct) -> Void)?
     private var purchaseCompletions = [String: Completion]()
 
     private override init() {
@@ -52,7 +52,7 @@ public class PurchaseManager: NSObject {
         SKPaymentQueue.default().add(self)
     }
 
-    public func observePurchases(handler: @escaping Completion) {
+    public func observePurchases(handler: @escaping ((SKProduct) -> Void)) {
         observeHandler = handler
     }
     
@@ -112,9 +112,9 @@ public class PurchaseManager: NSObject {
     
     public func restorePurchases(completion: Completion? = nil) {
         DispatchQueue.main.async {
-            SKPaymentQueue.default().restoreCompletedTransactions()
             self.restoreCompletion = completion
             self.restoredProductIds.removeAll()
+            SKPaymentQueue.default().restoreCompletedTransactions()
         }
     }
 }
@@ -174,9 +174,9 @@ extension PurchaseManager: SKPaymentTransactionObserver {
             default:
                 break
             }
-            if let result = result {
+            if let result = result, let product = products.first(where: { $0.skProduct.productIdentifier == id }) {
                 DispatchQueue.main.async {
-                    self.observeHandler?(result)
+                    self.observeHandler?(product.skProduct)
                     self.purchaseCompletions[id]?(result)
                     self.purchaseCompletions[id] = nil
                 }

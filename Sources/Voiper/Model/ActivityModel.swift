@@ -96,7 +96,7 @@ public class ActivityModel: Observable1 {
                     name: Constant.reloadBadges ,
                     object: nil,
                     userInfo: ["message": messageCount,
-                               "call":callsCount,
+                               "call": callsCount,
                                "phoneNumberID": activities.phoneNumberID]
                 )
         }
