@@ -19,8 +19,8 @@ public class NW {
         }
     }
     
-    public func getCountries(showAll: Bool, completion: @escaping (Swift.Result<[Country], Error>) -> Void) {
-        let promise: Promise<[Country]> = service.execute(.getCountries(showAll: showAll))
+    public func getCountries(showAll: Bool, completion: @escaping (Swift.Result<[CountryResponse], Error>) -> Void) {
+        let promise: Promise<[CountryResponse]> = service.execute(.getCountries(showAll: showAll))
         promise.done { country in
             completion(.success(country))
         }.catch{ error in
