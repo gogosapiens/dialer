@@ -19,6 +19,15 @@ public class NW {
         }
     }
     
+    public func getCountries(showAll: Bool, completion: @escaping (Swift.Result<[Country], Error>) -> Void) {
+        let promise: Promise<[Country]> = service.execute(.getCountries(showAll: showAll))
+        promise.done { country in
+            completion(.success(country))
+        }.catch{ error in
+            completion(.failure(error))
+        }
+    }
+    
     public func getRegionPhones(country: String, region: String, type: String, completion: @escaping (Swift.Result<RegionNumbersResponse, Error>) -> Void) {
         let promise: Promise<RegionNumbersResponse> = service.execute(.getRegionPhones(country: country, region: region, type: type))
         promise.done { result in
