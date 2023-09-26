@@ -225,6 +225,14 @@ extension TheProduct {
             }
         }
         
+        public static var subscriptions: Set<Self> {
+            return [.oneNumberMonthly,
+                    .oneNumberSixMonthsTrial,
+                    .oneNumberWeekly,
+                    .secondNumberWeekly,
+                    .secondNumberMonthly,
+                    .secondNumberThreeMonths]
+        }
         public static var coinsPacks: Set<Self> { [.coinPack100, .coinPack500, .coinPack1000, .coinPack2000] }
     }
 }
