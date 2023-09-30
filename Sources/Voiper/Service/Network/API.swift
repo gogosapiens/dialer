@@ -108,7 +108,7 @@ extension API {
         case .getChatActivities(let numberId, let participant, _, _):       return "account/numbers/\(numberId)/activity/\(participant)"
         case .getChatActivitiesCount(let numberId, let participant, _):     return "account/numbers/\(numberId)/activity/\(participant)/count"
         case .readChat(let numberId, let participant):                      return "account/numbers/\(numberId)/activity/\(participant)/read"
-        case .getCallActivities(let numberId, _, _):                              return "account/numbers/\(numberId)/activity"
+        case .getCallActivities(let numberId, _, _):                        return "account/numbers/\(numberId)/calls"
         case .sendMessage(let numberId,_,_,_,_):                             return "account/numbers/\(numberId)/messages"
             
         case .deteleSheduled(let numberId, let id):                         return "account/numbers/\(numberId)/messages/\(id)/cancel"
