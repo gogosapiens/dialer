@@ -224,10 +224,13 @@ public class NW {
         
     }
     
-    public func getCallActivity(numberID: Int, completion: @escaping (Swift.Result<ActivitiesResponse, Error>) -> Void){
+    public func getCallActivity(numberID: Int, completion: @escaping (Swift.Result<[Activity], Error>) -> Void){
         let promise: Promise<ActivitiesResponse> = service.execute(.getCallActivities(numberID: numberID, lastID: nil, perPage: 50))
-        promise.done { response in
-            completion(.success((response)))
+        promise.then(on: DispatchQueue.global()) { response -> Promise<([Activity])> in
+            let activities = response.activities
+            return Promise.value(activities)
+        }.done { activity in
+            completion(.success(activity))
         }.catch { error in
             completion(.failure(error))
         }
