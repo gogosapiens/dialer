@@ -224,10 +224,12 @@ public class NW {
         
     }
     
-    public func getCallActivity(numberID: Int, completion: @escaping (Swift.Result<Void, Error>) -> Void){
-        let promise: Promise<EmptyResponse> = service.execute(.getCallActivities(numberID: numberID, lastID: nil, perPage: 50))
+    public func getCallActivity(numberID: Int, completion: @escaping (Swift.Result<ActivitiesResponse, Error>) -> Void){
+        let promise: Promise<ActivitiesResponse> = service.execute(.getCallActivities(numberID: numberID, lastID: nil, perPage: 50))
         promise.done { response in
-            completion(.success(()))
+            completion(.success((response)))
+        }.catch { error in
+            completion(.failure(error))
         }
     }
     
