@@ -224,6 +224,13 @@ public class NW {
         
     }
     
+    public func getCallActivity(numberID: Int, completion: @escaping (Swift.Result<Void, Error>) -> Void){
+        let promise: Promise<EmptyResponse> = service.execute(.getCallActivities(numberID: numberID, lastID: nil, perPage: 50))
+        promise.done { response in
+            completion(.success(()))
+        }
+    }
+    
     public func registerPush( deviceID: String, token: String, completion: (() -> Void)? = nil) {
         let promise: Promise<EmptyResponse> = service.execute(.registerPush(deviceID, token))
         promise.done { _ in

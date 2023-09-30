@@ -55,6 +55,7 @@ public enum API {
     case numberRepurchase(Int)
     case getTransactions(Int,Int?)
     case getActivities(Int)
+    case getCallActivities(numberID: Int, lastID: Int?, perPage:Int?)
     case getChatActivities(Int, String, Int?, Int?)
     case getChatActivitiesCount(Int, String, Int)
     case readChat(Int, String)
@@ -107,6 +108,7 @@ extension API {
         case .getChatActivities(let numberId, let participant, _, _):       return "account/numbers/\(numberId)/activity/\(participant)"
         case .getChatActivitiesCount(let numberId, let participant, _):     return "account/numbers/\(numberId)/activity/\(participant)/count"
         case .readChat(let numberId, let participant):                      return "account/numbers/\(numberId)/activity/\(participant)/read"
+        case .getCallActivities(let numberId, _, _):                              return "account/numbers/\(numberId)/activity"
         case .sendMessage(let numberId,_,_,_,_):                             return "account/numbers/\(numberId)/messages"
             
         case .deteleSheduled(let numberId, let id):                         return "account/numbers/\(numberId)/messages/\(id)/cancel"
@@ -118,13 +120,14 @@ extension API {
         case .getMessagePricing(let numberId, _):                           return "account/numbers/\(numberId)/pricing/message"
         case .lockNumber(_):                                                return "numbers/lock"
         case .phoneActivity(_):                                    return "account/event"
+
         }
     }
     
     var method: HTTPMethod {
         switch self {
         case .getCountries, .getRegions, .getCountryPhones, .getRegionPhones, .getNumbers, .getAccount, .getTransactions,
-             .getActivities, .getChatActivities, .getChatActivitiesCount, .getCallAccessToken,
+                .getActivities, .getChatActivities, .getChatActivitiesCount, .getCallActivities, .getCallAccessToken,
              .getSubscriptions, .getNumberRestorationPeriod, .getPricing, .getVoicePricing, .getMessagePricing,
              .getFastPhonesCountry, .getFastPhonesCountryRegion:
             return HTTPMethod.get
@@ -258,6 +261,16 @@ extension API {
             return params
         case .getChatActivitiesCount(_, _, let lastId):
             return ["last_id": lastId]
+        case .getCallActivities(_, let lastId, let perPage):
+            
+            var params = [String: Int]()
+            if let lastId = lastId {
+                params["last_id"] = lastId
+            }
+            if let perPage = perPage {
+                params["per_page"] = perPage
+            }
+            return params
         case .sendMessage(_, let to, let text, let images,let delay):
             var param: [String: Any] = ["to": to]
             if let text = text {
