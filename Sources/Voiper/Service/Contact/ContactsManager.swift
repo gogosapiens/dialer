@@ -143,7 +143,18 @@ public class ContactsManager {
     
     public func contactBy(phone: String, completion: (Contact?) -> Void) {
         let contactStore = CNContactStore()
-        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+        let keysToFetch = [
+            CNContactPhoneNumbersKey as CNKeyDescriptor,
+            CNContactIdentifierKey as CNKeyDescriptor,
+            CNContactImageDataKey as CNKeyDescriptor,
+            CNContactThumbnailImageDataKey as CNKeyDescriptor,
+            CNContactImageDataAvailableKey as CNKeyDescriptor,
+            CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
+            CNContactPhoneNumbersKey as CNKeyDescriptor,
+            CNContactViewController.descriptorForRequiredKeys() as CNKeyDescriptor,
+            CNContactGivenNameKey as CNKeyDescriptor,
+            CNContactFamilyNameKey as CNKeyDescriptor] as [CNKeyDescriptor]
+
         var contacts = [CNContact]()
         let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
         do {
