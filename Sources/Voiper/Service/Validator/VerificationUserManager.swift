@@ -22,7 +22,6 @@ public class VerificationUserManager {
         }
 
         guard let activeNumber = accountManager.phoneManager.activePhoneModel?.phoneNumber else {
-            //TODO: Add error handling limited to cases
             return completion(.failure(LocalError.noActiveNumber))
         }
         let balance = self.accountManager.account?.balance ?? 0
@@ -31,7 +30,6 @@ public class VerificationUserManager {
             nw.getVoicePricing(from: activeNumber.id, to: phoneNumber) { result in
                 switch result {
                 case .success(let result):
-                    //TODO: This needs to be corrected later.
                     if result.canCall && result.minutes < balance {
                         completion(.success(()))
                     } else {
@@ -45,8 +43,7 @@ public class VerificationUserManager {
             nw.getMessagePricing(with: activeNumber.id, to: phoneNumber) { result in
                 switch result {
                 case .success(let result):
-                    //TODO: This needs to be corrected later.
-                    if result.canSms && result.smsPricing.outbound?.first ?? 1 < balance {
+                    if result.canSms && (result.smsPricing.outbound?.first ?? 1) < balance {
                         completion(.success(()))
                     } else {
                         completion(.failure(LocalError.notEnoughFundsSMS))
@@ -59,8 +56,7 @@ public class VerificationUserManager {
             nw.getMessagePricing(with: activeNumber.id, to: phoneNumber) { result in
                 switch result {
                 case .success(let result):
-                    //TODO: This needs to be corrected later.
-                    if result.canMms && result.mmsPricing.outbound?.first ?? 1 < balance {
+                    if result.canMms && (result.mmsPricing.outbound?.first ?? 1) < balance {
                         completion(.success(()))
                     } else {
                         completion(.failure(LocalError.notEnoughFundsMMS))
