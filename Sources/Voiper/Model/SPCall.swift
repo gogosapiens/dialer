@@ -115,6 +115,7 @@ public class SPCall: NSObject {
             invite.reject()
             twilioCallInvite = nil
             state = .ended
+            endDate = Date()
         } else if let twCall = twilioCall {
             twCall.disconnect()
             twilioCall = nil
@@ -130,6 +131,7 @@ extension SPCall: CallDelegate {
             print("Call failed: \(error.localizedDescription)")
         } else {
             state = .ended
+            endDate = Date()
             print("Call disconnected")
         }
         

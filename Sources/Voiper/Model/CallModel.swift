@@ -143,9 +143,9 @@ extension CallModel {
     public func requestEnd(_ call: SPCall) {
         call.state = .ending
         callVC?.updateUI()
+
         let endCallAction = CXEndCallAction(call: call.uuid)
         let transaction = CXTransaction(action: endCallAction)
-        
         callKitCallController.request(transaction) { error in
             if let error = error {
                 print("EndCallAction transaction request failed: \(error.localizedDescription).")
