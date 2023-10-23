@@ -10,10 +10,14 @@ public class ContactsManager {
     public static let contactsUpdateNotification = Notification.Name("contactsUpdateNotification")
     var store = CNContactStore()
     public static let shared = ContactsManager()
-    private init() {
-    }
     public var contacts: [Contact] = []
     public var cnContacts: [CNContact] = []
+
+    private init() {
+        if CNContactStore.authorizationStatus(for: .contacts) == .authorized {
+            loadContacts(filter: .none)
+        }
+    }
     
     public func requestAccess(completionHandler: @escaping (_ accessGranted: Bool) -> Void) {
         switch CNContactStore.authorizationStatus(for: .contacts) {
