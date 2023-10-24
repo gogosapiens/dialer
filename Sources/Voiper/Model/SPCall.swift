@@ -105,7 +105,7 @@ public class SPCall: NSObject {
         return true
     }
     
-    func sendDigits(_ digits: String) {
+    public func sendDigits(_ digits: String) {
         twilioCall?.sendDigits(digits)
     }
     
