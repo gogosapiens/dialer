@@ -29,6 +29,7 @@ public class CallModel {
     }
     private let callKitCallController = CXCallController()
     private var callKitCompletionCallback: ((Bool)-> ())? = nil
+    public var contact: Contact?
     
     private func observeCall() {
         call.callConnectBlock = { [weak self] in

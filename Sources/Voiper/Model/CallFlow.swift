@@ -19,6 +19,7 @@ public class CallFlow: NSObject, OnNotification {
     private var callModel: CallModel?
     weak var callManager: CallManager?
     private var callViewController: CallVCDatasource?
+    private var endCallViewController: EndCallVCDatasource?
     
     private let provider: CallProvider = {
         if let provider = CallMagic.provider {
@@ -78,20 +79,22 @@ public class CallFlow: NSObject, OnNotification {
     }
     
     public func endCall() {
-        hideCall(completion: { [weak self] in
-            self?.callModel = nil
-            self?.hideWindow()
-            self?.callManager?.phoneModel.activityModel.update()
-        })
+        guard let endCallViewController = endCallViewController,
+              let callModel = callModel else { hideCall(); return }
+
+        endCallViewController.configure(callModel: callModel)
+        window.rootViewController = endCallViewController
     }
 
-    func hideCall(completion: @escaping () -> Void) {
+    func hideCall() {
         UIView.animate(withDuration: 0.25, animations: {
             self.window.alpha = 0
         }, completion: { _ in
             self.window.isHidden = true
+            self.window.rootViewController = nil
             self.window.alpha = 1
-            completion()
+            self.callModel = nil
+            self.callManager?.phoneModel.activityModel.update()
         })
     }
     
@@ -114,6 +117,14 @@ public class CallFlow: NSObject, OnNotification {
     
     public func setCallVC(vc: CallVCDatasource) {
         self.callViewController = vc
+    }
+
+    public func setEndCallVC(vc: EndCallVCDatasource) {
+        self.endCallViewController = vc
+        endCallViewController?.endAction = { [weak self] in
+            guard let self = self else { return }
+            self.hideCall()
+        }
     }
     
     private func hideWindow() {
