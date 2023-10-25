@@ -4,7 +4,8 @@ import UIKit
 public protocol EndCallVCDatasource: UIViewController {
     var endAction: (() -> Void)? { get set }
     
-    func configure(callModel: CallModel)
+    func callWasStarted()
+    func callWasEnded(callModel: CallModel)
 }
 
 

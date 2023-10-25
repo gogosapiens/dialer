@@ -65,7 +65,7 @@ public class SPCall: NSObject {
     var callConnectBlock: (() -> ())?
     var callDisconnectBlock: ((Error?) -> ())?
     
-    var duration: TimeInterval {
+    public var duration: TimeInterval {
         guard let connectDate = connectDate else {
             return 0
         }

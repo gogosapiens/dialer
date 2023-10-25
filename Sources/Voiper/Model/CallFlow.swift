@@ -82,7 +82,7 @@ public class CallFlow: NSObject, OnNotification {
         guard let endCallViewController = endCallViewController,
               let callModel = callModel else { hideCall(); return }
 
-        endCallViewController.configure(callModel: callModel)
+        endCallViewController.callWasEnded(callModel: callModel)
         window.rootViewController = endCallViewController
     }
 
@@ -103,6 +103,7 @@ public class CallFlow: NSObject, OnNotification {
         DispatchQueue.main.async {
             if callModel.callVC == nil {
                 let controller = self.callViewController
+                self.endCallViewController?.callWasStarted()
                 controller?.configure(callModel: callModel)
                 self.window.rootViewController = controller
                 self.window.makeKeyAndVisible()

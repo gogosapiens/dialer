@@ -203,6 +203,7 @@ extension CallModel: CallProviderDelegate {
         callKitCompletionCallback = nil
         callVC?.updateUI()
         callVC?.durationTimer?.invalidate()
+        call.endDate = Date()
         Double(1).delay {
             self.callFlow.endCall()
         }
