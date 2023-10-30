@@ -309,8 +309,8 @@ extension SKProduct.PeriodUnit {
     }
 }
 
-extension SKProductSubscriptionPeriod {
-    func localizedPeriod() -> String? {
+public extension SKProductSubscriptionPeriod {
+    public func localizedPeriod() -> String? {
         return PeriodFormatter.format(unit: unit.toCalendarUnit(), numberOfUnits: numberOfUnits)
     }
 }
