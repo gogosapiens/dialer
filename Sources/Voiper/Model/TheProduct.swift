@@ -76,10 +76,12 @@ extension TheProduct {
 
         case oneNumberWeekly
         case oneNumberMonthly
+        case oneNumberThreeMonths
         
         case secondNumberWeekly
         case secondNumberMonthly
         case secondNumberThreeMonths
+        case secondNumberSixMonths
         
         case coinPack100
         case coinPack500
@@ -102,6 +104,8 @@ extension TheProduct {
                 self = .oneNumberWeekly
             case "\(ProductType.bundleId).monthly_1":
                 self = .oneNumberMonthly
+            case "\(ProductType.bundleId).3months_1":
+                self = .oneNumberThreeMonths
             case "\(ProductType.bundleId).6months_trial_1":
                 self = .oneNumberSixMonthsTrial
     
@@ -111,6 +115,8 @@ extension TheProduct {
                 self = .secondNumberMonthly
             case "\(ProductType.bundleId).3months_2":
                 self = .secondNumberThreeMonths
+            case "\(ProductType.bundleId).6months_2":
+                self = .secondNumberSixMonths
     
             case "\(ProductType.bundleId).credit_100":
                 self = .coinPack100
@@ -132,6 +138,8 @@ extension TheProduct {
                 return "\(ProductType.bundleId).weekly_1"
             case .oneNumberMonthly:
                 return "\(ProductType.bundleId).monthly_1"
+            case .oneNumberThreeMonths:
+                return "\(ProductType.bundleId).3months_1"
             case .oneNumberSixMonthsTrial:
                 return "\(ProductType.bundleId).6months_trial_1"
 
@@ -142,6 +150,8 @@ extension TheProduct {
                 return "\(ProductType.bundleId).monthly_2"
             case .secondNumberThreeMonths:
                 return "\(ProductType.bundleId).3months_2"
+            case .secondNumberSixMonths:
+                return "\(ProductType.bundleId).6months_2"
       
             case .coinPack100:
                 return "\(ProductType.bundleId).credit_100"
@@ -179,6 +189,7 @@ extension TheProduct {
             switch self {
             case .oneNumberWeekly,
                  .oneNumberMonthly,
+                 .oneNumberThreeMonths,
                  .oneNumberSixMonthsTrial:
 
                 return true
@@ -191,7 +202,8 @@ extension TheProduct {
             switch self {
             case .secondNumberWeekly,
                  .secondNumberMonthly,
-                 .secondNumberThreeMonths:
+                 .secondNumberThreeMonths,
+                 .secondNumberSixMonths:
 
                 return true
             default:
@@ -203,13 +215,15 @@ extension TheProduct {
             switch self {
             case .oneNumberWeekly,
                  .oneNumberMonthly,
-                 .oneNumberSixMonthsTrial:
+                 .oneNumberSixMonthsTrial,
+                 .oneNumberThreeMonths:
                 
                 return 1
 
             case .secondNumberWeekly,
                  .secondNumberMonthly,
-                 .secondNumberThreeMonths:
+                 .secondNumberThreeMonths,
+                 .secondNumberSixMonths:
 
                 return 2
 
@@ -229,9 +243,11 @@ extension TheProduct {
             return [.oneNumberMonthly,
                     .oneNumberSixMonthsTrial,
                     .oneNumberWeekly,
+                    .oneNumberThreeMonths,
                     .secondNumberWeekly,
                     .secondNumberMonthly,
-                    .secondNumberThreeMonths]
+                    .secondNumberThreeMonths,
+                    .secondNumberSixMonths]
         }
         public static var coinsPacks: Set<Self> { [.coinPack100, .coinPack500, .coinPack1000, .coinPack2000] }
     }
