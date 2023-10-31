@@ -157,8 +157,7 @@ public class ChatModel: Observable1 {
                 }
                 
                 self.activityModel.update()
-                let promise: Promise<AccountResponse> = self.service.execute(.getAccount)
-                return promise.then { [response] _ -> Promise<SendMessageResponse> in
+                return AccountManager.shared.loadAccount().then { [response] _ -> Promise<SendMessageResponse> in
                     return Promise.value(response)
                 }
             }
@@ -206,8 +205,7 @@ public class ChatModel: Observable1 {
                 }
                 
                 self.activityModel.update()
-                let promise: Promise<AccountResponse> = self.service.execute(.getAccount)
-                return promise.then { [response] _ -> Promise<SendMessageResponse> in
+                return AccountManager.shared.loadAccount().then { [response] _ -> Promise<SendMessageResponse> in
                     return Promise.value(response)
                 }
         }
@@ -218,12 +216,11 @@ public class ChatModel: Observable1 {
             VerificationUserManager.shared.canAction(phoneNumber: phoneNumber, action: action) { result in
                 switch result {
                 case .success:
-                    seal.resolve(nil)
+                    seal.fulfill(())
                 case .failure(let error):
                     seal.reject(error)
                 }
             }
-            seal.fulfill(())
         }
     }
     
