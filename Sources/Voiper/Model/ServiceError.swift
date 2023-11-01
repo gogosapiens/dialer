@@ -13,4 +13,5 @@ public enum ServiceError: Error {
     case accountPaused
     case phoneRestoring(String)
     case innactiveNumber
+    case noAccessToMicrophone
 }
