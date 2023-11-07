@@ -19,7 +19,7 @@ public struct RegionNumber: Decodable {
     public let country: String
     public let capabilities: [Capability]
     public let addressRequired: Int
-    public let renewPrice: Int
+    public let renewPrice: Int?
     public let source: Source?
     public let note: String
     
@@ -60,6 +60,6 @@ extension RegionNumber: CustomStringConvertible {
                                      (name: "country", value: country),
                                      (name: "capabilities", value: capabilities.description),
                                      (name: "addressRequired", value: String(addressRequired)),
-                                     (name: "renewPrice", value: String(renewPrice)))
+                                     (name: "renewPrice", value: String(renewPrice ?? 0)))
     }
 }
