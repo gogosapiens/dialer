@@ -68,7 +68,7 @@ public struct PhoneNumber: Decodable {
         }
         
         if let expired = expired {
-            return expired > Date()
+            return expired > Date().UTCDate
         } else {
             return true
         }
