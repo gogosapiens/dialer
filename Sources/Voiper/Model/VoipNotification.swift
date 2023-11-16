@@ -23,7 +23,7 @@ public class VoipNotification: NSObject, Observable1 {
         voipRegistry = PKPushRegistry(queue: .main)
         
         super.init()
-        
+
         voipRegistry.desiredPushTypes = [.voIP]
         
         DispatchQueue.main.async {
@@ -72,7 +72,11 @@ extension VoipNotification: PKPushRegistryDelegate {
     
    
     
-    public func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
+    public func pushRegistry(_ registry: PKPushRegistry,
+                             didReceiveIncomingPushWith payload: PKPushPayload,
+                             for type: PKPushType,
+                             completion: @escaping () -> Void
+    ) {
         print("VOIP PUSH RECIEVED")
                 
         guard type == .voIP else { return }
@@ -103,7 +107,7 @@ extension VoipNotification: PKPushRegistryDelegate {
             .trimmingCharacters(in: set.inverted)
             
             CallMagic.update = CXCallUpdate()
-            CallMagic.update?.remoteHandle = CXHandle(type: .phoneNumber, value: twi_from)
+            CallMagic.update?.remoteHandle = CXHandle(type: .generic, value: twi_from)
             CallMagic.update?.supportsDTMF = true
             CallMagic.update?.supportsHolding = false
             CallMagic.update?.supportsGrouping = false

@@ -65,7 +65,7 @@ public class SPCall: NSObject {
     var callConnectBlock: (() -> ())?
     var callDisconnectBlock: ((Error?) -> ())?
     
-    var duration: TimeInterval {
+    public var duration: TimeInterval {
         guard let connectDate = connectDate else {
             return 0
         }
@@ -105,7 +105,7 @@ public class SPCall: NSObject {
         return true
     }
     
-    func sendDigits(_ digits: String) {
+    public func sendDigits(_ digits: String) {
         twilioCall?.sendDigits(digits)
     }
     
@@ -115,6 +115,7 @@ public class SPCall: NSObject {
             invite.reject()
             twilioCallInvite = nil
             state = .ended
+            endDate = Date()
         } else if let twCall = twilioCall {
             twCall.disconnect()
             twilioCall = nil
@@ -130,6 +131,7 @@ extension SPCall: CallDelegate {
             print("Call failed: \(error.localizedDescription)")
         } else {
             state = .ended
+            endDate = Date()
             print("Call disconnected")
         }
         

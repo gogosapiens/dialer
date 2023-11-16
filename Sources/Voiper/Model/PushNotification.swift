@@ -34,7 +34,7 @@ public class PushNotification {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
                 return success
-        }
+            }
     }
 
     static private func getAccess() -> Guarantee<Bool> {

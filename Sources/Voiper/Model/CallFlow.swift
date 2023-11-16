@@ -19,6 +19,7 @@ public class CallFlow: NSObject, OnNotification {
     private var callModel: CallModel?
     weak var callManager: CallManager?
     private var callViewController: CallVCDatasource?
+    private var endCallViewController: EndCallVCDatasource?
     
     private let provider: CallProvider = {
         if let provider = CallMagic.provider {
@@ -55,20 +56,14 @@ public class CallFlow: NSObject, OnNotification {
     public func start(_ call: SPCall) -> Promise<Void> {
         return Promise { seal in
           
-            guard callModel == nil,
-                let callManager = callManager else {
-                    seal.resolve(ServiceError.innactiveNumber)
-                    return
+            guard callModel == nil, let callManager = callManager, callManager.phoneNumber.isActive else {
+                seal.reject(ServiceError.innactiveNumber)
+                return
             }
             
             guard call.handle.count > 5 else {
                     seal.resolve(nil)
                     return
-            }
-            
-            guard callManager.phoneNumber.isActive else {
-                seal.resolve(nil)
-                return
             }
              
             self.callModel = CallModel(call: call, callFlow: self, callProvider: self.provider, callManager: callManager)
@@ -84,20 +79,22 @@ public class CallFlow: NSObject, OnNotification {
     }
     
     public func endCall() {
-        hideCall(completion: { [weak self] in
-            self?.callModel = nil
-            self?.hideWindow()
-            self?.callManager?.phoneModel.activityModel.update()
-        })
+        guard let endCallViewController = endCallViewController,
+              let callModel = callModel else { hideCall(); return }
+
+        endCallViewController.callWasEnded(callModel: callModel)
+        window.rootViewController = endCallViewController
     }
 
-    func hideCall(completion: @escaping () -> Void) {
+    func hideCall() {
         UIView.animate(withDuration: 0.25, animations: {
             self.window.alpha = 0
         }, completion: { _ in
             self.window.isHidden = true
+            self.window.rootViewController = nil
             self.window.alpha = 1
-            completion()
+            self.callModel = nil
+            self.callManager?.phoneModel.activityModel.update()
         })
     }
     
@@ -106,6 +103,7 @@ public class CallFlow: NSObject, OnNotification {
         DispatchQueue.main.async {
             if callModel.callVC == nil {
                 let controller = self.callViewController
+                self.endCallViewController?.callWasStarted()
                 controller?.configure(callModel: callModel)
                 self.window.rootViewController = controller
                 self.window.makeKeyAndVisible()
@@ -120,6 +118,14 @@ public class CallFlow: NSObject, OnNotification {
     
     public func setCallVC(vc: CallVCDatasource) {
         self.callViewController = vc
+    }
+
+    public func setEndCallVC(vc: EndCallVCDatasource) {
+        self.endCallViewController = vc
+        endCallViewController?.endAction = { [weak self] in
+            guard let self = self else { return }
+            self.hideCall()
+        }
     }
     
     private func hideWindow() {

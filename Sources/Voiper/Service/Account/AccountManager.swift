@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import PromiseKit
 import RealmSwift
 
@@ -31,6 +32,7 @@ public class AccountManager: Observable1, OnNotification {
     public let voipNotification: VoipNotification
     private var callIntentHandle: String?
     public let service: Service
+    private var phoneManagerObserverToken: Int = -1
     
     public var account: Account? {
         guard let result = localAccount,
@@ -96,6 +98,11 @@ public class AccountManager: Observable1, OnNotification {
                 lastBalance = currentBalance
             }
         }
+        phoneManagerObserverToken = phoneManager.observe { [weak self] _ in
+            guard let self = self else { return }
+            updateCallFlow()
+        }
+        
     }
     
     public func create() -> Promise<Void> {
@@ -118,6 +125,7 @@ public class AccountManager: Observable1, OnNotification {
         let promise: Promise<EmptyResponse> = service.execute(.deleteAccount)
         return promise.done(on: DispatchQueue.global()) { _ in
             Settings.userToken = nil
+            UIApplication.shared.applicationIconBadgeNumber = 0
             self.notifyObservers(.removed)
             let realm = try! Realm()
             try! realm.write {
@@ -240,6 +248,7 @@ public class AccountManager: Observable1, OnNotification {
                     realm.add(subscription, update: .all)
                 }
             }
+            self.notifyObservers(.loaded)
         }
     }
     
@@ -283,15 +292,11 @@ public class AccountManager: Observable1, OnNotification {
                     }
             }
         }.then { response -> Promise<Void> in
-            let backendID: Int
-            if product.type.isFirstNumber, let firstSubscriptionId = response.firstSubscriptionId {
-                backendID = firstSubscriptionId
-            } else if product.type.isSecondNumber, let secondSubscriptionId = response.secondSubscriptionId {
-                backendID = secondSubscriptionId
+            if let subscription = response.subscriptions.first(where: { product.type.id == $0.productId && $0.expiredAt == nil && $0.accountNumberId == nil }) {
+                return self.addLocalNumber(number, subscriptionId: subscription.id)
             } else {
                 return Promise(error: ServiceError.purchaseError("Wrong subscription, please try again later!"))
             }
-            return self.addLocalNumber(number, subscriptionId: backendID)
         }
     }
     

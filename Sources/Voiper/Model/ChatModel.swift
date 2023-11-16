@@ -140,12 +140,12 @@ public class ChatModel: Observable1 {
     
     private var tempMessageId = -1
     
-    public func send(message: String, delay:Int?) -> Promise<Void> {
+    public func send(message: String, delay:Int?) -> Promise<SendMessageResponse> {
         return checkAvailability(phoneNumber: self.participant, action: .sms)
             .then { () -> Promise<SendMessageResponse> in
                 let promise: Promise<SendMessageResponse> = self.service.execute(.sendMessage(self.numberId, self.participant, message, nil,delay))
                 return promise
-            }.then(on: DispatchQueue.global()) { response -> Promise<Void> in
+            }.then(on: DispatchQueue.global()) { response -> Promise<SendMessageResponse> in
                 if let activity = response.activity {
                     let realm = try! Realm()
                     try! realm.write {
@@ -157,11 +157,10 @@ public class ChatModel: Observable1 {
                 }
                 
                 self.activityModel.update()
-                return Promise.value(())
-            }.then { () -> Promise<Void> in
-                let promise: Promise<AccountResponse> = self.service.execute(.getAccount)
-                return promise.asVoid()
-        }
+                return AccountManager.shared.loadAccount().then { [response] _ -> Promise<SendMessageResponse> in
+                    return Promise.value(response)
+                }
+            }
     }
     
     
@@ -182,7 +181,7 @@ public class ChatModel: Observable1 {
         }
     }
     
-    public func send(images: [UIImage],delay:Int?) -> Promise<Void> {
+    public func send(images: [UIImage],delay:Int?) -> Promise<SendMessageResponse> {
         return checkAvailability(phoneNumber: self.participant, action: .mms)
             .then { () -> Promise<SendMessageResponse> in
                 let imagesData = Array(images.compactMap { $0.jpegData(compressionQuality: 0.5) }.prefix(11))
@@ -194,7 +193,7 @@ public class ChatModel: Observable1 {
                     multipartData.append("".data(using: .utf8)!, withName: "text")
                 }
                 return promise
-            }.then(on: DispatchQueue.global()) { response -> Promise<Void> in
+            }.then(on: DispatchQueue.global()) { response -> Promise<SendMessageResponse> in
                 if let activity = response.activity {
                     let realm = try! Realm()
                     try! realm.write {
@@ -206,7 +205,9 @@ public class ChatModel: Observable1 {
                 }
                 
                 self.activityModel.update()
-                return Promise.value(())
+                return AccountManager.shared.loadAccount().then { [response] _ -> Promise<SendMessageResponse> in
+                    return Promise.value(response)
+                }
         }
     }
 
@@ -215,12 +216,11 @@ public class ChatModel: Observable1 {
             VerificationUserManager.shared.canAction(phoneNumber: phoneNumber, action: action) { result in
                 switch result {
                 case .success:
-                    seal.resolve(nil)
+                    seal.fulfill(())
                 case .failure(let error):
                     seal.reject(error)
                 }
             }
-            seal.fulfill(())
         }
     }
     

@@ -46,7 +46,7 @@ public class NW {
         }
     }
     
-    public func getCountries(with code: String, isShowAllCountry: Bool, completion: @escaping (Swift.Result<CountryResponse, Error>) -> Void) {
+    public func getCountries(isShowAllCountry: Bool, completion: @escaping (Swift.Result<CountryResponse, Error>) -> Void) {
         let promise: Promise<CountryResponse> = service.execute(.getCountries(showAll: isShowAllCountry))
         promise.done { result in
             completion(.success(result))

@@ -10,10 +10,12 @@ import Foundation
 public struct AddSubscriptionResponse: Decodable {
     let firstSubscriptionId: Int?
     let secondSubscriptionId: Int?
-    
+    let subscriptions: [SubscriptionInfo]
+
     enum CodingKeys: String, CodingKey {
         case firstSubscriptionId = "first_active_subscr_id"
         case secondSubscriptionId = "second_active_subscr_id"
+        case subscriptions = "subscriptions"
     }
 }
 

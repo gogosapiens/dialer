@@ -25,13 +25,11 @@ public class CallModel {
     var callVC: CallVCDatasource? {
         didSet {
             callVC?.updateUI()
-//            ContactsManager.shared.contactBy(phone: call.handle) { contact in
-//                callVC?.contact = contact
-//            }
         }
     }
     private let callKitCallController = CXCallController()
     private var callKitCompletionCallback: ((Bool)-> ())? = nil
+    public var contact: Contact?
     
     private func observeCall() {
         call.callConnectBlock = { [weak self] in
@@ -48,9 +46,6 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
-//        ContactsManager.shared.contactBy(phone: call.handle) { contact in
-//            callVC?.contact = contact
-//        }
     }
     
     func handleCall(completion: (()->())? = nil) {
@@ -81,9 +76,9 @@ extension CallModel {
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
         
         let startCallAction = CXStartCallAction(call: call.uuid, handle: callHandle)
-//        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-//            startCallAction.contactIdentifier = contact?.fullName
-//        })
+        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+            startCallAction.contactIdentifier = contact?.fullName
+        })
         let transaction = CXTransaction(action: startCallAction)
         
         callKitCallController.request(transaction)  { error in
@@ -100,9 +95,9 @@ extension CallModel {
             print("call UUID \(call.uuid)")
             
             let callUpdate = CXCallUpdate()
-//            ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-//                callUpdate.localizedCallerName = contact?.fullName
-//            })
+            ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
+                callUpdate.localizedCallerName = contact?.fullName
+            })
             callUpdate.remoteHandle = callHandle
             callUpdate.supportsDTMF = true
             callUpdate.supportsHolding = false
@@ -117,9 +112,6 @@ extension CallModel {
     
     private func reportIncoming(_ call: SPCall) {
         call.state = .pending
-//        ContactsManager.shared.contactBy(phone: call.handle, completion: { contact in
-//            CallMagic.update?.localizedCallerName = contact?.fullName
-//        })
         callVC?.updateUI()
         
         let callHandle = CXHandle(type: .phoneNumber, value: call.handle)
@@ -152,9 +144,9 @@ extension CallModel {
     public func requestEnd(_ call: SPCall) {
         call.state = .ending
         callVC?.updateUI()
+
         let endCallAction = CXEndCallAction(call: call.uuid)
         let transaction = CXTransaction(action: endCallAction)
-        
         callKitCallController.request(transaction) { error in
             if let error = error {
                 print("EndCallAction transaction request failed: \(error.localizedDescription).")
@@ -211,6 +203,7 @@ extension CallModel: CallProviderDelegate {
         callKitCompletionCallback = nil
         callVC?.updateUI()
         callVC?.durationTimer?.invalidate()
+        call.endDate = Date()
         Double(1).delay {
             self.callFlow.endCall()
         }

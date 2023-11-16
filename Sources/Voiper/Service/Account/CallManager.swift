@@ -88,13 +88,33 @@ public class CallManager: NSObject {
     
     
     public func call(for number: String, completion: @escaping (Swift.Result<Void, Error>) -> Void) {
-        self.accountManager?.updateCallFlow()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            AccountManager.callFlow.start(SPCall(uuid: UUID(), handle: number, isOutgoing: true)).done { _ in
-            }.catch { error in
-                completion(.failure(error))
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+        case .authorized:
+            self.accountManager?.updateCallFlow()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                AccountManager.callFlow.start(SPCall(uuid: UUID(), handle: number, isOutgoing: true)).done { _ in
+                }.catch { error in
+                    completion(.failure(error))
+                }
+            })
+        case .denied, .restricted:
+            completion(.failure(ServiceError.noAccessToMicrophone))
+        case .notDetermined:
+            requestAccessToMicrophone() { [unowned self, completion, number] granted in
+                if granted {
+                    call(for: number, completion: completion)
+                } else {
+                    completion(.failure(ServiceError.noAccessToMicrophone))
+                }
             }
-        })
+        @unknown default:
+            completion(.failure(ServiceError.noAccessToMicrophone))
+        }
+        
+    }
+    
+    private func requestAccessToMicrophone(_ completion: @escaping (Bool) -> Void) {
+        AVCaptureDevice.requestAccess(for: .audio) { [completion] (granted) in completion(granted) }
     }
 }
 

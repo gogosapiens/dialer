@@ -21,7 +21,7 @@ public struct RegionNumber: Decodable {
     public let addressRequired: Int
     public let renewPrice: Int?
     public let source: Source?
-    public let note: String
+    public let note: String?
     
     public var isAddressRequired: Bool {
          return addressRequired > 0

@@ -72,22 +72,20 @@ public struct TheProduct: Hashable {
 
 extension TheProduct {
     public enum ProductType: Int, CaseIterable {
-        case oneNumberWeeklyTrial
-        case oneNumberMonthlyTrial
         case oneNumberSixMonthsTrial
 
         case oneNumberWeekly
         case oneNumberMonthly
         case oneNumberThreeMonths
-        case oneNumberYearly
         
         case secondNumberWeekly
+        case secondNumberMonthly
+        case secondNumberThreeMonths
+        case secondNumberSixMonths
         
         case coinPack100
-        case coinPack200
         case coinPack500
         case coinPack1000
-        case coinPack1200
         case coinPack2000
         
         case unknown
@@ -102,73 +100,67 @@ extension TheProduct {
         
         init(from id: String) {
             switch id {
-            case "\(ProductType.bundleId).weekly":
+            case "\(ProductType.bundleId).weekly_1":
                 self = .oneNumberWeekly
-            case "\(ProductType.bundleId).weekly_trial":
-                self = .oneNumberWeeklyTrial
-            case "\(ProductType.bundleId).monthly":
+            case "\(ProductType.bundleId).monthly_1":
                 self = .oneNumberMonthly
-            case "\(ProductType.bundleId).monthly_trial":
-                self = .oneNumberMonthlyTrial
-            case "\(ProductType.bundleId).3months":
+            case "\(ProductType.bundleId).3months_1":
                 self = .oneNumberThreeMonths
-            case "\(ProductType.bundleId).6months_trial":
+            case "\(ProductType.bundleId).6months_trial_1":
                 self = .oneNumberSixMonthsTrial
-            case "\(ProductType.bundleId).yearly":
-                self = .oneNumberYearly
-            case "\(ProductType.bundleId).weekly_extra_4.99":
+    
+            case "\(ProductType.bundleId).weekly_2":
                 self = .secondNumberWeekly
-            case "\(ProductType.bundleId).creditspack100":
+            case "\(ProductType.bundleId).monthly_2":
+                self = .secondNumberMonthly
+            case "\(ProductType.bundleId).3months_2":
+                self = .secondNumberThreeMonths
+            case "\(ProductType.bundleId).6months_2":
+                self = .secondNumberSixMonths
+    
+            case "\(ProductType.bundleId).credit_100":
                 self = .coinPack100
-            case "\(ProductType.bundleId).creditspack200":
-                self = .coinPack200
-            case "\(ProductType.bundleId).creditspack500":
+            case "\(ProductType.bundleId).credit_500":
                 self = .coinPack500
-            case "\(ProductType.bundleId).creditspack1000":
+            case "\(ProductType.bundleId).credit_1000":
                 self = .coinPack1000
-            case "\(ProductType.bundleId).creditspack1200":
-                self = .coinPack1200
-            case "\(ProductType.bundleId).creditspack2000":
+            case "\(ProductType.bundleId).credit_2000":
                 self = .coinPack2000
             default:
                 self = .unknown
             }
         }
         
-        var id: String? {
+        public var id: String? {
             
             switch self {
             case .oneNumberWeekly:
-                return "\(ProductType.bundleId).weekly"
-            case .oneNumberWeeklyTrial:
-                return "\(ProductType.bundleId).weekly_trial"
-                
+                return "\(ProductType.bundleId).weekly_1"
             case .oneNumberMonthly:
-                return "\(ProductType.bundleId).monthly"
-            case .oneNumberMonthlyTrial:
-                return "\(ProductType.bundleId).monthly_trial"
+                return "\(ProductType.bundleId).monthly_1"
             case .oneNumberThreeMonths:
-                return "\(ProductType.bundleId).3months"
+                return "\(ProductType.bundleId).3months_1"
             case .oneNumberSixMonthsTrial:
-                return "\(ProductType.bundleId).6months_trial"
-            case .oneNumberYearly:
-                return "\(ProductType.bundleId).yearly"
+                return "\(ProductType.bundleId).6months_trial_1"
+
     
             case .secondNumberWeekly:
-                return "\(ProductType.bundleId).weekly_extra_4.99"
+                return "\(ProductType.bundleId).weekly_2"
+            case .secondNumberMonthly:
+                return "\(ProductType.bundleId).monthly_2"
+            case .secondNumberThreeMonths:
+                return "\(ProductType.bundleId).3months_2"
+            case .secondNumberSixMonths:
+                return "\(ProductType.bundleId).6months_2"
       
             case .coinPack100:
-                return "\(ProductType.bundleId).creditspack100"
-            case .coinPack200:
-                return "\(ProductType.bundleId).creditspack200"
+                return "\(ProductType.bundleId).credit_100"
             case .coinPack500:
-                return "\(ProductType.bundleId).creditspack500"
+                return "\(ProductType.bundleId).credit_500"
             case .coinPack1000:
-                return "\(ProductType.bundleId).creditspack1000"
-            case .coinPack1200:
-                return "\(ProductType.bundleId).creditspack1200"
+                return "\(ProductType.bundleId).credit_1000"
             case .coinPack2000:
-                return "\(ProductType.bundleId).creditspack2000"
+                return "\(ProductType.bundleId).credit_2000"
 
             default:
                 return nil
@@ -177,7 +169,7 @@ extension TheProduct {
         
         var isSubscription: Bool {
             switch self {
-            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000, .coinPack1200, .coinPack2000:
+            case .coinPack100, .coinPack500, .coinPack1000, .coinPack2000:
                 return false
             default:
                 return true
@@ -186,7 +178,7 @@ extension TheProduct {
         
         public var isTrial: Bool {
             switch self {
-            case .oneNumberWeeklyTrial, .oneNumberMonthlyTrial, .oneNumberSixMonthsTrial:
+            case .oneNumberSixMonthsTrial:
                 return true
             default:
                 return false
@@ -195,12 +187,11 @@ extension TheProduct {
         
         public var isFirstNumber: Bool {
             switch self {
-            case .oneNumberWeekly, .oneNumberWeeklyTrial,
-                 .oneNumberMonthly, .oneNumberMonthlyTrial,
+            case .oneNumberWeekly,
+                 .oneNumberMonthly,
                  .oneNumberThreeMonths,
-                 .oneNumberSixMonthsTrial,
-                 .oneNumberYearly:
-                
+                 .oneNumberSixMonthsTrial:
+
                 return true
             default:
                 return false
@@ -209,31 +200,55 @@ extension TheProduct {
         
         public var isSecondNumber: Bool {
             switch self {
-            case .secondNumberWeekly:
+            case .secondNumberWeekly,
+                 .secondNumberMonthly,
+                 .secondNumberThreeMonths,
+                 .secondNumberSixMonths:
+
                 return true
             default:
                 return false
             }
         }
         
-        var group: Int {
+        public var group: Int {
             switch self {
-            case .oneNumberWeekly, .oneNumberWeeklyTrial,
-                 .oneNumberMonthly, .oneNumberMonthlyTrial,
-                 .oneNumberThreeMonths,
+            case .oneNumberWeekly,
+                 .oneNumberMonthly,
                  .oneNumberSixMonthsTrial,
-                 .oneNumberYearly:
+                 .oneNumberThreeMonths:
                 
                 return 1
-            case .secondNumberWeekly:
+
+            case .secondNumberWeekly,
+                 .secondNumberMonthly,
+                 .secondNumberThreeMonths,
+                 .secondNumberSixMonths:
+
                 return 2
-            case .coinPack100, .coinPack200, .coinPack500, .coinPack1000, .coinPack1200, .coinPack2000:
+
+            case .coinPack100,
+                 .coinPack500,
+                 .coinPack1000,
+                 .coinPack2000:
+
                 return 3
+
             case .unknown:
                 return -1
             }
         }
         
+        public static var subscriptions: Set<Self> {
+            return [.oneNumberMonthly,
+                    .oneNumberSixMonthsTrial,
+                    .oneNumberWeekly,
+                    .oneNumberThreeMonths,
+                    .secondNumberWeekly,
+                    .secondNumberMonthly,
+                    .secondNumberThreeMonths,
+                    .secondNumberSixMonths]
+        }
         public static var coinsPacks: Set<Self> { [.coinPack100, .coinPack500, .coinPack1000, .coinPack2000] }
     }
 }
@@ -310,8 +325,8 @@ extension SKProduct.PeriodUnit {
     }
 }
 
-extension SKProductSubscriptionPeriod {
-    func localizedPeriod() -> String? {
+public extension SKProductSubscriptionPeriod {
+    public func localizedPeriod() -> String? {
         return PeriodFormatter.format(unit: unit.toCalendarUnit(), numberOfUnits: numberOfUnits)
     }
 }
