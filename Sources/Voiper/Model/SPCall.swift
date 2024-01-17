@@ -5,28 +5,29 @@ import CallKit
 
 
 public class SPCall: NSObject {
-    public enum State:Equatable {
-        
+    private var webSocket : URLSessionWebSocketTask?
+    
+    public enum State: Equatable {
         public static func == (lhs: SPCall.State, rhs: SPCall.State) -> Bool {
             switch (lhs, rhs ) {
-                case (.none, .none):
-                    return true
-                case (.pending, .pending):
-                    return true
-                case (.start, .start):
-                    return true
-                case (.connecting, .connecting):
-                    return true
-                case (.connected, .connected):
-                    return true
-                case (.ending, .ending):
-                    return true
-                case (.ended, .ended):
-                    return true
-                case (.failed(_), .failed(_)):
-                    return true
-                default:
-                    return false
+            case (.none, .none):
+                return true
+            case (.pending, .pending):
+                return true
+            case (.start, .start):
+                return true
+            case (.connecting, .connecting):
+                return true
+            case (.connected, .connected):
+                return true
+            case (.ending, .ending):
+                return true
+            case (.ended, .ended):
+                return true
+            case (.failed(_), .failed(_)):
+                return true
+            default:
+                return false
             }
         }
         
@@ -37,7 +38,11 @@ public class SPCall: NSObject {
     public let uuid: UUID
     public let isOutgoing: Bool
     public var handle: String
-    public var state: State = .none
+    public var state: State = .none {
+        didSet {
+            onUpdateState?()
+        }
+    }
     
     public var twilioCallInvite: CallInvite?
     public var twilioCall: Call?
@@ -45,6 +50,7 @@ public class SPCall: NSObject {
     public var connectingDate: Date?
     public var connectDate: Date?
     public var endDate: Date?
+    
     var isOnHold: Bool {
         set {
             twilioCall?.isOnHold = newValue
@@ -62,8 +68,10 @@ public class SPCall: NSObject {
         }
     }
     
+    var userID: Int = 0
     var callConnectBlock: (() -> ())?
     var callDisconnectBlock: ((Error?) -> ())?
+    var onUpdateState: (() -> Void)?
     
     public var duration: TimeInterval {
         guard let connectDate = connectDate else {
@@ -73,14 +81,28 @@ public class SPCall: NSObject {
         return Date().timeIntervalSince(connectDate)
     }
     
+    private var socketURL: String {
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path),
+           let baseURL = dict["socketBaseURL"] as? String {
+            return baseURL
+        } else {
+            fatalError("add socketBaseURL -> Info.plist")
+        }
+    }
+    
     public init(uuid: UUID, handle: String, isOutgoing: Bool = false) {
         self.uuid = uuid
         self.isOutgoing = isOutgoing
         self.handle = handle
     }
     
+    deinit {
+        closeSession()
+    }
+    
     func connect(with token: String) {
-        state = .connecting
+        state = .start
         connectingDate = Date()
        
         let option = ConnectOptions(accessToken: token) { [handle] builder in
@@ -88,6 +110,7 @@ public class SPCall: NSObject {
         }
        
         twilioCall = TwilioVoiceSDK.connect(options: option, delegate: self)
+        createSocket()
     }
     
     func answer() -> Bool {
@@ -95,13 +118,14 @@ public class SPCall: NSObject {
             return false
         }
         connectingDate = Date()
-        state = .connecting
+        state = .start
         
         //migrate
         
         self.twilioCall = invite.accept(with: self)
        
         twilioCallInvite = nil
+        createSocket()
         return true
     }
     
@@ -122,6 +146,21 @@ public class SPCall: NSObject {
             state = .ending
         }
     }
+
+    private func createSocket() {
+        guard webSocket == nil else { return }
+        //Session
+        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        
+        //Server API
+        let url = URL(string: "\(socketURL)/socket/websocket?token=\(Settings.userToken ?? "")")
+        
+        //Socket
+        webSocket = session.webSocketTask(with: url!)
+        
+        //Connect and hanles handshake
+        webSocket?.resume()
+    }
 }
 
 extension SPCall: CallDelegate {
@@ -136,6 +175,7 @@ extension SPCall: CallDelegate {
         }
         
         callDisconnectBlock?(error)
+        closeSession()
     }
     
     
@@ -143,12 +183,66 @@ extension SPCall: CallDelegate {
         print("Call failed to connect: \(error.localizedDescription)")
         state = .failed(error)
         callDisconnectBlock?(error)
+        closeSession()
     }
   
     public func callDidConnect(call twilioCall: Call) {
         print("callDidConnect:")
-        state = .connected
-        connectDate = Date()
+        state = .connecting
         callConnectBlock?()
+    }
+}
+
+extension SPCall: URLSessionWebSocketDelegate {
+    private func receive(){
+        DispatchQueue.global().async {
+            self.webSocket?.receive() { [weak self] result in
+                guard let self,
+                    case let .success(message) = result,
+                    case let .string(jsonString) = message,
+                    let jsonData = jsonString.data(using: .utf8) else { return }
+                
+                do {
+                    let phxData = try JSONDecoder().decode(PHXData.self, from: jsonData)
+                    if phxData.payload.parentCallSid == twilioCall?.sid, phxData.payload.status == "in-progress" {
+                        state = .connected
+                        connectDate = Date()
+                        closeSession()
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                receive()
+            }
+            
+        }
+    }
+
+    private func send(_ data: PHXData) {
+        DispatchQueue.global().async {
+            do {
+                self.webSocket?.send(.data(try JSONEncoder().encode(data))) { [weak self] error in
+                    guard let self, error == nil else { return }
+                    receive()
+                }
+            } catch {
+                print("Error encoding object to JSON: \(error)")
+            }
+        }
+    }
+    
+    private func closeSession() {
+        guard webSocket?.state == .running || webSocket?.state == .completed else { return }
+        webSocket?.cancel(with: .goingAway, reason: "You've Closed The Connection".data(using: .utf8))
+    }
+    
+    public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
+        send(PHXData(event: "phx_join", topic: "dial:\(userID)", payload: PHXData.Payload()))
+    }
+    
+    
+    public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
+
     }
 }
