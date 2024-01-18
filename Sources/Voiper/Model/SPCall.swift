@@ -6,41 +6,24 @@ import CallKit
 
 public class SPCall: NSObject {
     private var webSocket : URLSessionWebSocketTask?
-    
-    public enum State: Equatable {
-        public static func == (lhs: SPCall.State, rhs: SPCall.State) -> Bool {
-            switch (lhs, rhs ) {
-            case (.none, .none):
-                return true
-            case (.pending, .pending):
-                return true
-            case (.start, .start):
-                return true
-            case (.connecting, .connecting):
-                return true
-            case (.connected, .connected):
-                return true
-            case (.ending, .ending):
-                return true
-            case (.ended, .ended):
-                return true
-            case (.failed(_), .failed(_)):
-                return true
-            default:
-                return false
-            }
-        }
-        
-        case none, pending, start, connecting, connected, ending, ended
-        case failed(Error?)
-    }
-    
+
     public let uuid: UUID
     public let isOutgoing: Bool
     public var handle: String
-    public var state: State = .none {
+    
+    private var _state: State = .none {
         didSet {
             onUpdateState?()
+        }
+    }
+    public var state: State {
+        get {
+            return _state
+        }
+        set {
+            if newValue > _state {
+                _state = newValue
+            }
         }
     }
     
@@ -244,5 +227,68 @@ extension SPCall: URLSessionWebSocketDelegate {
     
     public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
 
+    }
+}
+
+public extension SPCall {
+    enum State: Equatable, Comparable {
+        case none
+        case pending
+        case start
+        case connecting
+        case connected
+        case ending
+        case ended
+        case failed(Error?)
+
+        public static func == (lhs: Self, rhs: Self) -> Bool {
+            switch (lhs, rhs ) {
+            case (.none, .none):
+                return true
+            case (.pending, .pending):
+                return true
+            case (.start, .start):
+                return true
+            case (.connecting, .connecting):
+                return true
+            case (.connected, .connected):
+                return true
+            case (.ending, .ending):
+                return true
+            case (.ended, .ended):
+                return true
+            case (.failed(_), .failed(_)):
+                return true
+            default:
+                return false
+            }
+        }
+        
+        public static func < (lhs: Self, rhs: Self) -> Bool {
+            if lhs == .failed(nil), rhs == .ended || rhs == .ending { return true }
+            if rhs == .failed(nil) { return true }
+            return lhs.index < rhs.index
+        }
+        
+        private var index: Int {
+            switch self {
+            case .none:
+                return 0
+            case .pending:
+                return 1
+            case .start:
+                return 2
+            case .connecting:
+                return 3
+            case .connected:
+                return 4
+            case .ending:
+                return 5
+            case .ended:
+                return 6
+            case .failed(let error):
+                return 7
+            }
+        }
     }
 }
