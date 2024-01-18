@@ -9,7 +9,11 @@ import Foundation
 import Firebase
 import FirebaseRemoteConfig
 
-class RemoteConfig {
+public protocol RemoteConfigDelegate: AnyObject {
+    func configHasBeenUpdated()
+}
+
+public class RemoteConfig {
     static let shared = RemoteConfig()
 
     static var hasGoogleServicePlist: Bool {
@@ -20,6 +24,12 @@ class RemoteConfig {
             return false
         }
     }
+    
+    public weak var delegate: RemoteConfigDelegate? {
+        didSet {
+            delegate?.configHasBeenUpdated()
+        }
+    }
 
     init() {
 
@@ -27,9 +37,10 @@ class RemoteConfig {
 
     func fetchConfig() {
         guard RemoteConfig.hasGoogleServicePlist else { return }
-        FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: 10) { (status, error) in
+        FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: 10) { [delegate] (status, error) in
             FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate(completion: nil)
             let remoteConfig = FirebaseRemoteConfig.RemoteConfig.remoteConfig()
+            delegate?.configHasBeenUpdated()
         }
     }
 
