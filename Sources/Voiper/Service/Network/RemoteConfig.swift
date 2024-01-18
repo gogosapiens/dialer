@@ -14,7 +14,7 @@ public protocol RemoteConfigDelegate: AnyObject {
 }
 
 public class RemoteConfig {
-    static let shared = RemoteConfig()
+    public static let shared = RemoteConfig()
 
     static var hasGoogleServicePlist: Bool {
         if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
@@ -39,7 +39,6 @@ public class RemoteConfig {
         guard RemoteConfig.hasGoogleServicePlist else { return }
         FirebaseRemoteConfig.RemoteConfig.remoteConfig().fetch(withExpirationDuration: 10) { [delegate] (status, error) in
             FirebaseRemoteConfig.RemoteConfig.remoteConfig().activate(completion: nil)
-            let remoteConfig = FirebaseRemoteConfig.RemoteConfig.remoteConfig()
             delegate?.configHasBeenUpdated()
         }
     }
