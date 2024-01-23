@@ -13,10 +13,12 @@ public class CallModel {
         self.callProvider = callProvider
         self.callManager = callManager
         
+        self.call.userID = AccountManager.shared.account?.id ?? 0
+
         observeCall()
         handleCall()
     }
-    
+
     unowned let callFlow: CallFlow
     private unowned let callManager: CallManager
     private unowned let callProvider: CallProvider
@@ -46,6 +48,8 @@ public class CallModel {
             }
             strongSelf.requestEnd(strongSelf.call)
         }
+        
+        call.onUpdateState = { [callVC] in callVC?.updateUI() }
     }
     
     func handleCall(completion: (()->())? = nil) {
@@ -142,6 +146,12 @@ extension CallModel {
     }
     
     public func requestEnd(_ call: SPCall) {
+        if call.state == .connected, RemoteConfig.shared.shortCallRestriction,
+           let duration = call.connectDate?.timeIntervalSinceNow,
+           Int(abs(duration)) < RemoteConfig.shared.shortCallDuration {
+            return
+        }
+
         call.state = .ending
         callVC?.updateUI()
 

@@ -12,5 +12,6 @@ public class Voiper {
     public let verificationManager = VerificationUserManager.shared
     
     public init() {
+        RemoteConfig.shared.fetchConfig()
     }
 }
